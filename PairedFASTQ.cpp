@@ -19,3 +19,7 @@ void PairedFASTQ::setPair(SingleFASTQ foward, SingleFASTQ reverse)
 pair <SingleFASTQ, SingleFASTQ> PairedFASTQ::getPair(){
 	return pair;
 }
+
+void PairedFASTQ::trim(string adapter, int minQuality, int minSequenceLength){
+	;
+}

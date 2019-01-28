@@ -65,6 +65,10 @@ vector <int> singleFASTQ::convertQualityToInteger()
 	// Base 33 (Ilumina, Ion Torrent, PacBio and Sanger)
 	for (int i = 0; i < test.length(); i++) intQuality.push_back(static_cast <int> (test[i]) - 33);
 	
-	// Base 64 removed (Old Illumina).
+	// Base 64 removed (Old Illumina)
 	return intQuality;
+}
+
+void singleFASTQ::trim(string adapter, int minQuality, int minSequenceLength){
+	;
 }
