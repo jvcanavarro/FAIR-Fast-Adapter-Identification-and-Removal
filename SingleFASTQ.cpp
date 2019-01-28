@@ -14,7 +14,8 @@ public:
 	string getPlaceHolder();
 	void setQuality(string qual);
 	string getQuality();
-	vector <int> convertQualityToInteger();
+	vector <int> convertQ33ToInteger();
+	vector <int> convertQ64ToInteger();
 	void trim(string adapter, int minQuality, int minSequenceLength);
 };
 
@@ -55,17 +56,27 @@ string singleFASTQ::getQuality()
 	return qual;
 }
 
-vector <int> singleFASTQ::convertQualityToInteger()
+vector <int> singleFASTQ::convertQ33ToInteger()
 {
-	// Phred Quality Score
 	
 	vector <int> intQuality;	
 	string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 	
 	// Base 33 (Ilumina, Ion Torrent, PacBio and Sanger)
 	for (int i = 0; i < test.length(); i++) intQuality.push_back(static_cast <int> (test[i]) - 33);
+
+	return intQuality;
+}
+
+vector <int> singleFASTQ::convertQ64ToInteger()
+{
 	
-	// Base 64 removed (Old Illumina)
+	vector <int> intQuality;	
+	string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
+	
+	// Base 64 (Old Illumina)
+	for (int i = 0; i < test.length(); i++) intQuality.push_back(static_cast <int> (test[i]) -64);
+		
 	return intQuality;
 }
 
