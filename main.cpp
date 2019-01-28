@@ -1,7 +1,6 @@
 #include "SingleFASTQ.cpp"
 
 int main (){
-	setlocale(LC_ALL, "Portuguese");
 	singleFASTQ single;
 	vector <int> test;
 	test = single.convertQ33ToInteger();

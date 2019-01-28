@@ -1,20 +1,21 @@
 #include <iostream>
 #include <vector>
+#include <utility>
 #include "SingleFASTQ.cpp"
 using namespace std;
 
 class PairedFASTQ
 {
-	pair <SingleFASTQ, SingleFASTQ> pair; 
+	pair <SingleFASTQ, SingleFASTQ> fastqPair; 
 public:
-	void setPair(SingleFASTQ foward, SingleFASTQ reverse);
+	void setPair(SingleFASTQ forward, SingleFASTQ reverse);
 	pair <SingleFASTQ, SingleFASTQ> getPair();
 	void trim(string adapter1, string adapter2, int minQuality, int minSequenceLength);
 };
 
-void PairedFASTQ::setPair(SingleFASTQ foward, SingleFASTQ reverse)
+void PairedFASTQ::setPair(SingleFASTQ forward, SingleFASTQ reverse)
 {
-	pair = make_pair(foward, reverse);
+	pair = make_pair(forward, reverse);
 }
 pair <SingleFASTQ, SingleFASTQ> PairedFASTQ::getPair(){
 	return pair;

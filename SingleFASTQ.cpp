@@ -18,7 +18,7 @@ public:
 	vector <int> convertQ64ToInteger();
 	void trim(string adapter, int minQuality, int minSequenceLength);
 };
-
+string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 
 void singleFASTQ::setIdentifier(string id)
 {
@@ -60,19 +60,16 @@ vector <int> singleFASTQ::convertQ33ToInteger()
 {
 	
 	vector <int> intQuality;	
-	string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 	
 	// Base 33 (Ilumina, Ion Torrent, PacBio and Sanger)
 	for (int i = 0; i < test.length(); i++) intQuality.push_back(static_cast <int> (test[i]) - 33);
 
 	return intQuality;
 }
-
 vector <int> singleFASTQ::convertQ64ToInteger()
 {
 	
-	vector <int> intQuality;	
-	string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
+	vector <int> intQuality;
 	
 	// Base 64 (Old Illumina)
 	for (int i = 0; i < test.length(); i++) intQuality.push_back(static_cast <int> (test[i]) -64);
