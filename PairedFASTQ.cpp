@@ -21,6 +21,7 @@ pair <SingleFASTQ, SingleFASTQ> PairedFASTQ::getPair(){
 	return pair;
 }
 
-void PairedFASTQ::trim(string adapter, int minQuality, int minSequenceLength){
+void PairedFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
+{
 	;
 }

@@ -77,6 +77,7 @@ vector <int> singleFASTQ::convertQ64ToInteger()
 	return intQuality;
 }
 
-void singleFASTQ::trim(string adapter, int minQuality, int minSequenceLength){
+void singleFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
+{
 	;
 }

@@ -7,8 +7,8 @@ using namespace std;
 class SingleFASTQFile
 {
 	string file;
-	ifstream fin;	
-	ofstream fout;
+	ifstream fin;	// Stream class to read from files
+	ofstream fout; // Stream class to write on files
 	bool next;
 public:
 	bool openFASTQInput(string file);
@@ -24,4 +24,29 @@ public:
 bool SingleFASTQFile::openFASTQInput(string file)
 {
 	
+}
+
+bool SingleFASTQFile::openFASTQOutput(string file)
+{
+
+}
+
+SingleFASTQ SingleFASTQFile::getNext()
+{
+
+}
+
+void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)
+{
+
+}
+
+void SingleFASTQFile::write(SingleFASTQ sequence)
+{
+
+}
+
+bool SingleFASTQFile::closeOutput()
+{
+
 }
