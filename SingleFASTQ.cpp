@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-class singleFASTQ
+class SingleFASTQ
 {
 	string id, seq, pholder, qual;
 public:
@@ -20,43 +20,43 @@ public:
 };
 string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 
-void singleFASTQ::setIdentifier(string id)
+void SingleFASTQ::setIdentifier(string id)
 {
 	id = id;
 }
-string singleFASTQ::getIdentifier()
+string SingleFASTQ::getIdentifier()
 {
 	return id;
 }
 
-void singleFASTQ::setSequence(string seq)
+void SingleFASTQ::setSequence(string seq)
 {
 	seq = seq;
 }
-string singleFASTQ::getSequence()
+string SingleFASTQ::getSequence()
 {
 	return seq;
 }
 
-void singleFASTQ::setPlaceHolder(string pholder)
+void SingleFASTQ::setPlaceHolder(string pholder)
 {
 	pholder = pholder;
 }
-string singleFASTQ::getPlaceHolder()
+string SingleFASTQ::getPlaceHolder()
 {
 	return pholder;
 }
 
-void singleFASTQ::setQuality(string qual)
+void SingleFASTQ::setQuality(string qual)
 {
 	qual = qual;
 }
-string singleFASTQ::getQuality()
+string SingleFASTQ::getQuality()
 {
 	return qual;
 }
 
-vector <int> singleFASTQ::convertQ33ToInteger()
+vector <int> SingleFASTQ::convertQ33ToInteger()
 {
 	
 	vector <int> intQuality;	
@@ -66,7 +66,7 @@ vector <int> singleFASTQ::convertQ33ToInteger()
 
 	return intQuality;
 }
-vector <int> singleFASTQ::convertQ64ToInteger()
+vector <int> SingleFASTQ::convertQ64ToInteger()
 {
 	
 	vector <int> intQuality;
@@ -77,7 +77,7 @@ vector <int> singleFASTQ::convertQ64ToInteger()
 	return intQuality;
 }
 
-void singleFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
+void SingleFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
 {
 	;
 }

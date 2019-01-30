@@ -18,30 +18,30 @@ public:
 
 bool PairedFASTQFile::openFASTQFile(string forward, string reverse)
 {
-	
+	;
 }
 
 bool PairedFASTQFile::hasNext()
 {
-
+	;
 }
 
 PairedFASTQ PairedFASTQFile::getNext()
 {
-
+	;
 }
 
 void PairedFASTQFile::trim(string adapter1, string adapter1, int minQuality, int minSequenceLength)
 {
-
+	;
 }
 
 void PairedFASTQFile::write(PairedFASTQ fastqPair)
 {
-	
+	;
 }
 
 bool PairedFASTQFile::closeOutput()
 {
-	
+	;
 }
