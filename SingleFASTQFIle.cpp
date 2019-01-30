@@ -23,12 +23,12 @@ public:
 
 bool SingleFASTQFile::openFASTQInput(string file)
 {
-	
+	fin.open(file);	
 }
 
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
-
+	fout.open(file);
 }
 
 SingleFASTQ SingleFASTQFile::getNext()

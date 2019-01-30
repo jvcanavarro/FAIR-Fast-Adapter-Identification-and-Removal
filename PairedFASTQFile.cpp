@@ -18,7 +18,7 @@ public:
 
 bool PairedFASTQFile::openFASTQFile(string forward, string reverse)
 {
-
+	
 }
 
 bool PairedFASTQFile::hasNext()
@@ -38,7 +38,7 @@ void PairedFASTQFile::trim(string adapter1, string adapter1, int minQuality, int
 
 void PairedFASTQFile::write(PairedFASTQ fastqPair)
 {
-
+	
 }
 
 bool PairedFASTQFile::closeOutput()
