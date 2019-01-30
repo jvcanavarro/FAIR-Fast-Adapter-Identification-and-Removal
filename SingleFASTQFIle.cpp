@@ -21,6 +21,7 @@ public:
 };
 
 
-bool SingleFASTQFile::openFASTQInput(string file){
+bool SingleFASTQFile::openFASTQInput(string file)
+{
 	
 }

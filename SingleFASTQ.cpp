@@ -72,7 +72,7 @@ vector <int> singleFASTQ::convertQ64ToInteger()
 	vector <int> intQuality;
 	
 	// Base 64 (Old Illumina)
-	for (int i = 0; i < test.length(); i++) intQuality.push_back(static_cast <int> (test[i]) -64);
+	for (int i = 0; i < test.length(); i++) intQuality.push_back(static_cast <int> (test[i]) - 64);
 		
 	return intQuality;
 }
