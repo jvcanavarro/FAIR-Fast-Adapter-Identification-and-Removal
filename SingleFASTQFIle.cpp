@@ -23,30 +23,30 @@ public:
 
 bool SingleFASTQFile::openFASTQInput(string file)
 {
-	fin.open(file);	
+	return fin.open(file);	
 }
 
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
-	fout.open(file);
+	return fout.open(file);
 }
 
 SingleFASTQ SingleFASTQFile::getNext()
 {
-
+	;
 }
 
 void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)
 {
-
+	;
 }
 
 void SingleFASTQFile::write(SingleFASTQ sequence)
 {
-
+	fin << sequence;
 }
 
 bool SingleFASTQFile::closeOutput()
 {
-
+	return fout.close();
 }
