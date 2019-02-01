@@ -1,6 +1,7 @@
 #include "SingleFASTQFile.cpp"
 
-int main (){
+int main(int argc, char **argv)
+{
 	SingleFASTQ single;
 	SingleFASTQFile sfile;
 	vector <int> test;
@@ -12,5 +13,9 @@ int main (){
 	string file = "amostra1.fastq";
 	open = sfile.openFASTQInput(file);
 	cout << open << endl;
+	// Terminal arguments test
+	cout << "You have entered " << argc << " arguments:" << "\n"; 
+  
+    for (int i = 1; i < argc; ++i) cout << argv[i] << "\n"; 
 	return 0;
 } 

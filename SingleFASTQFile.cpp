@@ -17,7 +17,7 @@ public:
 	SingleFASTQ getNext();
 	void trim(string adapter, int minQuality, int minSequenceLength);
 	void write(SingleFASTQ sequence);
-	bool closeOutput();
+	void closeOutput();
 };
 
 
@@ -35,7 +35,8 @@ bool SingleFASTQFile::openFASTQOutput(string file)
 	else return 0; // TODO: Error message
 }
 
-bool SingleFASTQFile::hasNext(){
+bool SingleFASTQFile::hasNext()
+{
 	;
 }
 
@@ -55,7 +56,7 @@ void SingleFASTQFile::write(SingleFASTQ sequence)
 	;
 }
 
-bool SingleFASTQFile::closeOutput()
+void SingleFASTQFile::closeOutput()
 {
 	fout.close();
 }
