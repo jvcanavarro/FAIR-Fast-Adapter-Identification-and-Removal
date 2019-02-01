@@ -18,7 +18,7 @@ public:
 
 bool PairedFASTQFile::openFASTQFile(string forward, string reverse)
 {
-	;
+	return forward.openFASTQInput(forward) && reverse.openFASTQOutput(reverse);
 }
 
 bool PairedFASTQFile::hasNext()
