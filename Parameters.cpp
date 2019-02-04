@@ -26,9 +26,94 @@ public:
 	string getReverseAdapter();
 	int getThreads();
 	int getPhredOffset();	// Quality
-}
+};
 
 bool Parameters::parseParameters(int argc, char **argv)
+{
+
+}
+
+void Parameters::printHelp()
+{
+
+}
+
+void Parameters::printVersion()
+{
+
+}
+
+string Parameters::getOutputDir()
+{
+
+}
+
+string Parameters::getSingle()
+{
+
+}
+
+string Parameters::getForward()
+{
+
+}
+
+string Parameters::getReverse()
+{
+
+}
+
+stirng Parameters::getInterlaced()
+{
+
+}
+
+bool Parameters::identifyOnly()
+{
+
+}
+
+bool Parameters::removeOnly()
+{
+
+}
+
+bool Parameters::trim()
+{
+
+}
+
+bool Parameters::trimQuality()
+{
+
+}
+
+int Parameters::getMinQuality()
+{
+
+}
+
+string Parameters::getAdapter()
+{
+
+}
+
+string Parameters::getForwardAdapter()
+{
+
+}
+
+string Parameters::getReverseAdapter()
+{
+
+}
+
+int Parameters::getThreads()
+{
+
+}
+
+int Parameters::getPhredOffset()
 {
 	
 }
