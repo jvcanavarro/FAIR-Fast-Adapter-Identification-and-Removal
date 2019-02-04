@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "PairedFASTQFile.cpp"
 using namespace std;
 
 class Parameters
@@ -18,8 +19,8 @@ public:
 	string getInterlaced();
 	bool identifyOnly();
 	bool removeOnly();
-	bool trim();
-	bool trimQuality();
+	bool trimm();
+	bool trimmQuality();
 	int getMinQuality();
 	string getAdapter();
 	string getForwardAdapter();
@@ -32,88 +33,71 @@ bool Parameters::parseParameters(int argc, char **argv)
 {
 
 }
-
 void Parameters::printHelp()
 {
 
 }
-
 void Parameters::printVersion()
 {
 
 }
-
 string Parameters::getOutputDir()
 {
 
 }
-
 string Parameters::getSingle()
 {
 
 }
-
 string Parameters::getForward()
 {
 
 }
-
 string Parameters::getReverse()
 {
 
 }
-
-stirng Parameters::getInterlaced()
+string Parameters::getInterlaced()
 {
 
 }
-
 bool Parameters::identifyOnly()
 {
 
 }
-
 bool Parameters::removeOnly()
 {
 
 }
-
-bool Parameters::trim()
+bool Parameters::trimm()
 {
 
 }
-
-bool Parameters::trimQuality()
+bool Parameters::trimmQuality()
 {
 
 }
-
 int Parameters::getMinQuality()
 {
 
 }
-
 string Parameters::getAdapter()
 {
 
 }
-
 string Parameters::getForwardAdapter()
 {
 
 }
-
 string Parameters::getReverseAdapter()
 {
 
 }
-
 int Parameters::getThreads()
 {
 
 }
-
 int Parameters::getPhredOffset()
 {
-	
+
 }

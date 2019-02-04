@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include "SingleFASTQFile.cpp"
-#include "PairedFASTQ.cpp"
+using namespace std;
 
 class PairedFASTQFile
 {
@@ -13,12 +14,12 @@ public:
 	PairedFASTQ getNext();
 	void trim(string adapter1 ,string adapter2 ,int minQuality ,int minSequenceLength);
 	void write(PairedFASTQ fastqPair);
-	bool closeOutput();
+	void closeOutput();
 };
 
-bool PairedFASTQFile::openFASTQFile(string forward, string reverse)
+bool PairedFASTQFile::openFASTQFile(string forw, string reve)
 {
-	return forward.openFASTQInput(forward) && reverse.openFASTQOutput(reverse);
+	return forward.openFASTQInput(forw) && reverse.openFASTQOutput(reve);
 }
 
 bool PairedFASTQFile::hasNext()
@@ -31,7 +32,7 @@ PairedFASTQ PairedFASTQFile::getNext()
 	;
 }
 
-void PairedFASTQFile::trim(string adapter1, string adapter1, int minQuality, int minSequenceLength)
+void PairedFASTQFile::trim(string adapter1, string adapter2, int minQuality, int minSequenceLength)
 {
 	;
 }
@@ -41,7 +42,7 @@ void PairedFASTQFile::write(PairedFASTQ fastqPair)
 	;
 }
 
-bool PairedFASTQFile::closeOutput()
+void PairedFASTQFile::closeOutput()
 {
 	;
 }

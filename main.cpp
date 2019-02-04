@@ -1,4 +1,4 @@
-#include "SingleFASTQFile.cpp"
+#include "Parameters.cpp"
 
 int main(int argc, char **argv)
 {
@@ -12,10 +12,13 @@ int main(int argc, char **argv)
 	bool open;
 	string file = "amostra1.fastq";
 	open = sfile.openFASTQInput(file);
-	cout << open << endl;
-	// Terminal arguments test
-	cout << "You have entered " << argc << " arguments:" << "\n"; 
+	
+	// Parameters
+	//Parameters parameters;
+
+//	cout << "You have entered " << argc << " arguments:" << "\n"; 
   
-    for (int i = 1; i < argc; ++i) cout << argv[i] << "\n"; 
+    for (int i = 0; i < argc; ++i) cout << argv[i] << "\n"; 
+    sfile.closeOutput();
 	return 0;
-} 
+}

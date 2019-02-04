@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <vector>
 #include <utility>
 #include "SingleFASTQ.cpp"
@@ -15,13 +16,13 @@ public:
 
 void PairedFASTQ::setPair(SingleFASTQ forward, SingleFASTQ reverse)
 {
-	pair = make_pair(forward, reverse);
+	fastqPair = make_pair(forward, reverse);
 }
 pair <SingleFASTQ, SingleFASTQ> PairedFASTQ::getPair(){
-	return pair;
+	return fastqPair;
 }
 
-void PairedFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
+void PairedFASTQ::trim(string adapter1, string adapter2, int minQuality, int minSequenceLength)
 {
 	;
 }
