@@ -31,7 +31,8 @@ public:
 
 bool Parameters::parseParameters(int argc, char **argv)
 {
-
+	cout << "You have entered " << argc << " arguments." << endl;
+	for (int i = 0; i < argc; i ++) cout << argv[i] << endl ;
 }
 void Parameters::printHelp()
 {
