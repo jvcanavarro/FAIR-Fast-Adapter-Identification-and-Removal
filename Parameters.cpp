@@ -1,15 +1,17 @@
 #include <iostream>
-#include <string>
+#include <string.h>
+#include <fstream>
 #include "PairedFASTQFile.cpp"
 using namespace std;
 
 class Parameters
 {
 	string outputDir,version, single, forward, reverse, interlaced, adapter, forwardAdapter, reverseAdapter;
-	bool onlyIdentify, onlyRemove, trim, trimQuality;
+	bool onlyIdentify , onlyRemove, trim, trimQuality;
 	int minQuality, threads, phredOffset;
 public:
-	bool parseParameters(int argc, char **argv);
+	Parameters();
+	bool parseParameters(int argc, char *const argv[]);
 	void printHelp();
 	void printVersion();
 	string getOutputDir();
@@ -29,14 +31,33 @@ public:
 	int getPhredOffset();	// Quality
 };
 
-bool Parameters::parseParameters(int argc, char **argv)
+Parameters::Parameters()
 {
-	cout << "You have entered " << argc << " arguments." << endl;
-	for (int i = 0; i < argc; i ++) cout << argv[i] << endl ;
+	version = "1.0";
+	onlyIdentify = false;
+	onlyRemove = false;
+	trim = false;
+	trimQuality = false;
+	threads = 1;
+	phredOffset = 0;
+}
+
+bool Parameters::parseParameters(int argc, char *const argv[])
+{
+	if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
+	{	
+		printHelp();
+		return 1;
+	}
+	else
+	{
+		cout << " OK " << endl;
+		return 1;
+	}
 }
 void Parameters::printHelp()
-{
-
+{	
+	cout << ifstream("Help.md").rdbuf() << endl;
 }
 void Parameters::printVersion()
 {

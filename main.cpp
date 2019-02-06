@@ -1,6 +1,6 @@
 #include "Parameters.cpp"
 
-int main(int argc, char **argv)
+int main(int argc, char *const argv[])
 {
 	SingleFASTQ single;
 	SingleFASTQFile sfile;
@@ -14,11 +14,8 @@ int main(int argc, char **argv)
 	open = sfile.openFASTQInput(file);
 	
 	// Parameters
-	//Parameters parameters;
-
-//	cout << "You have entered " << argc << " arguments:" << "\n"; 
+	Parameters parameters;
+  	parameters.parseParameters(argc, argv);
   
-    for (int i = 0; i < argc; ++i) cout << argv[i] << "\n"; 
-    sfile.closeOutput();
 	return 0;
 }
