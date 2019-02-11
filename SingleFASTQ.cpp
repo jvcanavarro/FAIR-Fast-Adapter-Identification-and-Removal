@@ -18,6 +18,7 @@ public:
 	vector <int> convertQ33ToInteger();
 	vector <int> convertQ64ToInteger();
 	void trim(string adapter, int minQuality, int minSequenceLength);
+	void print();
 };
 string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 
@@ -81,4 +82,9 @@ vector <int> SingleFASTQ::convertQ64ToInteger()
 void SingleFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
 {
 	;
+}
+
+void SingleFASTQ::print()
+{
+	cout << id << endl << seq << endl << pholder << endl << qual << endl;
 }

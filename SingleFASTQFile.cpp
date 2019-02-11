@@ -7,10 +7,10 @@ using namespace std;
 
 class SingleFASTQFile
 {
+	SingleFASTQ currentSequence;
 	string file;
 	ifstream fin;	// Stream class to read from files
 	ofstream fout; // Stream class to write on files
-	bool next;
 public:
 	bool openFASTQInput(string file);
 	bool openFASTQOutput(string file);
@@ -24,26 +24,38 @@ public:
 
 bool SingleFASTQFile::openFASTQInput(string file)
 {
-	fin.open(file);	
-	if (fin.is_open()) return 1;
-	else return 0; // TODO: Error message
+	this->file = file;
+	fin.open(file);
+	if (fin.is_open()) return true;
+	else
+	{
+		cerr << "Failed to Open File" << file << endl;
+		return false;
+	}
 }
 
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
-	fout.open(file);
-	if (fout.is_open()) return 1;
-	else return 0; // TODO: Error message
+;
 }
 
 bool SingleFASTQFile::hasNext()
 {
-	;
+	string lines[4];
+	for (int i = 0; i < 4; i++)
+	{
+		if (!getline(fin, lines[i])) return false;
+	}
+	currentSequence.setIdentifier(lines[0]);
+	currentSequence.setSequence(lines[1]);
+	currentSequence.setPlaceHolder(lines[2]);
+	currentSequence.setQuality(lines[3]);
+	return true; 
 }
 
 SingleFASTQ SingleFASTQFile::getNext()
 {
-	;
+	return currentSequence;
 }
 
 void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)

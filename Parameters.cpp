@@ -44,16 +44,12 @@ Parameters::Parameters()
 
 bool Parameters::parseParameters(int argc, char *const argv[])
 {
-	if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
+	if (argc == 1 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
 	{	
 		printHelp();
 		return 1;
 	}
-	else
-	{
-		cout << " OK " << endl;
-		return 1;
-	}
+	else return 0;
 }
 void Parameters::printHelp()
 {	
