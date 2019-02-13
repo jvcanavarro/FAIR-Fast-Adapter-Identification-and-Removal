@@ -26,7 +26,7 @@ string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 
 void SingleFASTQ::setIdentifier(string id)
 {
-	id = id;
+	this->id = id;
 }
 string SingleFASTQ::getIdentifier()
 {
@@ -35,7 +35,7 @@ string SingleFASTQ::getIdentifier()
 
 void SingleFASTQ::setSequence(string seq)
 {
-	seq = seq;
+	this->seq = seq;
 }
 string SingleFASTQ::getSequence()
 {
@@ -44,7 +44,7 @@ string SingleFASTQ::getSequence()
 
 void SingleFASTQ::setPlaceHolder(string pholder)
 {
-	pholder = pholder;
+	this->pholder = pholder;
 }
 string SingleFASTQ::getPlaceHolder()
 {
@@ -53,7 +53,7 @@ string SingleFASTQ::getPlaceHolder()
 
 void SingleFASTQ::setQuality(string qual)
 {
-	qual = qual;
+	this->qual = qual;
 }
 string SingleFASTQ::getQuality()
 {

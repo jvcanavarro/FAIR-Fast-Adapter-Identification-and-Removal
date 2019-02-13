@@ -36,7 +36,7 @@ bool SingleFASTQFile::openFASTQInput(string file)
 
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
-	this.->file = file;
+	this->file = file;
 	fout.open(file);
 	if (fout.is_open()) return true;
 	else
@@ -59,7 +59,6 @@ bool SingleFASTQFile::hasNext()
 
 SingleFASTQ SingleFASTQFile::getNext()
 {
-	currentSequence.print();
 	return currentSequence;
 }
 
