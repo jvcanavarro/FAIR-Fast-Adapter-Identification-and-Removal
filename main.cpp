@@ -15,13 +15,13 @@ int main(int argc, char *const argv[])
 		while (sfile.hasNext())
 		{
 			single = sfile.getNext()
-			
+			cout << single << endl;
 		}
 	}
 	
-	// Parameterss
+	// Parameters
 	Parameters parameters;
-  	//parameters.parseParameters(argc, argv);
+  	parameters.parseParameters(argc, argv);
   
 	return 0;
 }

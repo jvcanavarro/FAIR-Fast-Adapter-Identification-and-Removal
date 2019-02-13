@@ -29,23 +29,27 @@ bool SingleFASTQFile::openFASTQInput(string file)
 	if (fin.is_open()) return true;
 	else
 	{
-		cerr << "Failed to Open File" << file << endl;
+		cerr << "Failed to Open Input File" << file << endl;
 		return false;
 	}
 }
 
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
-;
+	this.->file = file;
+	fout.open(file);
+	if (fout.is_open()) return true;
+	else
+	{
+		cerr << "Failed to Open Output File" << file << endl;
+	}
 }
 
 bool SingleFASTQFile::hasNext()
 {
 	string lines[4];
-	for (int i = 0; i < 4; i++)
-	{
-		if (!getline(fin, lines[i])) return false;
-	}
+	for (int i = 0; i < 4; i++) if (!getline(fin, lines[i])) return false;
+
 	currentSequence.setIdentifier(lines[0]);
 	currentSequence.setSequence(lines[1]);
 	currentSequence.setPlaceHolder(lines[2]);
@@ -55,6 +59,7 @@ bool SingleFASTQFile::hasNext()
 
 SingleFASTQ SingleFASTQFile::getNext()
 {
+	currentSequence.print();
 	return currentSequence;
 }
 

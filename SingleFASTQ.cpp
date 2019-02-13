@@ -5,7 +5,9 @@ using namespace std;
 
 class SingleFASTQ
 {
+private:
 	string id, seq, pholder, qual;
+	friend ostream & operator << (ostream &os, const SingleFASTQ& single);
 public:
 	void setIdentifier(string id);
 	string getIdentifier();
@@ -18,8 +20,8 @@ public:
 	vector <int> convertQ33ToInteger();
 	vector <int> convertQ64ToInteger();
 	void trim(string adapter, int minQuality, int minSequenceLength);
-	void print();
 };
+
 string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 
 void SingleFASTQ::setIdentifier(string id)
@@ -84,7 +86,11 @@ void SingleFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
 	;
 }
 
-void SingleFASTQ::print()
+ostream & operator << (ostream &os, const SingleFASTQ& single)
 {
-	cout << id << endl << seq << endl << pholder << endl << qual << endl;
+    os << single.id << endl;
+    os << single.seq << endl;
+    os << single.pholder << endl;
+    os << single.qual << endl;
+    return os;
 }
