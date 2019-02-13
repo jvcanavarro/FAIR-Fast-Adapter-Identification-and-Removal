@@ -49,7 +49,6 @@ bool SingleFASTQFile::hasNext()
 {
 	string lines[4];
 	for (int i = 0; i < 4; i++) if (!getline(fin, lines[i])) return false;
-
 	currentSequence.setIdentifier(lines[0]);
 	currentSequence.setSequence(lines[1]);
 	currentSequence.setPlaceHolder(lines[2]);
