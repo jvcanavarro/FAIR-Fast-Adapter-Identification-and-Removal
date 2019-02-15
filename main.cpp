@@ -21,7 +21,7 @@ int main(int argc, char *const argv[])
 	
 	// Parameters
 	Parameters parameters;
-  	// parameters.parseParameters(argc, argv);
+  	parameters.parseParameters(argc, argv);
   
 	return 0;
 }
