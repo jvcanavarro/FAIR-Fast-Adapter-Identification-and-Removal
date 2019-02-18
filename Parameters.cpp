@@ -80,7 +80,11 @@ bool Parameters::parseParameters(int argc, char *const argv[])
 			cout << "Wrong Parameters" << endl;
 			return false;
 		}
-		if (argc > 
+		// Pipeline Options
+		if (argc > 4)
+		{
+
+		}
 	}
 	else return false;
 }
@@ -94,61 +98,65 @@ void Parameters::printVersion()
 }
 string Parameters::getOutputDir()
 {
-
+	return outputDir;
 }
 string Parameters::getSingle()
 {
-
+	return single;
 }
 string Parameters::getForward()
 {
-
+	return forward;
 }
 string Parameters::getReverse()
 {
-
+	return reverse;
 }
 string Parameters::getInterlaced()
 {
-
+	return interlaced;
 }
 bool Parameters::identifyOnly()
 {
-
+	if (onlyIdentify) return true;
+	else return false;
 }
 bool Parameters::removeOnly()
 {
-
+	if (onlyRemove) return true;
+	else return false;
 }
 bool Parameters::trimm()
 {
-
+	if (trim) return true;
+	else return false;
 }
 bool Parameters::trimmQuality()
 {
-
+	if (trimQuality) return true;
+	else return false;
 }
 int Parameters::getMinQuality()
 {
-
+	return minQuality;
 }
 string Parameters::getAdapter()
 {
-
+	return adapter;
 }
 string Parameters::getForwardAdapter()
 {
-
+	return forwardAdapter;
 }
 string Parameters::getReverseAdapter()
 {
-
+	return reverseAdapter;
 }
 int Parameters::getThreads()
 {
-
+	return threads;
 }
 int Parameters::getPhredOffset()
 {
-
+	return phredOffset;
 }
