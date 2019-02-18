@@ -44,12 +44,45 @@ Parameters::Parameters()
 
 bool Parameters::parseParameters(int argc, char *const argv[])
 {
+	// Basic Options
 	if (argc == 1 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
 	{	
 		printHelp();
-		return 1;
+		return true;
 	}
-	else return 0;
+	else if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)
+	{
+		printVersion();
+		return true;
+	}
+	
+	if (argc > 2)
+	{
+		// Input Data
+		if (strcmp(argv[1], "-s") == 0 || strcmp(argv[1], "--single") == 0)
+		{
+			single = argv[2];
+		}
+		else if (strcmp(argv[1], "-f") == 0 || strcmp(argv[1], "--forward") == 0)
+		{
+			forward = argv[2];
+		}
+		else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "--reverse") == 0)
+		{
+			reverse = argv[2];
+		}
+		else if (strcmp(argv[1], "-i") == 0 || strcmp(argv[1], "--interlaced") == 0)
+		{
+			interlaced = argv[2];
+		}
+		else
+		{
+			cout << "Wrong Parameters" << endl;
+			return false;
+		}
+		if (argc > 
+	}
+	else return false;
 }
 void Parameters::printHelp()
 {	
@@ -57,7 +90,7 @@ void Parameters::printHelp()
 }
 void Parameters::printVersion()
 {
-
+	cout << "FAIR - Fast Adapter Idenification and Removal v" << version << endl;
 }
 string Parameters::getOutputDir()
 {

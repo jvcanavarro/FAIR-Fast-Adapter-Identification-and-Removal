@@ -1,6 +1,6 @@
 FAIR - Fast Adapter Identification and Removal v1.0
 
-Usage: /home/fmiranda/bin/FAIR/fair [options] -o <output_dir>
+Usage: /home/fmiranda/bin/FAIR/fair -o <output_dir> [options]
 
 Basic options:
 -o/--output   <output_dir>   directory to store all the resulting files (required)
