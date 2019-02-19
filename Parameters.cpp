@@ -38,7 +38,7 @@ Parameters::Parameters()
 	onlyRemove = false;
 	trim = false;
 	trimQuality = false;
-	threads = 1;
+	threads = 4;
 	phredOffset = 0;
 }
 
@@ -89,11 +89,11 @@ bool Parameters::parseParameters(int argc, char *const argv[])
 			if (strcmp(argv[3], "--trim-quality") == 0) trimQuality = true;
 			if (strcmp(argv[3], "--min-quality") == 0)
 			{
-				minQuality = argv[4];	
+				minQuality = atoi(argv[4]);	
 				num_args++ ; // --min-quality <int> -- adapter <adapter> -o <output_directory>
 			}
 			// Advanced Options.
-			if (strcmp(argv[]))
+			// if (strcmp(argv[]))
 		}
 		else return false;
 	}
