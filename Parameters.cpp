@@ -45,46 +45,57 @@ Parameters::Parameters()
 bool Parameters::parseParameters(int argc, char *const argv[])
 {
 	// Basic Options
-	if (argc == 1 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
-	{	
-		printHelp();
-		return true;
-	}
-	else if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)
+	if (argc<=2) // ./main -h
 	{
-		printVersion();
-		return true;
+		if (argc == 1 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
+		{	
+			printHelp();
+			return true;
+		}
+		else if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)
+		{
+			printVersion();
+			return true;
+		}	
 	}
-	
-	if (argc > 2)
+	else if (argc >= 5) // ./main -s <file_name> -o <output_directory>
 	{
-		// Input Data
-		if (strcmp(argv[1], "-s") == 0 || strcmp(argv[1], "--single") == 0)
+		if (strcmp(argv[3], "-o") == 0 || strcmp(argv[3], "--output") == 0)
 		{
-			single = argv[2];
+			outputDir = argv[4];
+			if (strcmp(argv[1], "-s") == 0 || strcmp(argv[1], "--single") == 0)
+			{
+				single = argv[2];
+			}
+			else if (strcmp(argv[1], "-f") == 0 || strcmp(argv[1], "--forward") == 0)
+			{
+				forward = argv[2];
+			}
+			else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "--reverse") == 0)
+			{
+				reverse = argv[2];
+			}
+			else if (strcmp(argv[1], "-i") == 0 || strcmp(argv[1], "--interlaced") == 0)
+			{
+				interlaced = argv[2];
+			}	
 		}
-		else if (strcmp(argv[1], "-f") == 0 || strcmp(argv[1], "--forward") == 0)
+		if (argc > 5) // ./main -s <file_name> --only-identify -o <output_directory> ...
 		{
-			forward = argv[2];
+			int num_args = 0;
+			if (strcmp(argv[3], "--only-identify") == 0) onlyIdentify = true;
+			if (strcmp(argv[3], "--only-remove") == 0) onlyRemove = true;
+			if (strcmp(argv[3], "--trim") == 0) trim = true;
+			if (strcmp(argv[3], "--trim-quality") == 0) trimQuality = true;
+			if (strcmp(argv[3], "--min-quality") == 0)
+			{
+				minQuality = argv[4];	
+				num_args++ ; // --min-quality <int> -- adapter <adapter> -o <output_directory>
+			}
+			// Advanced Options.
+			if (strcmp(argv[]))
 		}
-		else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "--reverse") == 0)
-		{
-			reverse = argv[2];
-		}
-		else if (strcmp(argv[1], "-i") == 0 || strcmp(argv[1], "--interlaced") == 0)
-		{
-			interlaced = argv[2];
-		}
-		else
-		{
-			cout << "Wrong Parameters" << endl;
-			return false;
-		}
-		// Pipeline Options
-		if (argc > 4)
-		{
-
-		}
+		else return false;
 	}
 	else return false;
 }
