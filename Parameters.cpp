@@ -32,10 +32,11 @@ public:
 	int getPhredOffset();	// Quality
 };
 
-Parameters::Parameters(itn argc, char *const argv[])
+Parameters::Parameters(int argc, char *const argv[])
 {
 	bool help, version;
 	version = "1.0";
+	cout << version << endl;
 	onlyIdentify = false;
 	onlyRemove = false;
 	trim = false;
@@ -104,13 +105,13 @@ Parameters::Parameters(itn argc, char *const argv[])
 	}
 
 	if(help) {
-        printHelp()
+        printHelp();
         ready = false;
     } else if(version) {
         printVersion();
         ready = false;
     } else if(outputDir.length() == 0 || (single.length() == 0 && (forward.length() == 0 || reverse.length() == 0))) {
-        displayHelp();
+        printHelp();
         ready = false;
 	}
 }
@@ -125,7 +126,8 @@ void Parameters::printHelp()
 }
 void Parameters::printVersion()
 {
-	cout << "FAIR - Fast Adapter Idenification and Removal v" << version << endl;
+	cout << version << endl;
+	cout << "FAIR - Fast Adapter Idenification and Removal v" << endl;
 }
 string Parameters::getOutputDir()
 {
