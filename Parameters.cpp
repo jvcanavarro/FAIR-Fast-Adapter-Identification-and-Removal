@@ -6,12 +6,13 @@ using namespace std;
 
 class Parameters
 {
+private:
 	string outputDir,version, single, forward, reverse, interlaced, adapter, forwardAdapter, reverseAdapter;
-	bool onlyIdentify , onlyRemove, trim, trimQuality;
+	bool onlyIdentify , onlyRemove, trim, trimQuality, ready;
 	int minQuality, threads, phredOffset;
 public:
-	Parameters();
-	bool parseParameters(int argc, char *const argv[]);
+	Parameters(int argc, char *const argv[]);
+	bool parseParameters();
 	void printHelp();
 	void printVersion();
 	string getOutputDir();
@@ -31,8 +32,9 @@ public:
 	int getPhredOffset();	// Quality
 };
 
-Parameters::Parameters()
+Parameters::Parameters(itn argc, char *const argv[])
 {
+	bool help, version;
 	version = "1.0";
 	onlyIdentify = false;
 	onlyRemove = false;
@@ -40,64 +42,82 @@ Parameters::Parameters()
 	trimQuality = false;
 	threads = 4;
 	phredOffset = 0;
+	ready = true;
+	for(int i = 1; i < argc; i++) {
+		string argument(argv[i]);
+		if(argument == "--help" || argument == "-h") {
+			//printHelp();
+			// return true;
+			help = true;
+			continue;
+		} else if(argument == "--version" || argument == "-v") {
+			// printVersion();
+			// return true;
+			version = true;
+			continue;
+		} else if(argument == "--forward" || argument == "-f") {
+			forward = argv[i + 1];
+			continue;
+		} else if (argument == "--reverse" || argument == "-r") {
+			reverse = argv[i + 1];
+			continue;
+		} else if (argument == "--single" || argument == "-s") {
+			single = argv[i + 1];
+			continue;
+		} else if (argument == "--interlaced" || argument == "-i") {
+			interlaced = argv[i + 1];
+			continue;
+		} else if (argument == "--only-identify") {
+			onlyIdentify = true;
+			continue;
+		} else if (argument == "--only-remove") {
+			onlyRemove = true;
+			continue;
+		} else if (argument == "--trim") {
+			trim = true;
+			continue;
+		} else if (argument == "--trim-quality") {
+			trimQuality = true;
+			continue;
+		} else if (argument == "--min-quality") {
+			minQuality = atoi(argv[i + 1]);
+			continue;
+		} else if (argument == "--threads" || argument == "-t") {
+			threads = atoi(argv[i + 1]);
+			continue;
+		} else if (argument == "-phred-offset") {
+			phredOffset = atoi(argv[i + 1]);
+			continue;
+		} else if (argument == "--adapter") {
+			adapter = argv[i + 1];
+			continue;
+		} else if (argument == "--forward-adapter") {
+			forwardAdapter = argv[i + 1];
+			continue;
+		} else if (argument == "--reverse-adapter"){
+			reverseAdapter = argv[i + 1];
+			continue;
+		} else if (argument == "--output" || argument == "-o") {
+			outputDir = argv[i + 1];
+			continue;
+		}
+	}
+
+	if(help) {
+        printHelp()
+        ready = false;
+    } else if(version) {
+        printVersion();
+        ready = false;
+    } else if(outputDir.length() == 0 || (single.length() == 0 && (forward.length() == 0 || reverse.length() == 0))) {
+        displayHelp();
+        ready = false;
+	}
 }
 
-bool Parameters::parseParameters(int argc, char *const argv[])
+bool Parameters::parseParameters()
 {
-	// Basic Options
-	if (argc<=2) // ./main -h
-	{
-		if (argc == 1 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
-		{	
-			printHelp();
-			return true;
-		}
-		else if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)
-		{
-			printVersion();
-			return true;
-		}	
-	}
-	else if (argc >= 5) // ./main -s <file_name> -o <output_directory>
-	{
-		if (strcmp(argv[3], "-o") == 0 || strcmp(argv[3], "--output") == 0)
-		{
-			outputDir = argv[4];
-			if (strcmp(argv[1], "-s") == 0 || strcmp(argv[1], "--single") == 0)
-			{
-				single = argv[2];
-			}
-			else if (strcmp(argv[1], "-f") == 0 || strcmp(argv[1], "--forward") == 0)
-			{
-				forward = argv[2];
-			}
-			else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "--reverse") == 0)
-			{
-				reverse = argv[2];
-			}
-			else if (strcmp(argv[1], "-i") == 0 || strcmp(argv[1], "--interlaced") == 0)
-			{
-				interlaced = argv[2];
-			}	
-		}
-		if (argc > 5) // ./main -s <file_name> --only-identify -o <output_directory> ...
-		{
-			int num_args = 0;
-			if (strcmp(argv[3], "--only-identify") == 0) onlyIdentify = true;
-			if (strcmp(argv[3], "--only-remove") == 0) onlyRemove = true;
-			if (strcmp(argv[3], "--trim") == 0) trim = true;
-			if (strcmp(argv[3], "--trim-quality") == 0) trimQuality = true;
-			if (strcmp(argv[3], "--min-quality") == 0)
-			{
-				minQuality = atoi(argv[4]);	
-				num_args++ ; // --min-quality <int> -- adapter <adapter> -o <output_directory>
-			}
-			// Advanced Options.
-			// if (strcmp(argv[]))
-		}
-		else return false;
-	}
-	else return false;
+	;
 }
 void Parameters::printHelp()
 {	
