@@ -1,10 +1,4 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <dirent.h>
-#include <errno.h>
 #include "PairedFASTQFile.cpp"
-using namespace std;
 
 class Parameters
 {

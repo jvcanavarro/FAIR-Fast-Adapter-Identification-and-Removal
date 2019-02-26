@@ -1,7 +1,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <utility>
 #include <fstream>
+#include <dirent.h>
+#include <errno.h>
 using namespace std;
 
 class SingleFASTQ

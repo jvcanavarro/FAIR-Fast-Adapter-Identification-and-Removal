@@ -1,9 +1,4 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <utility>
 #include "SingleFASTQ.cpp"
-using namespace std;
 
 class PairedFASTQ
 {

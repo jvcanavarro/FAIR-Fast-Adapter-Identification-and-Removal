@@ -1,8 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <string>
 #include "SingleFASTQFile.cpp"
-using namespace std;
 
 class PairedFASTQFile
 {
