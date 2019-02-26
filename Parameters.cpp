@@ -1,6 +1,8 @@
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <fstream>
+#include <dirent.h>
+#include <errno.h>
 #include "PairedFASTQFile.cpp"
 using namespace std;
 
@@ -35,8 +37,7 @@ public:
 Parameters::Parameters(int argc, char *const argv[])
 {
 	bool help, version;
-	version = "1.0";
-	cout << version << endl;
+	this->version = "1.0";
 	onlyIdentify = false;
 	onlyRemove = false;
 	trim = false;
@@ -113,7 +114,7 @@ Parameters::Parameters(int argc, char *const argv[])
     } else if(outputDir.length() == 0 || (single.length() == 0 && (forward.length() == 0 || reverse.length() == 0))) {
         printHelp();
         ready = false;
-	}
+	} else if ()
 }
 
 bool Parameters::parseParameters()
@@ -126,8 +127,7 @@ void Parameters::printHelp()
 }
 void Parameters::printVersion()
 {
-	cout << version << endl;
-	cout << "FAIR - Fast Adapter Idenification and Removal v" << endl;
+	cout << "FAIR - Fast Adapter Idenification and Removal v" << version <<  endl;
 }
 string Parameters::getOutputDir()
 {

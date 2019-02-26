@@ -8,7 +8,7 @@ using namespace std;
 class SingleFASTQFile
 {
 	SingleFASTQ currentSequence;
-	string file;
+	string file, adapter;
 	ifstream fin;	// Stream class to read from files
 	ofstream fout; // Stream class to write on files
 public:
@@ -16,6 +16,7 @@ public:
 	bool openFASTQOutput(string file);
 	bool hasNext();
 	SingleFASTQ getNext();
+	string identifyAdapter();
 	void trim(string adapter, int minQuality, int minSequenceLength);
 	void write(SingleFASTQ sequence);
 	void closeOutput();
@@ -36,13 +37,11 @@ bool SingleFASTQFile::openFASTQInput(string file)
 
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
+	
 	this->file = file;
 	fout.open(file);
 	if (fout.is_open()) return true;
-	else
-	{
-		cerr << "Failed to Open Output File" << file << endl;
-	}
+	else cerr << "Failed to Open Output File" << file << endl;
 }
 
 bool SingleFASTQFile::hasNext()
@@ -59,6 +58,11 @@ bool SingleFASTQFile::hasNext()
 SingleFASTQ SingleFASTQFile::getNext()
 {
 	return currentSequence;
+}
+
+string SingleFASTQFile::identifyAdapter()
+{
+	;
 }
 
 void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)

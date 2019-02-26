@@ -8,10 +8,12 @@ class PairedFASTQFile
 {
 	SingleFASTQFile forward, reverse;
 	bool next;
+	pair<string, string> adapter;
 public:
 	bool openFASTQFile(string forward, string reverse);
 	bool hasNext();
 	PairedFASTQ getNext();
+	pair<string, string> identifyAdapters();
 	void trim(string adapter1 ,string adapter2 ,int minQuality ,int minSequenceLength);
 	void write(PairedFASTQ fastqPair);
 	void closeOutput();
@@ -28,6 +30,11 @@ bool PairedFASTQFile::hasNext()
 }
 
 PairedFASTQ PairedFASTQFile::getNext()
+{
+	;
+}
+
+pair<string, string> PairedFASTQFile::identifyAdapters()
 {
 	;
 }
