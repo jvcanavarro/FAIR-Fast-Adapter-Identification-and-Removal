@@ -9,9 +9,10 @@ using namespace std;
 class Parameters
 {
 private:
-	string outputDir,version, single, forward, reverse, interlaced, adapter, forwardAdapter, reverseAdapter;
+	string version, single, forward, reverse, interlaced, adapter, forwardAdapter, reverseAdapter;
 	bool onlyIdentify , onlyRemove, trim, trimQuality, ready;
 	int minQuality, threads, phredOffset;
+	static string outputDir;
 public:
 	Parameters(int argc, char *const argv[]);
 	bool parseParameters();
@@ -48,13 +49,9 @@ Parameters::Parameters(int argc, char *const argv[])
 	for(int i = 1; i < argc; i++) {
 		string argument(argv[i]);
 		if(argument == "--help" || argument == "-h") {
-			//printHelp();
-			// return true;
 			help = true;
 			continue;
 		} else if(argument == "--version" || argument == "-v") {
-			// printVersion();
-			// return true;
 			version = true;
 			continue;
 		} else if(argument == "--forward" || argument == "-f") {
@@ -104,7 +101,8 @@ Parameters::Parameters(int argc, char *const argv[])
 			continue;
 		}
 	}
-
+	const char *oDir = outputDir.c_str();
+	DIR* dir = opendir(oDir);
 	if(help) {
         printHelp();
         ready = false;
@@ -114,7 +112,13 @@ Parameters::Parameters(int argc, char *const argv[])
     } else if(outputDir.length() == 0 || (single.length() == 0 && (forward.length() == 0 || reverse.length() == 0))) {
         printHelp();
         ready = false;
-	} else if ()
+	} else if(dir){
+		// directory exists.
+		closedir(dir);
+	} else if (ENOENT == errno){
+		cerr << "Directory Does Not Exist." << endl;
+		ready = false;
+	}
 }
 
 bool Parameters::parseParameters()

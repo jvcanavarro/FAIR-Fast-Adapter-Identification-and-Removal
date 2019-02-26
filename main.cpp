@@ -21,6 +21,9 @@ int main(int argc, char *const argv[])
 	
 	// Parameters
 	Parameters parameters(argc, argv);
-  
+  	
+  	// Opening Files
+  	string results = "result.fastq";
+  	sfile.openFASTQOutput(results);
 	return 0;
 }	

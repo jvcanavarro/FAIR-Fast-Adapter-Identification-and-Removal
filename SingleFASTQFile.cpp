@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <fstream>
+// #include <fstream>
 #include "PairedFASTQ.cpp"
 using namespace std;
 
@@ -37,9 +37,12 @@ bool SingleFASTQFile::openFASTQInput(string file)
 
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
-	
-	this->file = file;
+	Parameters p;
+	string fullPath = p.outputDir + "/" + file;
+	//string fullPath = Parameters.outputDir + "/" + file;
+	cout << "FullPath: " << fullPath << endl;
 	fout.open(file);
+	cout << "Teste" << endl;
 	if (fout.is_open()) return true;
 	else cerr << "Failed to Open Output File" << file << endl;
 }
