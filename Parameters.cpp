@@ -111,7 +111,7 @@ Parameters::Parameters(int argc, char *const argv[])
 		// directory exists.
 		// Parameters::outputDir += "/results.fastq" ;
 		outputDir = outputDir + "/results.fastq";
-		cout << "Added results.fastq" << endl;
+		// cout << "Added results.fastq" << endl;
 		closedir(dir);
 	} else if (ENOENT == errno){
 		cerr << "Directory Does Not Exist." << endl;
