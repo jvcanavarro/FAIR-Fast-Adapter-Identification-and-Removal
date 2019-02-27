@@ -32,14 +32,14 @@ bool SingleFASTQFile::openFASTQInput(string file)
 
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
-	Parameters p;
-	string fullPath = p.outputDir + "/" + file;
-	//string fullPath = Parameters.outputDir + "/" + file;
-	cout << "FullPath: " << fullPath << endl;
+	this->file = file;
 	fout.open(file);
-	cout << "Teste" << endl;
 	if (fout.is_open()) return true;
-	else cerr << "Failed to Open Output File" << file << endl;
+	else
+	{
+		cerr << "Failed to Open Output File" << file << endl;
+		return false;
+	} 
 }
 
 bool SingleFASTQFile::hasNext()

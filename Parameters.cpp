@@ -6,7 +6,7 @@ private:
 	string version, single, forward, reverse, interlaced, adapter, forwardAdapter, reverseAdapter;
 	bool onlyIdentify , onlyRemove, trim, trimQuality, ready;
 	int minQuality, threads, phredOffset;
-	static string outputDir;
+	string outputDir;
 public:
 	Parameters(int argc, char *const argv[]);
 	bool parseParameters();
@@ -31,7 +31,7 @@ public:
 
 Parameters::Parameters(int argc, char *const argv[])
 {
-	bool help, version;
+	bool help = false, version = false;
 	this->version = "1.0";
 	onlyIdentify = false;
 	onlyRemove = false;
@@ -105,9 +105,13 @@ Parameters::Parameters(int argc, char *const argv[])
         ready = false;
     } else if(outputDir.length() == 0 || (single.length() == 0 && (forward.length() == 0 || reverse.length() == 0))) {
         printHelp();
+        cout << "DIR" << endl;
         ready = false;
 	} else if(dir){
 		// directory exists.
+		// Parameters::outputDir += "/results.fastq" ;
+		outputDir = outputDir + "/results.fastq";
+		cout << "Added results.fastq" << endl;
 		closedir(dir);
 	} else if (ENOENT == errno){
 		cerr << "Directory Does Not Exist." << endl;
@@ -117,7 +121,20 @@ Parameters::Parameters(int argc, char *const argv[])
 
 bool Parameters::parseParameters()
 {
-	;
+	SingleFASTQFile singlef;
+	SingleFASTQ single;
+	if(ready)
+	{
+		if (singlef.openFASTQInput(this->single) && singlef.openFASTQOutput(outputDir))
+		{
+			while (singlef.hasNext())
+			{
+				single = singlef.getNext();
+				cout << single << endl;	
+			}
+			return true;
+		}
+	} else return false;
 }
 void Parameters::printHelp()
 {	
