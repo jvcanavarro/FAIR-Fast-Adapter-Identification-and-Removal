@@ -13,7 +13,9 @@ void PairedFASTQ::setPair(SingleFASTQ forward, SingleFASTQ reverse)
 {
 	fastqPair = make_pair(forward, reverse);
 }
-pair <SingleFASTQ, SingleFASTQ> PairedFASTQ::getPair(){
+
+pair <SingleFASTQ, SingleFASTQ> PairedFASTQ::getPair()
+{
 	return fastqPair;
 }
 

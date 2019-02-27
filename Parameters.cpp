@@ -121,20 +121,16 @@ Parameters::Parameters(int argc, char *const argv[])
 
 bool Parameters::parseParameters()
 {
-	SingleFASTQFile singlef;
-	SingleFASTQ single;
-	if(ready)
+	if (ready)
 	{
-		if (singlef.openFASTQInput(this->single) && singlef.openFASTQOutput(outputDir))
+		PairedFASTQFile pff;
+		if (pff.openFASTQFile(single, forward))
 		{
-			while (singlef.hasNext())
-			{
-				single = singlef.getNext();
-				cout << single << endl;	
-			}
+			cout << "Opening ok" << endl;
 			return true;
-		}
-	} else return false;
+		} else return false;
+
+	}
 }
 void Parameters::printHelp()
 {	

@@ -70,7 +70,6 @@ void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength
 
 void SingleFASTQFile::write(SingleFASTQ sequence)
 {
-	// fin << sequence;
 	;
 }
 
