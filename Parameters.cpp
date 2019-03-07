@@ -105,12 +105,17 @@ Parameters::Parameters(int argc, char *const argv[])
         ready = false;
     } else if(outputDir.length() == 0 || (single.length() == 0 && (forward.length() == 0 || reverse.length() == 0))) {
         printHelp();
-        cout << "DIR" << endl;
         ready = false;
 	} else if(dir){
 		// directory exists.
 		// Parameters::outputDir += "/results.fastq" ;
-		outputDir = outputDir + "/results.fastq";
+		time_t rawtime;
+		time(&rawtime);
+		cout << ctime(&rawtime);
+		outputDir = outputDir + "/" + ctime(&rawtime);
+		outputDir.erase(outputDir.length() - 1);
+		outputDir.append(".fastq");
+		cout << outputDir << endl;
 		// cout << "Added results.fastq" << endl;
 		closedir(dir);
 	} else if (ENOENT == errno){
@@ -123,10 +128,18 @@ bool Parameters::parseParameters()
 {
 	if (ready)
 	{
+		PairedFASTQ pairedData;
 		PairedFASTQFile pff;
-		if (pff.openFASTQFile(single, forward))
+		if (pff.openFASTQInputFile(forward, reverse) && pff.openFASTQOutputFile(outputDir))
 		{
-			cout << "Opening ok" << endl;
+			while(pff.hasNext())
+			{
+				// open method
+				pairedData = pff.getNext();
+				// write method
+
+			}
+
 			return true;
 		} else return false;
 

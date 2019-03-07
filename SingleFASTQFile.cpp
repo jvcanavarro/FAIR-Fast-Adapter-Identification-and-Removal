@@ -20,6 +20,7 @@ public:
 
 bool SingleFASTQFile::openFASTQInput(string file)
 {
+	cout << file << endl;
 	this->file = file;
 	fin.open(file);
 	if (fin.is_open()) return true;
@@ -55,6 +56,7 @@ bool SingleFASTQFile::hasNext()
 
 SingleFASTQ SingleFASTQFile::getNext()
 {
+	// cout << currentSequence << endl;
 	return currentSequence;
 }
 
@@ -70,7 +72,7 @@ void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength
 
 void SingleFASTQFile::write(SingleFASTQ sequence)
 {
-	;
+	
 }
 
 void SingleFASTQFile::closeOutput()
