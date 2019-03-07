@@ -7,8 +7,6 @@ int main(int argc, char *const argv[])
   	if (parameters.parseParameters())
   	{
   		; 
-  	}
-
-  	
+  	}	
 	return 0;
 }	
