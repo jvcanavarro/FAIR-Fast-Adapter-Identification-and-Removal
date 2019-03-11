@@ -56,7 +56,7 @@ bool SingleFASTQFile::hasNext()
 
 SingleFASTQ SingleFASTQFile::getNext()
 {
-	// cout << currentSequence << endl;
+	write(currentSequence);
 	return currentSequence;
 }
 
@@ -72,7 +72,9 @@ void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength
 
 void SingleFASTQFile::write(SingleFASTQ sequence)
 {
-	
+	cout << "Writing Sequence (SingleFASTQFile) .." << endl;
+	cout << sequence.getSequence() << endl;
+	fout << sequence.getSequence() << "\n";
 }
 
 void SingleFASTQFile::closeOutput()

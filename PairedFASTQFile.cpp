@@ -53,7 +53,6 @@ bool PairedFASTQFile::hasNext()
 
 PairedFASTQ PairedFASTQFile::getNext()
 {
-	// cout << "Forward - Reverse" << endl;
 	pairedData.setPair(forward.getNext(), reverse.getNext());
 	return pairedData;
 }
@@ -70,7 +69,10 @@ void PairedFASTQFile::trim(string adapter1, string adapter2, int minQuality, int
 
 void PairedFASTQFile::write(PairedFASTQ pairedData)
 {
-	
+	cout << "Writing Sequence.." << endl;
+
+	reverse.write(get<0>(pairedData.getPair()));
+	forward.write(get<1>(pairedData.getPair()));
 }
 
 void PairedFASTQFile::closeOutput()

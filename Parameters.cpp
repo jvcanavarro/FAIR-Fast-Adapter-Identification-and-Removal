@@ -108,7 +108,6 @@ Parameters::Parameters(int argc, char *const argv[])
         ready = false;
 	} else if(dir){
 		// directory exists.
-		// Parameters::outputDir += "/results.fastq" ;
 		time_t rawtime;
 		time(&rawtime);
 		cout << ctime(&rawtime);
@@ -134,10 +133,9 @@ bool Parameters::parseParameters()
 		{
 			while(pff.hasNext())
 			{
-				// open method
+				// open method + write method(inside getNext())
 				pairedData = pff.getNext();
-				// write method
-
+				// TODO adapter identify + trim method
 			}
 
 			return true;
