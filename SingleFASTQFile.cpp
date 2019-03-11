@@ -82,3 +82,5 @@ void SingleFASTQFile::closeOutput()
 {
 	fout.close();
 }
+
+
