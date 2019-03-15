@@ -74,7 +74,7 @@ void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength
 
 void SingleFASTQFile::write(SingleFASTQ sequence)
 {
-	cout << "Writing Sequence (SingleFASTQFile) .." << endl;
+	// cout << "Writing Sequence (SingleFASTQFile) .." << endl;
 	fout << sequence.getSequence() << "\n";
 }
 

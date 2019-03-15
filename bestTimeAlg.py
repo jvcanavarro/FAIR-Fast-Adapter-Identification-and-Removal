@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+import matplotlib.pyplot as plt
+import numpy as np
+import re
+import math
+
+def plotTopFive (x):
+    plt.plot()
+    plt.plot()
+    plt.grid(linestyle = ':')
+    plt.show()
+
+def findBestMeans (x, plot = True):
+    x = sorted(x, key=lambda x: x[1])
+
+    x = x[:5]
+    algo = [item[0] for item in x]
+    time = [item[1] for item in x]
+
+    y = np.arange(5)
+    plt.bar(y, time, label = algo)
+    plt.grid(True, linestyle = ':')
+    plt.legend()
+    plt.show()
+
+    print('Best Algo: %s (%f)' %(algo[0], time[0]))
+
+def separeTime (uniqueTime):
+    uniqueTime = [x for xs in uniqueTime for x in xs.split(' ')]
+    uniqueTime = list(filter(None, uniqueTime))
+    allTimes = [float(x) for x in uniqueTime if re.match("^\d+?\.\d+?$", x)]
+
+    return allTimes, uniqueTime[0], round(np.mean(allTimes),4)
+
+def formatResults (arq):
+    timeList = [line.split('\t') for line in arq.readlines()]
+    formatedTimes = []
+    x = 0
+    for x in range(len(timeList)):
+        formatedTimes.append(separeTime(timeList[x]))
+    i = []
+    formatedTimes = [i for i in formatedTimes if not math.isnan(i[2])]
+    return formatedTimes
+
+arq = open('genome3.txt', 'r+')
+x = formatResults(arq)
+
+
+cutedALL = [y[1:] for y in x] # remove indivual times
+findBestMeans(cutedALL)
