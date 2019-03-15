@@ -6,6 +6,7 @@
 #include <dirent.h>
 #include <errno.h>
 #include <ctime>
+
 using namespace std;
 
 class SingleFASTQ

@@ -1,4 +1,4 @@
-#include "PairedFASTQ.cpp"
+#include "TrimAlgorithm.cpp"
 
 class SingleFASTQFile
 {
