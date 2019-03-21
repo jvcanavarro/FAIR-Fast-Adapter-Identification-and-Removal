@@ -22,13 +22,14 @@ def findBestMeans (x, plot = True):
     plt.legend()
     plt.show()
 
-    print('Best Algo: %s (%.3f)' %(algo[0], time[0]))
+    for i in range(5):
+        print('Best Algos: %s (%.3f)' %(algo[i], time[i]))
 
 def separeTime (uniqueTime):
     uniqueTime = [x for xs in uniqueTime for x in xs.split(' ')]
     uniqueTime = list(filter(None, uniqueTime))
     allTimes = [float(x[:-1]) for x in uniqueTime if re.match("^\d+?\.\d+?$", x)]
-    return allTimes, uniqueTime[0], round(np.mean(allTimes),4)
+    return allTimes , uniqueTime[0], np.mean(allTimes)
 
 def formatResults (arq):
     timeList = [line.split('\t') for line in arq.readlines()]
