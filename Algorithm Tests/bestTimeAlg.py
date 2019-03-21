@@ -6,7 +6,6 @@ import math
 
 def plotTopFive (x):
     plt.plot()
-    plt.plot()
     plt.grid(linestyle = ':')
     plt.show()
 
@@ -23,13 +22,12 @@ def findBestMeans (x, plot = True):
     plt.legend()
     plt.show()
 
-    print('Best Algo: %s (%f)' %(algo[0], time[0]))
+    print('Best Algo: %s (%.3f)' %(algo[0], time[0]))
 
 def separeTime (uniqueTime):
     uniqueTime = [x for xs in uniqueTime for x in xs.split(' ')]
     uniqueTime = list(filter(None, uniqueTime))
-    allTimes = [float(x) for x in uniqueTime if re.match("^\d+?\.\d+?$", x)]
-
+    allTimes = [float(x[:-1]) for x in uniqueTime if re.match("^\d+?\.\d+?$", x)]
     return allTimes, uniqueTime[0], round(np.mean(allTimes),4)
 
 def formatResults (arq):
@@ -37,12 +35,13 @@ def formatResults (arq):
     formatedTimes = []
     x = 0
     for x in range(len(timeList)):
+        timeList[x][-1] = timeList[x][-1].strip()
         formatedTimes.append(separeTime(timeList[x]))
     i = []
     formatedTimes = [i for i in formatedTimes if not math.isnan(i[2])]
     return formatedTimes
 
-arq = open('genome3.txt', 'r+')
+arq = open('all8-64.csv', 'r+')
 x = formatResults(arq)
 
 
