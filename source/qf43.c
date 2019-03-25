@@ -24,7 +24,7 @@
  */
 
 
-#include "timer.h"
+
 #include "define.h"
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -33,23 +33,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define BEGIN_PREPROCESSING	{timer_start(_timer);start = clock();}
-#define BEGIN_SEARCHING		{timer_start(_timer);start = clock();}
-#define END_PREPROCESSING	{timer_stop(_timer);end = clock();(*pre_time) = timer_elapsed(_timer)*1000;}
-#define END_SEARCHING		{timer_stop(_timer);end = clock();(*run_time) = timer_elapsed(_timer)*1000;}
-
 #define	Q	4
 #define	S	3
 
 #define ASIZE (1<<(Q*S))
 #define AMASK (ASIZE-1)
 #define BSIZE 262144	/* = 2**18 */
-
-/* global variables used for computing preprocessing and searching times */
-double *run_time, 		// searching time
-	   *pre_time;	// preprocessing time
-clock_t start, end;
-TIMER * _timer;
 
 int search(unsigned char *x, int m, unsigned char *y, int n)
 {
@@ -61,7 +50,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
 	if(ASIZE > BSIZE)	return -1;
 	
 	/* Preprocessing */
-   BEGIN_PREPROCESSING
+   // BEGIN_PREPROCESSING
 	for(i=0; i<ASIZE; i++) B[i]=0;		
 	ch = 0;
 	for(i = m-1; i >= 0; i--) {
@@ -69,10 +58,10 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
 		if(i < mq1)
 			B[ch] |= (1<<((m-i) % Q));
 	}
-   END_PREPROCESSING
+   // END_PREPROCESSING
 	
 	/* Searching */
-   BEGIN_SEARCHING
+   // BEGIN_SEARCHING
 	for(i=mq1-1; i<=n-Q; i+=mq1) {
 		ch = y[i+3];
 		ch = (ch<<S) + y[i+2];
@@ -103,6 +92,6 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
 		   }
 	   }
 	}
-   END_SEARCHING
+   // END_SEARCHING
 	return count;
 }
