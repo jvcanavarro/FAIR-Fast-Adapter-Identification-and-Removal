@@ -23,14 +23,33 @@
  * Q is the dimension of q-grams
  */
 
-#include "include/define.h"
-#include "include/main.h"
+
+#include "timer.h"
+#include "define.h"
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define BEGIN_PREPROCESSING	{timer_start(_timer);start = clock();}
+#define BEGIN_SEARCHING		{timer_start(_timer);start = clock();}
+#define END_PREPROCESSING	{timer_stop(_timer);end = clock();(*pre_time) = timer_elapsed(_timer)*1000;}
+#define END_SEARCHING		{timer_stop(_timer);end = clock();(*run_time) = timer_elapsed(_timer)*1000;}
+
 #define	Q	4
 #define	S	3
 
 #define ASIZE (1<<(Q*S))
 #define AMASK (ASIZE-1)
 #define BSIZE 262144	/* = 2**18 */
+
+/* global variables used for computing preprocessing and searching times */
+double *run_time, 		// searching time
+	   *pre_time;	// preprocessing time
+clock_t start, end;
+TIMER * _timer;
 
 int search(unsigned char *x, int m, unsigned char *y, int n)
 {
