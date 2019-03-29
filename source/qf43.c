@@ -42,9 +42,12 @@
 
 int search(unsigned char *x, int m, unsigned char *y, int n)
 {
+	/*x = p and y = t
+	m = size of pattern (adapter) , n = size of source text (currentSequence).*/
 	int count = 0;
 	int i, j, k, mq1=m-Q+1, B[ASIZE];
 	unsigned int D, ch, mask=AMASK;
+	// Teorical Requirements
 	if(m <= Q) return -1;
 	if((WORD*8) < Q) abort();
 	if(ASIZE > BSIZE)	return -1;
@@ -54,7 +57,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
 	for(i=0; i<ASIZE; i++) B[i]=0;		
 	ch = 0;
 	for(i = m-1; i >= 0; i--) {
-		ch = ((ch << S) + x[i]) & mask;
+		ch = ((ch << S + x[i]) & mask;
 		if(i < mq1)
 			B[ch] |= (1<<((m-i) % Q));
 	}
