@@ -125,11 +125,11 @@ int main(int argc, char *argv[])
 			printf("error in input parameter\nfour parameters needed in standard mode\n");
 			return 1;
 		}
-		p = (unsigned char*) argv[1];
-		m = atoi(argv[2]);
-		t = (unsigned char*) argv[3];
-		n = atoi(argv[4]);
-		int occ = search(p,m,t,n);
+		p = (unsigned char*) argv[1]; // Pattern
+		m = atoi(argv[2]);			  // Pattern Size
+		t = (unsigned char*) argv[3]; // Text
+		n = atoi(argv[4]);			  // Text Size
+		int occ = search(p,m,t,n);	  // QF43 return the Nº of Occurrences of Pattern p in Text T
 		printf("found %d occurrences\n",occ);
 		return 0;
 	}

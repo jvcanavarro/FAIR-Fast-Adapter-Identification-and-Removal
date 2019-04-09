@@ -63,7 +63,9 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
 	}
    // END_PREPROCESSING
 	
-	/* Searching */
+	/* "Searching"
+	   Instead of Searching, we need to
+	   transform this algorithm in a adapter removal. */
    // BEGIN_SEARCHING
 	for(i=mq1-1; i<=n-Q; i+=mq1) {
 		ch = y[i+3];
