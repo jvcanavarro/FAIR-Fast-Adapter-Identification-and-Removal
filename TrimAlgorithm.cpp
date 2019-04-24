@@ -17,7 +17,12 @@ TrimAlgorithm::TrimAlgorithm(int minQuality, int minSequenceLength)
 SingleFASTQ TrimAlgorithm::removingAdapter(SingleFASTQ untrimmedSequence, string adapter)
 {
     string trimmedSequence = untrimmedSequence.getSequence();
-    // trim sequence with adapter and algorithm
+    // search(pattern, pattern_len, text, text_len)
+    unsigned char seq_c[];
+    unsigned char adapter_c[];
+    strcpy( (char*) seq_c, trimmedSequence);
+    strcpy( (char*) adapter_c, adapter_c);
+    search(adapter_c, adapter.length(),seq_c , trimmedSequence.length());
     untrimmedSequence.setSequence(trimmedSequence);
     return untrimmedSequence;
 }

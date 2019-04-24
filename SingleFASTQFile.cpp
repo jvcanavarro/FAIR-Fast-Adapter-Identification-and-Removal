@@ -56,7 +56,7 @@ bool SingleFASTQFile::hasNext()
 
 SingleFASTQ SingleFASTQFile::getNext()
 {
-	write(currentSequence);
+	// write(currentSequence);
 	return currentSequence;
 }
 
