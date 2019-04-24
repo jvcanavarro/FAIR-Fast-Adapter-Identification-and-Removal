@@ -1,13 +1,14 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <utility>
-#include <fstream>
-#include <dirent.h>
-#include <errno.h>
-#include <ctime>
+// #include <iostream>
+// #include <string>
+// #include <vector>
+// #include <utility>
+// #include <fstream>
+// #include <dirent.h>
+// #include <errno.h>
+// #include <ctime>
 
-using namespace std;
+// using namespace std;
+#include "source/qf43.cpp"
 
 class SingleFASTQ
 {

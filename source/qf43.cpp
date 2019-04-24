@@ -25,13 +25,23 @@
 
 
 
-#include "define.h"
+#include "include/define.h"
+#include <iostream>
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <cstring>
+#include <string>
+#include <vector>
+#include <utility>
+#include <fstream>
+#include <dirent.h>
+#include <errno.h>
+#include <ctime>
+
+using namespace std;
 
 #define	Q	4
 #define	S	3
@@ -39,6 +49,7 @@
 #define ASIZE (1<<(Q*S))
 #define AMASK (ASIZE-1)
 #define BSIZE 262144	/* = 2**18 */
+
 
 int search(unsigned char *x, int m, unsigned char *y, int n)
 {
@@ -48,16 +59,18 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
 	int i, j, k, mq1=m-Q+1, B[ASIZE];
 	unsigned int D, ch, mask=AMASK;
 	// Teorical Requirements
+	// Pattern Size <= 4
 	if(m <= Q) return -1;
 	if((WORD*8) < Q) abort();
 	if(ASIZE > BSIZE)	return -1;
 	
 	/* Preprocessing */
-   // BEGIN_PREPROCESSING
-	for(i=0; i<ASIZE; i++) B[i]=0;		
+	// BEGIN_PREPROCESSING
+	// Keep tracking of Active Phases
+	for(i=0; i<ASIZE; i++) B[i]=0;
 	ch = 0;
 	for(i = m-1; i >= 0; i--) {
-		ch = ((ch << S + x[i]) & mask;
+		ch = ((ch << S) + x[i]) & mask;
 		if(i < mq1)
 			B[ch] |= (1<<((m-i) % Q));
 	}
@@ -75,7 +88,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
 		D = B[ch & mask];
 		if( D ) {
 		   j = i-mq1+Q;
-	      more:
+		  more:
 		   i = i-Q;
 			if(i >= j) {
 				ch = y[i+3];
@@ -83,15 +96,17 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
 				ch = (ch<<S) + y[i+1];
 				ch = (ch<<S) + y[i];
 				D = B[ch & mask];
-		      if(D == 0) continue;
-		      else goto more;
+			  if(D == 0) continue;
+			  else goto more;
 			} 
 		   else {  /* verify potential matches */
 			   i = j;
-		      k = j-Q+1;
-		      if(j > n-m)  j = n-m;
-		      for(  ; k <= j; k++) {
-		         if(memcmp(y+k,x,m) == 0) 
+			  k = j-Q+1;
+			  if(j > n-m)  j = n-m;
+			  for(  ; k <= j; k++) {
+			  	// memcmp() compare the first m bits of the area
+			  	// y+k with the first m bits of the area x
+				 if(memcmp(y+k,x,m) == 0) 
 						count++;
 			   }  
 		   }
