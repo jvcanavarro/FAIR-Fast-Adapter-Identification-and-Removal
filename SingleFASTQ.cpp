@@ -99,9 +99,9 @@ void SingleFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
 
 ostream & operator << (ostream &os, const SingleFASTQ& single)
 {
-    os << single.id << endl;
-    os << single.seq << endl;
-    os << single.pholder << endl;
-    os << single.qual << endl;
-    return os;
+	os << single.id << endl;
+	os << single.seq << endl;
+	os << single.pholder << endl;
+	os << single.qual << endl;
+	return os;
 }

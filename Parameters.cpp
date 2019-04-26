@@ -98,14 +98,14 @@ Parameters::Parameters(int argc, char *const argv[])
 	const char *oDir = outputDir.c_str();
 	DIR* dir = opendir(oDir);
 	if(help) {
-        printHelp();
-        ready = false;
-    } else if(version) {
-        printVersion();
-        ready = false;
-    } else if(outputDir.length() == 0 || (single.length() == 0 && (forward.length() == 0 || reverse.length() == 0))) {
-        printHelp();
-        ready = false;
+		printHelp();
+		ready = false;
+	} else if(version) {
+		printVersion();
+		ready = false;
+	} else if(outputDir.length() == 0 || (single.length() == 0 && (forward.length() == 0 || reverse.length() == 0))) {
+		printHelp();
+		ready = false;
 	} else if(dir){
 		// directory exists.
 		time_t rawtime;

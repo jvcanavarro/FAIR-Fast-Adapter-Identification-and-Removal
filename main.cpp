@@ -6,9 +6,9 @@ int main(int argc, char *const argv[])
 {	
 	// Parameters
 	Parameters parameters(argc, argv);
-  	if (parameters.parseParameters())
-  	{
-  		; 
-  	}	
+	if (parameters.parseParameters())
+	{
+		; 
+	}	
 	return 0;
 }	

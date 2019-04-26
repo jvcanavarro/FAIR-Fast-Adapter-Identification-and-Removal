@@ -104,8 +104,8 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
 			  k = j-Q+1;
 			  if(j > n-m)  j = n-m;
 			  for(  ; k <= j; k++) {
-			  	// memcmp() compare the first m bits of the area
-			  	// y+k with the first m bits of the area x
+				// memcmp() compare the first m bits of the area
+				// y+k with the first m bits of the area x
 				 if(memcmp(y+k,x,m) == 0) 
 						count++;
 			   }  
