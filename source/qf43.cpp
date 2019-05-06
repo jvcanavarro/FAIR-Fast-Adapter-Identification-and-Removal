@@ -108,6 +108,7 @@ int search(unsigned char *x, int m, unsigned char *y, int n)
 				// y+k with the first m bits of the area x
 				 if(memcmp(y+k,x,m) == 0) 
 						count++;
+						printf("Match Nº: %d\n", count);
 			   }  
 		   }
 	   }
