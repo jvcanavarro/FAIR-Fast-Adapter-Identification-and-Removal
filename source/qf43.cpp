@@ -51,7 +51,7 @@ using namespace std;
 #define BSIZE 262144	/* = 2**18 */
 
 
-int search(unsigned char *x, int m, unsigned char *y, int n)
+int search(char *x, int m, char *y, int n)
 {
 	/*x = p and y = t
 	m = size of pattern (adapter) , n = size of source text (currentSequence).*/

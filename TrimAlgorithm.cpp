@@ -4,11 +4,11 @@ class TrimAlgorithm
 	static string default_adapter;
 	int minQuality, minSequenceLength;
 public:
-	TrimAlgorithm(int minQuality ,int minSequenceLength);
-	SingleFASTQ removingAdapter(SingleFASTQ untrimmedSequence, string adapter = default_adapter);
+	void setPreferences(int minQuality ,int minSequenceLength);
+	static SingleFASTQ removingAdapter(SingleFASTQ untrimmedSequence, string adapter = default_adapter);
 };
 
-TrimAlgorithm::TrimAlgorithm(int minQuality, int minSequenceLength)
+void TrimAlgorithm::setPreferences(int minQuality, int minSequenceLength)
 {
 	this->minQuality = minQuality;
 	this->minSequenceLength = minSequenceLength;
@@ -17,12 +17,12 @@ TrimAlgorithm::TrimAlgorithm(int minQuality, int minSequenceLength)
 SingleFASTQ TrimAlgorithm::removingAdapter(SingleFASTQ untrimmedSequence, string adapter)
 {
 	string trimmedSequence = untrimmedSequence.getSequence();
-	// search(pattern, pattern_len, text, text_len)
-	unsigned char seq_c[trimmedSequence.length()];
-	unsigned char adapter_c[adapter.length()];
 	
-	strcpy( (char*) seq_c, trimmedSequence);
-	strcpy( (char*) adapter_c, adapter_c);
+	char seq_c[trimmedSequence.length() + 1];
+	char adapter_c[adapter.length() + 1];
+	
+	strcpy(seq_c, trimmedSequence.c_str());
+	strcpy(adapter_c, adapter.c_str());
 	search(adapter_c, adapter.length(),seq_c , trimmedSequence.length());
 	untrimmedSequence.setSequence(trimmedSequence);
 	return untrimmedSequence;

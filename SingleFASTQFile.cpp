@@ -68,13 +68,14 @@ string SingleFASTQFile::identifyAdapter()
 void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)
 {
 	// TODO:add pattern matching algorithm to search a given adapter
-	
-	;
+	TrimAlgorithm trimm;
+	currentSequence = trimm.removingAdapter(currentSequence, adapter);
+	cout <<" SINGLE FASTQ FILE TRIM" << endl;
 }
 
 void SingleFASTQFile::write(SingleFASTQ sequence)
 {
-	// cout << "Writing Sequence (SingleFASTQFile) .." << endl;
+	cout << "Writing Sequence (SingleFASTQFile) .." << endl;
 	fout << sequence.getSequence() << "\n";
 }
 

@@ -64,7 +64,9 @@ pair<string, string> PairedFASTQFile::identifyAdapters()
 
 void PairedFASTQFile::trim(string adapter1, string adapter2, int minQuality, int minSequenceLength)
 {
-	;
+	// TODO: add pair <adapter1, adapter2>;
+	forward.trim(adapter1, 0, 0);
+	reverse.trim(adapter2, 0, 0);
 }
 
 void PairedFASTQFile::write(PairedFASTQ pairedData)
