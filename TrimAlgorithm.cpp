@@ -5,7 +5,7 @@ class TrimAlgorithm
 	int minQuality, minSequenceLength;
 public:
 	void setPreferences(int minQuality ,int minSequenceLength);
-	static SingleFASTQ removingAdapter(SingleFASTQ untrimmedSequence, string adapter = default_adapter);
+	static SingleFASTQ removingAdapter(SingleFASTQ untrimmedSequence, string adapter = "GAGAGT");
 };
 
 void TrimAlgorithm::setPreferences(int minQuality, int minSequenceLength)
@@ -23,7 +23,9 @@ SingleFASTQ TrimAlgorithm::removingAdapter(SingleFASTQ untrimmedSequence, string
 	
 	strcpy(seq_c, trimmedSequence.c_str());
 	strcpy(adapter_c, adapter.c_str());
-	search(adapter_c, adapter.length(),seq_c , trimmedSequence.length());
-	untrimmedSequence.setSequence(trimmedSequence);
+	cout << "Adapter: " << adapter << endl;
+	int occurencies = search(adapter_c, adapter.length(),seq_c , trimmedSequence.length());
+	// untrimmedSequence.setSequence(trimmedSequence);
+	cout << "Number of occurencies: " << occurencies << endl;
 	return untrimmedSequence;
 }

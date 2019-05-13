@@ -1,0 +1,6 @@
+1 - Remove Adapter
+2 - Identify Adapter
+3 - Trim / Trim Quality
+4 - Interlaced Data
+5 - Threads
+6 - Phred Qual.

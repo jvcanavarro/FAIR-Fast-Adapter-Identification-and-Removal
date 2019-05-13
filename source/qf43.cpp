@@ -55,7 +55,7 @@ int search(char *x, int m, char *y, int n)
 {
 	/*x = p and y = t
 	m = size of pattern (adapter) , n = size of source text (currentSequence).*/
-	int count = 0;
+	int count;
 	int i, j, k, mq1=m-Q+1, B[ASIZE];
 	unsigned int D, ch, mask=AMASK;
 	// Teorical Requirements
@@ -108,7 +108,7 @@ int search(char *x, int m, char *y, int n)
 				// y+k with the first m bits of the area x
 				 if(memcmp(y+k,x,m) == 0) 
 						count++;
-						printf("Match Nº: %d\n", count);
+						cout << "Match: " << count << endl;
 			   }  
 		   }
 	   }

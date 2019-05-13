@@ -69,7 +69,7 @@ void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength
 {
 	// TODO:add pattern matching algorithm to search a given adapter
 	TrimAlgorithm trimm;
-	currentSequence = trimm.removingAdapter(currentSequence, adapter);
+	currentSequence = trimm.removingAdapter(currentSequence);
 	cout <<" SINGLE FASTQ FILE TRIM" << endl;
 }
 
