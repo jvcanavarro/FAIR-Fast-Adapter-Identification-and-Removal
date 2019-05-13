@@ -2,7 +2,6 @@
 
 int main(int argc, char *const argv[])
 {	
-	// Parameters
 	Parameters parameters(argc, argv);
 	if (parameters.parseParameters())
 	{

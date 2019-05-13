@@ -135,8 +135,7 @@ bool Parameters::parseParameters()
 			{
 				// open method + write method(inside getNext())
 				pairedData = pff.getNext();
-				string adapter1 = "", adapter2 = "";
-				pff.trim(adapter1, adapter2, 1, 1);
+				pff.trim(forward, reverse, 1, 1);
 				// TODO adapter identify + trim method
 			}
 			return true;

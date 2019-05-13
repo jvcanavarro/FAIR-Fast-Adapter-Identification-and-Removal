@@ -4,8 +4,8 @@ class SingleFASTQFile
 {
 	SingleFASTQ currentSequence;
 	string file, adapter;
-	ifstream fin;	// Stream class to read from files
-	ofstream fout; // Stream class to write on files
+	ifstream fin;
+	ofstream fout;
 public:
 	bool openFASTQInput(string file);
 	bool openFASTQOutput(string file);
@@ -20,15 +20,15 @@ public:
 
 bool SingleFASTQFile::openFASTQInput(string file)
 {
-	cout << file << endl;
 	this->file = file;
+
 	fin.open(file);
-	if (fin.is_open()) return true;
-	else
+	if (fin.is_open())
 	{
-		cerr << "Failed to Open Input File" << file << endl;
-		return false;
+		return true;
 	}
+	cerr << "Failed to Open Input File" << file << endl;
+	return false;
 }
 
 bool SingleFASTQFile::openFASTQOutput(string file)
@@ -46,17 +46,21 @@ bool SingleFASTQFile::openFASTQOutput(string file)
 bool SingleFASTQFile::hasNext()
 {
 	string lines[4];
-	for (int i = 0; i < 4; i++) if (!getline(fin, lines[i])) return false;
+
+	for (int i = 0; i < 4; i++) 
+		if (!getline(fin, lines[i]))
+			return false;
+
 	currentSequence.setIdentifier(lines[0]);
 	currentSequence.setSequence(lines[1]);
 	currentSequence.setPlaceHolder(lines[2]);
 	currentSequence.setQuality(lines[3]);
+
 	return true; 
 }
 
 SingleFASTQ SingleFASTQFile::getNext()
 {
-	// write(currentSequence);
 	return currentSequence;
 }
 
@@ -68,14 +72,14 @@ string SingleFASTQFile::identifyAdapter()
 void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)
 {
 	// TODO:add pattern matching algorithm to search a given adapter
-	TrimAlgorithm trimm;
-	currentSequence = trimm.removingAdapter(currentSequence);
-	cout <<" SINGLE FASTQ FILE TRIM" << endl;
+	TrimAlgorithm trimmer;
+	currentSequence = trimmer.removingAdapter(currentSequence);
+	cerr <<" SINGLE FASTQ FILE TRIM" << endl;
 }
 
 void SingleFASTQFile::write(SingleFASTQ sequence)
 {
-	cout << "Writing Sequence (SingleFASTQFile) .." << endl;
+	cerr << "Writing Sequence (SingleFASTQFile) .." << endl;
 	fout << sequence.getSequence() << "\n";
 }
 

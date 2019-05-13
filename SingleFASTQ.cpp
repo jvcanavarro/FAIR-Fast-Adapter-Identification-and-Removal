@@ -1,13 +1,3 @@
-// #include <iostream>
-// #include <string>
-// #include <vector>
-// #include <utility>
-// #include <fstream>
-// #include <dirent.h>
-// #include <errno.h>
-// #include <ctime>
-
-// using namespace std;
 #include "source/qf43.cpp"
 
 class SingleFASTQ
@@ -33,7 +23,6 @@ string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 
 void SingleFASTQ::setIdentifier(string id)
 {
-	// cout << " --- Id:" <<  id << endl;
 	this->id = id;
 }
 string SingleFASTQ::getIdentifier()
@@ -43,7 +32,6 @@ string SingleFASTQ::getIdentifier()
 
 void SingleFASTQ::setSequence(string seq)
 {
-	// cout << " --- Seq:" << seq << endl;
 	this->seq = seq;
 }
 string SingleFASTQ::getSequence()
@@ -53,7 +41,6 @@ string SingleFASTQ::getSequence()
 
 void SingleFASTQ::setPlaceHolder(string pholder)
 {
-	// cout << " --- Pholder:" << pholder << endl;
 	this->pholder = pholder;
 }
 string SingleFASTQ::getPlaceHolder()
@@ -63,7 +50,6 @@ string SingleFASTQ::getPlaceHolder()
 
 void SingleFASTQ::setQuality(string qual)
 {
-	// cout << " --- Qual:" << qual << endl;
 	this->qual = qual;
 }
 string SingleFASTQ::getQuality()
