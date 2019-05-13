@@ -97,8 +97,10 @@ Parameters::Parameters(int argc, char *const argv[])
 			continue;
 		}
 	}
+
 	const char *oDir = outputDir.c_str();
 	DIR* dir = opendir(oDir);
+
 	if(help) {
 		printHelp();
 		ready = false;
@@ -109,15 +111,13 @@ Parameters::Parameters(int argc, char *const argv[])
 		printHelp();
 		ready = false;
 	} else if(dir){
-		// directory exists.
 		time_t rawtime;
 		time(&rawtime);
-		cout << ctime(&rawtime);
+
 		outputDir = outputDir + "/" + ctime(&rawtime);
 		outputDir.erase(outputDir.length() - 1);
 		outputDir.append(".fastq");
-		cout << outputDir << endl;
-		// cout << "Added results.fastq" << endl;
+
 		closedir(dir);
 	} else if (ENOENT == errno){
 		cerr << "Directory Does Not Exist." << endl;
@@ -131,18 +131,17 @@ bool Parameters::parseParameters()
 	{
 		PairedFASTQ pairedData;
 		PairedFASTQFile pff;
+
 		if (pff.openFASTQInputFile(forward, reverse) && pff.openFASTQOutputFile(outputDir))
 		{
 			while(pff.hasNext())
 			{
-				// open method + write method(inside getNext())
 				pairedData = pff.getNext();
 				pff.trim(forward, reverse, 1, 1);
-				// TODO adapter identify + trim method
 			}
 			return true;
-		} else return false;
-
+		}
+		return false;
 	}
 }
 void Parameters::printHelp()

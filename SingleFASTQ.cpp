@@ -2,9 +2,9 @@
 
 class SingleFASTQ
 {
-private:
 	string id, seq, pholder, qual;
 	friend ostream & operator << (ostream &os, const SingleFASTQ& single);
+	
 public:
 	void setIdentifier(string id);
 	string getIdentifier();

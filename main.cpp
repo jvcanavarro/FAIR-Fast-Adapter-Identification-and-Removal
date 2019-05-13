@@ -3,6 +3,7 @@
 int main(int argc, char *const argv[])
 {	
 	Parameters parameters(argc, argv);
+	
 	if (parameters.parseParameters())
 	{
 		; 

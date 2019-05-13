@@ -6,6 +6,7 @@ class SingleFASTQFile
 	string file, adapter;
 	ifstream fin;
 	ofstream fout;
+
 public:
 	bool openFASTQInput(string file);
 	bool openFASTQOutput(string file);
@@ -27,6 +28,7 @@ bool SingleFASTQFile::openFASTQInput(string file)
 	{
 		return true;
 	}
+	
 	cerr << "Failed to Open Input File" << file << endl;
 	return false;
 }
@@ -34,7 +36,7 @@ bool SingleFASTQFile::openFASTQInput(string file)
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
 	this->file = file;
-	
+
 	fout.open(file);
 	if (fout.is_open())
 	{
