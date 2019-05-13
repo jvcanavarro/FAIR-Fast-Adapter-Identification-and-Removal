@@ -34,13 +34,15 @@ bool SingleFASTQFile::openFASTQInput(string file)
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
 	this->file = file;
+	
 	fout.open(file);
-	if (fout.is_open()) return true;
-	else
+	if (fout.is_open())
 	{
-		cerr << "Failed to Open Output File" << file << endl;
-		return false;
-	} 
+		return true;
+	}
+
+	cerr << "Failed to Open Output File" << file << endl;
+	return false;
 }
 
 bool SingleFASTQFile::hasNext()

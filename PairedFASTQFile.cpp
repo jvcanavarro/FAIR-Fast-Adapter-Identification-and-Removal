@@ -6,6 +6,7 @@ class PairedFASTQFile
 	SingleFASTQFile forward, reverse;
 	PairedFASTQ pairedData;
 	pair<string, string> adapter;
+	
 public:
 	bool openFASTQInputFile(string forward, string reverse);
 	bool openFASTQOutputFile(string file);
@@ -20,7 +21,9 @@ public:
 bool PairedFASTQFile::openFASTQInputFile(string forward, string reverse)
 {
 	if (this->forward.openFASTQInput(forward) && this->reverse.openFASTQInput(reverse))
+	{
 		return true;
+	}
 
 	cerr << "Failed To Open Forward & Reverse Files." << endl;
 	return false;
@@ -44,6 +47,7 @@ bool PairedFASTQFile::hasNext()
 	{
 		return true;
 	}
+
 	cerr << "EOF" << endl;
 	return false;
 }

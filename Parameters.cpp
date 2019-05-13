@@ -3,10 +3,10 @@
 class Parameters
 {
 private:
-	string version, single, forward, reverse, interlaced, adapter, forwardAdapter, reverseAdapter;
+	string version, single, forward, reverse, interlaced, adapter, forwardAdapter, reverseAdapter, outputDir;
 	bool onlyIdentify , onlyRemove, trim, trimQuality, ready;
 	int minQuality, threads, phredOffset;
-	string outputDir;
+
 public:
 	Parameters(int argc, char *const argv[]);
 	bool parseParameters();
@@ -31,15 +31,17 @@ public:
 
 Parameters::Parameters(int argc, char *const argv[])
 {
-	bool help = false, version = false;
 	this->version = "1.0";
+	bool help = false, version = false;
 	onlyIdentify = false;
 	onlyRemove = false;
 	trim = false;
 	trimQuality = false;
 	threads = 4;
 	phredOffset = 0;
+	
 	ready = true;
+
 	for(int i = 1; i < argc; i++) {
 		string argument(argv[i]);
 		if(argument == "--help" || argument == "-h") {
