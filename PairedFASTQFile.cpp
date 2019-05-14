@@ -5,7 +5,7 @@ class PairedFASTQFile
 	string file;
 	SingleFASTQFile forward, reverse;
 	PairedFASTQ pairedData;
-	pair<string, string> adapter;
+	pair<string, string> adapters;
 	
 public:
 	bool openFASTQInputFile(string forward, string reverse);
@@ -59,7 +59,9 @@ PairedFASTQ PairedFASTQFile::getNext()
 
 pair<string, string> PairedFASTQFile::identifyAdapters()
 {
-	;
+	adapters.first = forward.identifyAdapter();
+	adapters.second = reverse.identifyAdapter();
+	return adapters;
 }
 
 void PairedFASTQFile::trim(string adapter1, string adapter2, int minQuality, int minSequenceLength)
@@ -73,8 +75,8 @@ void PairedFASTQFile::write(PairedFASTQ pairedData)
 {
 	cerr << "Writing Sequence (PairedFASTQFile).." << endl;
 
-	reverse.write(get<0>(pairedData.getPair()));
-	forward.write(get<1>(pairedData.getPair()));
+	forward.write();
+	reverse.write();
 }
 
 void PairedFASTQFile::closeOutput()

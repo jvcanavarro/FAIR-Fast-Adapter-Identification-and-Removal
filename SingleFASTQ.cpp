@@ -19,7 +19,7 @@ public:
 	void trim(string adapter, int minQuality, int minSequenceLength);
 };
 
-string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
+// string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 
 void SingleFASTQ::setIdentifier(string id)
 {

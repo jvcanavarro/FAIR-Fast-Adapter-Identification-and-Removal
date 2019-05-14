@@ -137,16 +137,32 @@ bool Parameters::parseParameters()
 				if (onlyIdentify)
 				{
 					cerr << "Adapter (Single FIle)" << s_fastq.identifyAdapter() << endl;
-					return true;
 				}
-
-				while(s_fastq.hasNext())
+				else
 				{
-					if (onlyRemove)
+					while(s_fastq.hasNext())
 					{
-						s_fastq.write()
+						s_fastq.removeAdapter(single, onlyRemove);
+
+						if (trim)
+						{
+							s_fastq.trim(single, minQuality, 0);
+						}
+
+						s_fastq.write();
 					}
 				}
+			}
+			s_fastq.closeOutput();
+
+			return true;
+		}
+		else if (forward.length() != 0 && reverse.length() != 0)
+		{
+			PairedFASTQFile p_fastq;
+			if (p_fastq.openFASTQInputFile(forward, reverse) && p_fastq.openFASTQOutputFile(outputDir))
+			{
+				
 			}
 		}
 	}
@@ -156,7 +172,7 @@ void Parameters::printHelp()
 	// cout << ifstream("Help.md").rdbuf() << endl;
 	cerr << endl << "FAIR v1.0" << endl << endl;
     cerr << "Fast Adapter Identification & Removal" << endl << endl;
-	cerr << "Usage: " << argv[0] << " [options] -o <output_dir> " << endl << endl;
+	// cerr << "Usage: " << argv[0] << " [options] -o <output_dir> " << endl << endl;
 	cerr << "Basic options:" << endl;
 	cerr << "    -o/--output <output_dir>    Folder to store all the files generated during the assembly (required)." << endl;
     cerr << "    -p/--partitions <int>       Number of partitions [default: 16]" << endl;

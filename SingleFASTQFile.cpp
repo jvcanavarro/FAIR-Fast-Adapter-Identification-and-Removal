@@ -1,8 +1,8 @@
-#include "TrimAlgorithm.cpp"
+#include "PairedFASTQ.cpp"
 
 class SingleFASTQFile
 {
-	SingleFASTQFile currentSequence;
+	SingleFASTQ currentSequence;
 	string file, adapter;
 	ifstream fin;
 	ofstream fout;
@@ -14,8 +14,8 @@ public:
 	SingleFASTQ getNext();
 	string identifyAdapter();
 	void trim(string adapter, int minQuality, int minSequenceLength);
-	void removeAdapter(bool identify = true);
-	void write(SingleFASTQ sequence);
+	void removeAdapter(string adapter, bool onlyRemove);
+	void write();
 	void closeOutput();
 };
 
@@ -71,7 +71,8 @@ SingleFASTQ SingleFASTQFile::getNext()
 
 string SingleFASTQFile::identifyAdapter()
 {
-	;
+	// TODO
+	return adapter;
 }
 
 void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)
@@ -79,32 +80,38 @@ void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength
 	;
 }
 
-void SingleFASTQFile::removeAdapter(string adapter, bool identify)
+void SingleFASTQFile::removeAdapter(string adapter, bool onlyRemove)
 {
+	// TODO: Add this->adapter or remove it.
 	string newSequence = currentSequence.getSequence();
-	string adapter;
-	if (identify)
-	{
 
+	if (!onlyRemove)
+	{
+		adapter = identifyAdapter();
 	}
+
 	char seq_c[newSequence.length() + 1];
 	char adapter_c[adapter.length() + 1];
 	
-	strcpy(seq_c, trimmedSequence.c_str());
+	strcpy(seq_c, newSequence.c_str());
 	strcpy(adapter_c, adapter.c_str());
 
-	int occurencies = search(adapter_c, adapter.length(),seq_c , trimmedSequence.length());
+	int removed = search(adapter_c, adapter.length(),seq_c , newSequence.length());
+	// currentSequence.setSequence(newSequence);
 
 	cerr << "Adapter: " << adapter << endl;
-	cerr << "Number of occurencies: " << occurencies << endl;
-	// untrimmedSequence.setSequence(trimmedSequence);
+	cerr << "Adapters Removed: " << removed << endl;
+
 }
 
-void SingleFASTQFile::write(SingleFASTQ sequence)
+void SingleFASTQFile::write()
 {
 	cerr << "Writing Sequence (SingleFASTQFile) .." << endl;
 
-	fout << sequence.getSequence() << "\n";
+	// fout << currentSequence.getIdentifier() << "\n";
+	fout << currentSequence.getSequence() << "\n";
+	// fout << currentSequence.getPlaceHolder() << "\n";
+	// fout << currentSequence.getQuality() << "\n";
 }
 
 void SingleFASTQFile::closeOutput()
