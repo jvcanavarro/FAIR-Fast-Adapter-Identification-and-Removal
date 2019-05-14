@@ -48,7 +48,6 @@ bool PairedFASTQFile::hasNext()
 		return true;
 	}
 
-	cerr << "EOF" << endl;
 	return false;
 }
 

@@ -2,7 +2,7 @@
 
 class SingleFASTQFile
 {
-	SingleFASTQ currentSequence;
+	SingleFASTQFile currentSequence;
 	string file, adapter;
 	ifstream fin;
 	ofstream fout;
@@ -14,6 +14,7 @@ public:
 	SingleFASTQ getNext();
 	string identifyAdapter();
 	void trim(string adapter, int minQuality, int minSequenceLength);
+	void removeAdapter(bool identify = true);
 	void write(SingleFASTQ sequence);
 	void closeOutput();
 };
@@ -75,15 +76,34 @@ string SingleFASTQFile::identifyAdapter()
 
 void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)
 {
-	// TODO:add pattern matching algorithm to search a given adapter
-	TrimAlgorithm trimmer;
-	currentSequence = trimmer.removingAdapter(currentSequence);
-	cerr <<" SINGLE FASTQ FILE TRIM" << endl;
+	;
+}
+
+void SingleFASTQFile::removeAdapter(string adapter, bool identify)
+{
+	string newSequence = currentSequence.getSequence();
+	string adapter;
+	if (identify)
+	{
+
+	}
+	char seq_c[newSequence.length() + 1];
+	char adapter_c[adapter.length() + 1];
+	
+	strcpy(seq_c, trimmedSequence.c_str());
+	strcpy(adapter_c, adapter.c_str());
+
+	int occurencies = search(adapter_c, adapter.length(),seq_c , trimmedSequence.length());
+
+	cerr << "Adapter: " << adapter << endl;
+	cerr << "Number of occurencies: " << occurencies << endl;
+	// untrimmedSequence.setSequence(trimmedSequence);
 }
 
 void SingleFASTQFile::write(SingleFASTQ sequence)
 {
 	cerr << "Writing Sequence (SingleFASTQFile) .." << endl;
+
 	fout << sequence.getSequence() << "\n";
 }
 

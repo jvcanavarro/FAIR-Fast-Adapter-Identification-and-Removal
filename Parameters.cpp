@@ -26,7 +26,7 @@ public:
 	string getForwardAdapter();
 	string getReverseAdapter();
 	int getThreads();
-	int getPhredOffset();	// Quality
+	int getPhredOffset();
 };
 
 Parameters::Parameters(int argc, char *const argv[])
@@ -129,28 +129,59 @@ bool Parameters::parseParameters()
 {
 	if (ready)
 	{
-		PairedFASTQ pairedData;
-		PairedFASTQFile pff;
-
-		if (pff.openFASTQInputFile(forward, reverse) && pff.openFASTQOutputFile(outputDir))
+		if (single.length() != 0)
 		{
-			while(pff.hasNext())
+			SingleFASTQFile s_fastq;
+			if (s_fastq.openFASTQInput(single) && s_fastq.openFASTQOutput(outputDir))
 			{
-				pairedData = pff.getNext();
-				pff.trim(forward, reverse, 1, 1);
+				if (onlyIdentify)
+				{
+					cerr << "Adapter (Single FIle)" << s_fastq.identifyAdapter() << endl;
+					return true;
+				}
+
+				while(s_fastq.hasNext())
+				{
+					if (onlyRemove)
+					{
+						s_fastq.write()
+					}
+				}
 			}
-			return true;
 		}
-		return false;
 	}
 }
 void Parameters::printHelp()
 {	
-	cout << ifstream("Help.md").rdbuf() << endl;
+	// cout << ifstream("Help.md").rdbuf() << endl;
+	cerr << endl << "FAIR v1.0" << endl << endl;
+    cerr << "Fast Adapter Identification & Removal" << endl << endl;
+	cerr << "Usage: " << argv[0] << " [options] -o <output_dir> " << endl << endl;
+	cerr << "Basic options:" << endl;
+	cerr << "    -o/--output <output_dir>    Folder to store all the files generated during the assembly (required)." << endl;
+    cerr << "    -p/--partitions <int>       Number of partitions [default: 16]" << endl;
+    cerr << "    -w/--whole                  Use whole dataset to merge [default: off]" << endl;
+    cerr << "    --iontorrent                This flag is required for IonTorrent data." << endl;
+    cerr << "    -h/--help                   Prints this usage message." << endl;
+    cerr << "    -v/--version                Prints version info" << endl << endl;
+	cerr << "Input data:" << endl;
+	cerr << "    -f/--forward <filename>     File with forward paired-end reads." << endl;
+	cerr << "    -r/--reverse <filename>     File with reverse paired-end reads." << endl;
+    cerr << "    -s/--single <filename>      File with unpaired reads." << endl << endl;
+    cerr << "Advanced options:" << endl;
+    cerr << "    -t/--threads <int>          Number of threads [default: 4]" << endl;
+    cerr << "    -k/--kmers <int>            Number of kmers to run the assembly [default: 3]" << endl << endl;
+	cerr << "Please, report bugs to: jvcanavarro@gmail.com" << endl;
+	cerr << "Software homepage: <https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal>" << endl << endl;
 }
 void Parameters::printVersion()
 {
-	cout << "FAIR - Fast Adapter Idenification and Removal v" << version <<  endl;
+	cerr << endl << "FAIR - Fast Adapter Identification & Removal v1.0" << endl << endl;
+	cerr << "Copyright (C) 2019 Federal University of Para." << endl;
+	cerr << "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>." << endl;
+	cerr << "This is free software: you are free to change and redistribute it." << endl;
+	cerr << "There is NO WARRANTY, to the extent permitted by law." << endl << endl;
+	cerr << "Written by João V. Canavarro." << endl << endl;
 }
 string Parameters::getOutputDir()
 {
@@ -174,23 +205,19 @@ string Parameters::getInterlaced()
 }
 bool Parameters::identifyOnly()
 {
-	if (onlyIdentify) return true;
-	else return false;
+	return onlyIdentify;
 }
 bool Parameters::removeOnly()
 {
-	if (onlyRemove) return true;
-	else return false;
+	return onlyRemove;
 }
 bool Parameters::trimm()
 {
-	if (trim) return true;
-	else return false;
+	return trim;
 }
 bool Parameters::trimmQuality()
 {
-	if (trimQuality) return true;
-	else return false;
+	return trimQuality;
 }
 int Parameters::getMinQuality()
 {
