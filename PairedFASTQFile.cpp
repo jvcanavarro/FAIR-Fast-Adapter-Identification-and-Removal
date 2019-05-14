@@ -14,7 +14,8 @@ public:
 	PairedFASTQ getNext();
 	pair<string, string> identifyAdapters();
 	void trim(string adapter1 ,string adapter2 ,int minQuality ,int minSequenceLength);
-	void write(PairedFASTQ pairedData);
+	void removeAdapters(string adapter1, adapter2, bool onlyRemove);
+	void write();
 	void closeOutput();
 };
 
@@ -43,12 +44,7 @@ bool PairedFASTQFile::openFASTQOutputFile(string file)
 
 bool PairedFASTQFile::hasNext()
 {
-	if (forward.hasNext() && reverse.hasNext())
-	{
-		return true;
-	}
-
-	return false;
+	return (forward.hasNext() && reverse.hasNext());
 }
 
 PairedFASTQ PairedFASTQFile::getNext()
@@ -71,7 +67,13 @@ void PairedFASTQFile::trim(string adapter1, string adapter2, int minQuality, int
 	reverse.trim(adapter2, 0, 0);
 }
 
-void PairedFASTQFile::write(PairedFASTQ pairedData)
+void PairedFASTQFile::removeAdapters(string adapter1, string adapter2, bool onlyRemove)
+{
+	forward.removeAdapters(adapter1, onlyRemove);
+	reverse.removeAdapters(adapter2, onlyRemove);
+}
+
+void PairedFASTQFile::write()
 {
 	cerr << "Writing Sequence (PairedFASTQFile).." << endl;
 

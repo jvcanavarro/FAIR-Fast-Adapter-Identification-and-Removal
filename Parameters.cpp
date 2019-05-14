@@ -162,8 +162,33 @@ bool Parameters::parseParameters()
 			PairedFASTQFile p_fastq;
 			if (p_fastq.openFASTQInputFile(forward, reverse) && p_fastq.openFASTQOutputFile(outputDir))
 			{
-				
+				if (onlyIdentify)
+				{
+					cerr << "Adapters (Paired FIle): " << p_fastq.identifyAdapters() << endl;
+				}
+				else
+				{
+					while(p_fastq.hasNext())
+					{
+						p_fastq.removeAdapters(forward, reverse, onlyRemove);
+
+						if(trim)
+						{
+							p_fastq.trim(forward, reverse, 0);
+						}
+
+						p_fastq.write();
+					}
+				}
 			}
+			p_fastq.closeOutput();
+
+			return true;
+		}
+		else if (interlaced.length() != 0)
+		{
+			//?
+			return true;
 		}
 	}
 }
