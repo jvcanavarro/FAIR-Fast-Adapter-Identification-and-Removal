@@ -3,8 +3,8 @@
 class SingleFASTQ
 {
 	string id, seq, pholder, qual;
-	friend ostream & operator << (ostream &os, const SingleFASTQ& single);
-	
+	friend ostream &operator<<(ostream &os, const SingleFASTQ &single);
+
 public:
 	void setIdentifier(string id);
 	string getIdentifier();
@@ -14,12 +14,12 @@ public:
 	string getPlaceHolder();
 	void setQuality(string qual);
 	string getQuality();
-	vector <int> convertQ33ToInteger();
-	vector <int> convertQ64ToInteger();
+	vector<int> convertQ33ToInteger();
+	vector<int> convertQ64ToInteger();
 	void trim(string adapter, int minQuality, int minSequenceLength);
 };
 
-// string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
+string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 
 void SingleFASTQ::setIdentifier(string id)
 {
@@ -57,24 +57,26 @@ string SingleFASTQ::getQuality()
 	return qual;
 }
 
-vector <int> SingleFASTQ::convertQ33ToInteger()
+vector<int> SingleFASTQ::convertQ33ToInteger()
 {
-	
-	vector <int> intQuality;	
-	
+
+	vector<int> intQuality;
+
 	// Base 33 (Ilumina, Ion Torrent, PacBio and Sanger)
-	for (int i = 0; i < test.length(); i++) intQuality.push_back(static_cast <int> (test[i]) - 33);
+	for (int i = 0; i < test.length(); i++)
+		intQuality.push_back(static_cast<int>(test[i]) - 33);
 
 	return intQuality;
 }
-vector <int> SingleFASTQ::convertQ64ToInteger()
+vector<int> SingleFASTQ::convertQ64ToInteger()
 {
-	
-	vector <int> intQuality;
-	
+
+	vector<int> intQuality;
+
 	// Base 64 (Old Illumina)
-	for (int i = 0; i < test.length(); i++) intQuality.push_back(static_cast <int> (test[i]) - 64);
-		
+	for (int i = 0; i < test.length(); i++)
+		intQuality.push_back(static_cast<int>(test[i]) - 64);
+
 	return intQuality;
 }
 
@@ -83,7 +85,7 @@ void SingleFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
 	;
 }
 
-ostream & operator << (ostream &os, const SingleFASTQ& single)
+ostream &operator<<(ostream &os, const SingleFASTQ &single)
 {
 	os << single.id << endl;
 	os << single.seq << endl;

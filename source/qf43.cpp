@@ -23,8 +23,6 @@
  * Q is the dimension of q-grams
  */
 
-
-
 #include "include/define.h"
 #include <iostream>
 #include <sys/types.h>
@@ -43,76 +41,88 @@
 
 using namespace std;
 
-#define	Q	4
-#define	S	3
+#define Q 4
+#define S 3
 
-#define ASIZE (1<<(Q*S))
-#define AMASK (ASIZE-1)
-#define BSIZE 262144	/* = 2**18 */
-
+#define ASIZE (1 << (Q * S))
+#define AMASK (ASIZE - 1)
+#define BSIZE 262144 /* = 2**18 */
 
 int search(char *x, int m, char *y, int n)
 {
 	/*x = p and y = t
 	m = size of pattern (adapter) , n = size of source text (currentSequence).*/
 	int count;
-	int i, j, k, mq1=m-Q+1, B[ASIZE];
-	unsigned int D, ch, mask=AMASK;
+	int i, j, k, mq1 = m - Q + 1, B[ASIZE];
+	unsigned int D, ch, mask = AMASK;
 	// Teorical Requirements
 	// Pattern Size <= 4
-	if(m <= Q) return -1;
-	if((WORD*8) < Q) abort();
-	if(ASIZE > BSIZE)	return -1;
-	
+	if (m <= Q)
+		return -1;
+	if ((WORD * 8) < Q)
+		abort();
+	if (ASIZE > BSIZE)
+		return -1;
+
 	/* Preprocessing */
 	// BEGIN_PREPROCESSING
 	// Keep tracking of Active Phases
-	for(i=0; i<ASIZE; i++) B[i]=0;
+	for (i = 0; i < ASIZE; i++)
+		B[i] = 0;
 	ch = 0;
-	for(i = m-1; i >= 0; i--) {
+	for (i = m - 1; i >= 0; i--)
+	{
 		ch = ((ch << S) + x[i]) & mask;
-		if(i < mq1)
-			B[ch] |= (1<<((m-i) % Q));
+		if (i < mq1)
+			B[ch] |= (1 << ((m - i) % Q));
 	}
-   // END_PREPROCESSING
-	
+	// END_PREPROCESSING
+
 	/* "Searching"
 	   Instead of Searching, we need to
 	   transform this algorithm in a adapter removal. */
-   // BEGIN_SEARCHING
-	for(i=mq1-1; i<=n-Q; i+=mq1) {
-		ch = y[i+3];
-		ch = (ch<<S) + y[i+2];
-		ch = (ch<<S) + y[i+1];
-		ch = (ch<<S) + y[i];
+	// BEGIN_SEARCHING
+	for (i = mq1 - 1; i <= n - Q; i += mq1)
+	{
+		ch = y[i + 3];
+		ch = (ch << S) + y[i + 2];
+		ch = (ch << S) + y[i + 1];
+		ch = (ch << S) + y[i];
 		D = B[ch & mask];
-		if( D ) {
-		   j = i-mq1+Q;
-		  more:
-		   i = i-Q;
-			if(i >= j) {
-				ch = y[i+3];
-				ch = (ch<<S) + y[i+2];
-				ch = (ch<<S) + y[i+1];
-				ch = (ch<<S) + y[i];
+		if (D)
+		{
+			j = i - mq1 + Q;
+		more:
+			i = i - Q;
+			if (i >= j)
+			{
+				ch = y[i + 3];
+				ch = (ch << S) + y[i + 2];
+				ch = (ch << S) + y[i + 1];
+				ch = (ch << S) + y[i];
 				D = B[ch & mask];
-			  if(D == 0) continue;
-			  else goto more;
-			} 
-		   else {  /* verify potential matches */
-			   i = j;
-			  k = j-Q+1;
-			  if(j > n-m)  j = n-m;
-			  for(  ; k <= j; k++) {
-				// memcmp() compare the first m bits of the area
-				// y+k with the first m bits of the area x
-				 if(memcmp(y+k,x,m) == 0) 
+				if (D == 0)
+					continue;
+				else
+					goto more;
+			}
+			else
+			{ /* verify potential matches */
+				i = j;
+				k = j - Q + 1;
+				if (j > n - m)
+					j = n - m;
+				for (; k <= j; k++)
+				{
+					// memcmp() compare the first m bits of the area
+					// y+k with the first m bits of the area x
+					if (memcmp(y + k, x, m) == 0)
 						count++;
-						cout << "Match: " << count << endl;
-			   }  
-		   }
-	   }
+					cout << "Match: " << count << endl;
+				}
+			}
+		}
 	}
-   // END_SEARCHING
+	// END_SEARCHING
 	return count;
 }

@@ -19,7 +19,6 @@ public:
 	void closeOutput();
 };
 
-
 bool SingleFASTQFile::openFASTQInput(string file)
 {
 	this->file = file;
@@ -29,7 +28,7 @@ bool SingleFASTQFile::openFASTQInput(string file)
 	{
 		return true;
 	}
-	
+
 	cerr << "Failed to Open Input File" << file << endl;
 	return false;
 }
@@ -52,7 +51,7 @@ bool SingleFASTQFile::hasNext()
 {
 	string lines[4];
 
-	for (int i = 0; i < 4; i++) 
+	for (int i = 0; i < 4; i++)
 		if (!getline(fin, lines[i]))
 			return false;
 
@@ -61,7 +60,7 @@ bool SingleFASTQFile::hasNext()
 	currentSequence.setPlaceHolder(lines[2]);
 	currentSequence.setQuality(lines[3]);
 
-	return true; 
+	return true;
 }
 
 SingleFASTQ SingleFASTQFile::getNext()
@@ -92,16 +91,15 @@ void SingleFASTQFile::removeAdapter(string adapter, bool onlyRemove)
 
 	char seq_c[newSequence.length() + 1];
 	char adapter_c[adapter.length() + 1];
-	
+
 	strcpy(seq_c, newSequence.c_str());
 	strcpy(adapter_c, adapter.c_str());
 
-	int removed = search(adapter_c, adapter.length(),seq_c , newSequence.length());
+	int removed = search(adapter_c, adapter.length(), seq_c, newSequence.length());
 	// currentSequence.setSequence(newSequence);
 
 	cerr << "Adapter: " << adapter << endl;
 	cerr << "Adapters Removed: " << removed << endl;
-
 }
 
 void SingleFASTQFile::write()
@@ -118,5 +116,3 @@ void SingleFASTQFile::closeOutput()
 {
 	fout.close();
 }
-
-
