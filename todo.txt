@@ -1,6 +1,6 @@
-1 - Remove Adapter
-2 - Identify Adapter
-3 - Trim / Trim Quality
-4 - Interlaced Data
-5 - Threads
-6 - Phred Qual.
+Implementações Restantes:
+- Identificação de Adaptador.
+- Autodetect do Tipo de Qualidade (Phred -Offset). 
+- Trim Sequence / Min Quality / Trim Quality: essa parte é possível implementar em poucas horas, já que na classe SingleFASTQ já temos implementada uma função de análise de qualidade (33 ou 64).
+- Implementação de Threads.
+- Suporte para Interlaced Sequences.

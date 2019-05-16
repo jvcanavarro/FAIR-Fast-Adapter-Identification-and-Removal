@@ -59,7 +59,6 @@ string SingleFASTQ::getQuality()
 
 vector<int> SingleFASTQ::convertQ33ToInteger()
 {
-
 	vector<int> intQuality;
 
 	// Base 33 (Ilumina, Ion Torrent, PacBio and Sanger)

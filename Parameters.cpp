@@ -207,7 +207,7 @@ bool Parameters::parseParameters()
 			{
 				if (onlyIdentify)
 				{
-					cerr << "Adapters (Paired FIle): " << p_fastq.identifyAdapters() << endl;
+					cerr << "Adapters (Paired FIle): " << endl;
 				}
 				else
 				{
@@ -217,7 +217,7 @@ bool Parameters::parseParameters()
 
 						if (trim)
 						{
-							p_fastq.trim(forward, reverse, 0);
+							p_fastq.trim(forward, reverse, 0, 0);
 						}
 
 						p_fastq.write();
