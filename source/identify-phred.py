@@ -106,14 +106,6 @@ def main():
     input_file = fileinput.input(args, openhook=fileinput.hook_compressed)
 
     for i, line in enumerate(input_file):
-        if i == 0:
-            input_filename_for_disp = fileinput.filename()
-
-            if fileinput.isstdin():
-                input_filename_for_disp = 'STDIN'
-
-            print("# reading qualities from "
-                  "{}".format(input_filename_for_disp), file=sys.stderr)
 
         lmin, lmax, qual_val_counts = get_qual_range(line.rstrip())
 
@@ -142,7 +134,7 @@ def main():
     if err_exit:
         sys.exit(1)
     else:
-        print("{}\t{}\t{}".format(",".join(valid), gmin, gmax))
+        print("{} | Lower Qual. :{} | Higher Qual. :{}".format(" - ".join(valid), gmin, gmax))
 
 
 if __name__ == "__main__":

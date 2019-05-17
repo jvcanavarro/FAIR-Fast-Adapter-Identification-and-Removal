@@ -13,6 +13,7 @@ public:
 	bool hasNext();
 	SingleFASTQ getNext();
 	string identifyAdapter();
+	void identifyQuality();
 	void trim(string adapter, int minQuality, int minSequenceLength);
 	void removeAdapter(string adapter, bool onlyRemove);
 	void write();
@@ -22,6 +23,8 @@ public:
 bool SingleFASTQFile::openFASTQInput(string file)
 {
 	this->file = file;
+
+	identifyQuality();
 
 	fin.open(file);
 	if (fin.is_open())
@@ -74,6 +77,19 @@ string SingleFASTQFile::identifyAdapter()
 	return adapter;
 }
 
+void SingleFASTQFile::identifyQuality()
+{
+	cout << endl << "Phred Quality Offset of " << file << ":" << endl;
+	
+	string command = "sed -n '2p' " + file + " > seq_sample.fastq";
+
+	system(command.c_str());
+	system("python3 source/identify-phred.py seq_sample.fastq");
+	system("rm seq_sample.fastq");
+
+	cout << endl;
+}
+
 void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)
 {
 	;
@@ -104,7 +120,7 @@ void SingleFASTQFile::removeAdapter(string adapter, bool onlyRemove)
 
 void SingleFASTQFile::write()
 {
-	cerr << "Writing Sequence (SingleFASTQFile) .." << endl;
+	cerr << "Writing Sequence (SingleFASTQFile).." << endl;
 
 	// fout << currentSequence.getIdentifier() << "\n";
 	fout << currentSequence.getSequence() << "\n";

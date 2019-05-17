@@ -12,6 +12,7 @@ public:
 	bool parseParameters();
 	void printHelp();
 	void printVersion();
+	void printQuality(string filename);
 	string getOutputDir();
 	string getSingle();
 	string getForward();
@@ -37,7 +38,7 @@ Parameters::Parameters(int argc, char *const argv[])
 	onlyRemove = false;
 	trim = false;
 	trimQuality = false;
-	threads = 4;
+	threads = 1;
 	phredOffset = 0;
 
 	ready = true;
@@ -172,6 +173,12 @@ bool Parameters::parseParameters()
 {
 	if (ready)
 	{
+		// Threads
+		if (threads != 1)
+			{
+				;	
+			}
+
 		if (single.length() != 0)
 		{
 			SingleFASTQFile s_fastq;
