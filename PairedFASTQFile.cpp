@@ -75,7 +75,7 @@ void PairedFASTQFile::removeAdapters(bool onlyRemove, string adapter1, string ad
 
 void PairedFASTQFile::write()
 {
-	cerr << "Writing Sequence (PairedFASTQFile).." << endl;
+	cerr << "Writing PairedFASTQ ..." << endl;
 
 	forward.write();
 	reverse.write();

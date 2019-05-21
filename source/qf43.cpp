@@ -48,22 +48,22 @@ using namespace std;
 #define AMASK (ASIZE - 1)
 #define BSIZE 262144 /* = 2**18 */
 
-int search(char *x, int m, char *y, int n)
+vector<int> search(char *x, int m, char *y, int n)
 {
 	/*x = p and y = t
 	m = size of pattern (adapter) , n = size of source text (currentSequence).*/
 	int count;
-	vector<int> indexes;
+	vector<int> index;
 	int i, j, k, mq1 = m - Q + 1, B[ASIZE];
 	unsigned int D, ch, mask = AMASK;
 	// Teorical Requirements
 	// Pattern Size <= 4
 	if (m <= Q)
-		return -1;
+		abort();
 	if ((WORD * 8) < Q)
 		abort();
 	if (ASIZE > BSIZE)
-		return -1;
+		abort();
 
 	/* Preprocessing */
 	// BEGIN_PREPROCESSING
@@ -119,16 +119,19 @@ int search(char *x, int m, char *y, int n)
 					// y+k with the first m bits of the area x
 					if (memcmp(y + k, x, m) == 0)
 					{
+						// Start = k, End = k + m.
+						index.push_back(k);
 						count++;
-						cout << "M: " << m << endl;
-						cout << "Y + K: " << y + k << endl;
-						cout << "X: " << x << endl;
-						cout << "Match: " << count << endl;
 					}
 				}
 			}
 		}
 	}
 	// END_SEARCHING
-	return count;
+	// cout << "i: ";
+	// for (auto i = indexes.begin(); i != indexes.end(); i++)
+	// 	// cout << indexes[i];
+	// 	cout << *i << " ";
+	// cout << endl;
+	return index;
 }

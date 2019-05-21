@@ -116,16 +116,19 @@ void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 	strcpy(seq_c, newSequence.c_str());
 	strcpy(adapter_c, adapter.c_str());
 
-	int removed = search(adapter_c, adapter.length(), seq_c, newSequence.length());
+	vector<int> index = search(adapter_c, adapter.length(), seq_c, newSequence.length());
 	// currentSequence.setSequence(newSequence);
-
-	cerr << "Adapter: " << adapter << endl;
-	cerr << "Adapters Removed: " << removed << endl;
+	cerr << "Adapters Indexes: ";
+	for (auto it = index.cbegin(); it != index.cend(); it++)
+	{
+		cout << *it << ' ';
+	}
+	cerr << endl << "Adapter: " << adapter << endl;
 }
 
 void SingleFASTQFile::write()
 {
-	cerr << "Writing Sequence (SingleFASTQFile).." << endl;
+	cerr << "Writing SingleFASTQ Sequence..." << endl;
 
 	// fout << currentSequence.getIdentifier() << "\n";
 	fout << currentSequence.getSequence() << "\n";
