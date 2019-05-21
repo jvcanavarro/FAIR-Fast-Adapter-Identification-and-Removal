@@ -3,7 +3,7 @@
 class Parameters
 {
 private:
-	string version, single, forward, reverse, interlaced, adapter, forwardAdapter, reverseAdapter, outputDir;
+	string version, single, forward, reverse, interlaced, singleAdapter, forwardAdapter, reverseAdapter, outputDir;
 	bool onlyIdentify, onlyRemove, trim, trimQuality, ready;
 	int minQuality, threads, phredOffset;
 
@@ -23,7 +23,7 @@ public:
 	bool trimm();
 	bool trimmQuality();
 	int getMinQuality();
-	string getAdapter();
+	string getSingleAdapter();
 	string getForwardAdapter();
 	string getReverseAdapter();
 	int getThreads();
@@ -113,7 +113,7 @@ Parameters::Parameters(int argc, char *const argv[])
 		}
 		else if (argument == "--adapter")
 		{
-			adapter = argv[i + 1];
+			singleAdapter = argv[i + 1];
 			continue;
 		}
 		else if (argument == "--forward-adapter")
@@ -192,7 +192,8 @@ bool Parameters::parseParameters()
 				{
 					while (s_fastq.hasNext())
 					{
-						s_fastq.removeAdapter(single, onlyRemove);
+
+						s_fastq.removeAdapter(onlyRemove, singleAdapter);
 
 						if (trim)
 						{
@@ -214,13 +215,13 @@ bool Parameters::parseParameters()
 			{
 				if (onlyIdentify)
 				{
-					cerr << "Adapters (Paired FIle): " << endl;
+					cerr << "Adapters (Paired File): " << endl;
 				}
 				else
 				{
 					while (p_fastq.hasNext())
 					{
-						p_fastq.removeAdapters(forward, reverse, onlyRemove);
+						p_fastq.removeAdapters(onlyRemove, forwardAdapter, reverseAdapter);
 
 						if (trim)
 						{
@@ -299,9 +300,9 @@ int Parameters::getMinQuality()
 {
 	return minQuality;
 }
-string Parameters::getAdapter()
+string Parameters::getSingleAdapter()
 {
-	return adapter;
+	return singleAdapter;
 }
 string Parameters::getForwardAdapter()
 {

@@ -15,7 +15,7 @@ public:
 	string identifyAdapter();
 	void identifyQuality();
 	void trim(string adapter, int minQuality, int minSequenceLength);
-	void removeAdapter(string adapter, bool onlyRemove);
+	void removeAdapter(bool onlyRemove, string adapter);
 	void write();
 	void closeOutput();
 };
@@ -95,15 +95,20 @@ void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength
 	;
 }
 
-void SingleFASTQFile::removeAdapter(string adapter, bool onlyRemove)
+void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 {
 	// TODO: Add this->adapter or remove it.
 	string newSequence = currentSequence.getSequence();
 
-	if (!onlyRemove)
+	if (onlyRemove) // String OK
+	{
+		this->adapter = adapter;
+	}
+	else // Need to Identify
 	{
 		adapter = identifyAdapter();
 	}
+
 
 	char seq_c[newSequence.length() + 1];
 	char adapter_c[adapter.length() + 1];

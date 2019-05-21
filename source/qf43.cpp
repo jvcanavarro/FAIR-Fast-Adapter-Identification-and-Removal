@@ -53,6 +53,7 @@ int search(char *x, int m, char *y, int n)
 	/*x = p and y = t
 	m = size of pattern (adapter) , n = size of source text (currentSequence).*/
 	int count;
+	vector<int> indexes;
 	int i, j, k, mq1 = m - Q + 1, B[ASIZE];
 	unsigned int D, ch, mask = AMASK;
 	// Teorical Requirements
@@ -117,8 +118,13 @@ int search(char *x, int m, char *y, int n)
 					// memcmp() compare the first m bits of the area
 					// y+k with the first m bits of the area x
 					if (memcmp(y + k, x, m) == 0)
+					{
 						count++;
-					cout << "Match: " << count << endl;
+						cout << "M: " << m << endl;
+						cout << "Y + K: " << y + k << endl;
+						cout << "X: " << x << endl;
+						cout << "Match: " << count << endl;
+					}
 				}
 			}
 		}
