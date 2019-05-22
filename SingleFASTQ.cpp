@@ -1,5 +1,6 @@
 #include "source/qf43.cpp"
 
+
 class SingleFASTQ
 {
 	string id, seq, pholder, qual;

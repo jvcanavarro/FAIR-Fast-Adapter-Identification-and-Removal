@@ -181,6 +181,7 @@ bool Parameters::parseParameters()
 
 		if (single.length() != 0)
 		{
+			cerr << "SingleFASTQFIle: " << single << endl;
 			SingleFASTQFile s_fastq;
 			if (s_fastq.openFASTQInput(single) && s_fastq.openFASTQOutput(outputDir))
 			{
@@ -210,6 +211,7 @@ bool Parameters::parseParameters()
 		}
 		else if (forward.length() != 0 && reverse.length() != 0)
 		{
+			cerr << "PairedFASTQFile: " << forward << "|" << reverse << endl;
 			PairedFASTQFile p_fastq;
 			if (p_fastq.openFASTQInputFile(forward, reverse) && p_fastq.openFASTQOutputFile(outputDir))
 			{

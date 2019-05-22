@@ -38,7 +38,7 @@ bool SingleFASTQFile::openFASTQInput(string file)
 
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
-	this->file = file;
+	// this->file = file;
 
 	fout.open(file);
 	if (fout.is_open())
@@ -98,6 +98,7 @@ void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength
 void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 {
 	// TODO: Add this->adapter or remove it.
+	cerr << file << endl;
 	string newSequence = currentSequence.getSequence();
 
 	if (onlyRemove) // String OK
@@ -117,13 +118,14 @@ void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 	strcpy(adapter_c, adapter.c_str());
 
 	vector<int> index = search(adapter_c, adapter.length(), seq_c, newSequence.length());
-	// currentSequence.setSequence(newSequence);
+
 	cerr << "Adapters Indexes: ";
 	for (auto it = index.cbegin(); it != index.cend(); it++)
 	{
-		cout << *it << ' ';
+		cerr << *it << ' ';
 	}
-	cerr << endl << "Adapter: " << adapter << endl;
+	cerr << endl;
+	// cerr << endl << "Adapter: " << adapter << endl;
 }
 
 void SingleFASTQFile::write()
