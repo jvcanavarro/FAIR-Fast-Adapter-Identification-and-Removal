@@ -1,4 +1,4 @@
-#include "source/qf43.cpp"
+#include "source/sbndmq4.cpp"
 
 
 class SingleFASTQ

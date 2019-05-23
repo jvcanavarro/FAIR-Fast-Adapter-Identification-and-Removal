@@ -24,71 +24,39 @@
 
 
 #include "include/define.h"
-#include "include/main.h"
+#include <iostream>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <cstring>
+#include <string>
+#include <vector>
+#include <utility>
+#include <fstream>
+#include <dirent.h>
+#include <errno.h>
+#include <ctime>
+
 #define GRAM4(j) (B[y[j]]<<3)&(B[y[j-1]]<<2)&(B[y[j-2]]<<1)&B[y[j-3]]
 
-int search(unsigned char *x, int m, unsigned char *y, int n) {
-   unsigned int B[SIGMA], D, q;
-   int i, j, pos, mMinusq, mq, count, shift;
-   q = 4;
 
-   if(m<q) return -1;
-   if(m>32) return search_large(x,m,y,n);
+using namespace std;
 
-	BEGIN_PREPROCESSING
-   count = 0;
-   mMinusq = m - q +1;
-   mq = m - q;
-   for(i=0; i<SIGMA; i++) B[i]=0;
-   for (i = 1; i <= m; ++i)
-      B[x[m-i]] |= (1<<(i-1));
 
-      D = B[x[m-2]]; j=1; shift=0;
-   if(D & (1<<(m-1))) shift = m-j;
-      for(i=m-3; i>=0; i--) {
-      D = (D<<1) & B[x[i]];
-      j++;
-      if(D & (1<<(m-1))) shift = m-j;
-      }
-	END_PREPROCESSING
-
-	BEGIN_SEARCHING
-   if( !memcmp(x,y,m) ) OUTPUT(0);
-   j = m;
-   while (j < n) {
-      D = GRAM4(j);
-      if (D != 0) {
-         pos = j;
-         while (D=(D<<1) & B[y[j-q]]) --j;
-         j += mq;
-         if (j == pos) {
-            OUTPUT(j);
-            j+=shift;
-         }
-      }
-      else j+=mMinusq;
-   }
-   END_SEARCHING
-   return count;
-}
-
-/*
- * Simplified Backward Nondeterministic DAWG Matching using q-grams designed for large patterns
- * The present implementation searches for prefixes of the pattern of length 32.
- * When an occurrence is found the algorithm tests for the whole occurrence of the pattern
- */
-
-int search_large(unsigned char *x, int m, unsigned char *y, int n) {
+vector<int> search_large(char *x, int m, char *y, int n) {
+   vector<int> index;
    unsigned int B[SIGMA], D, q, shift;
    int i, j, pos, mMinusq, mq, count, p_len;
    q = 4;
 
-   if(m<q) return 0;
+   if(m<q) abort();
    p_len = m;
    m = 32;
    int diff = p_len-m;
    
-	BEGIN_PREPROCESSING
+   // BEGIN_PREPROCESSING
    count = 0;
    mMinusq = m - q +1;
    mq = m - q;
@@ -103,9 +71,9 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
       j++;
       if(D & (1<<(m-1))) shift = m-j;
    }
-	END_PREPROCESSING
+   // END_PREPROCESSING
 
-	BEGIN_SEARCHING
+   // BEGIN_SEARCHING
    if( !memcmp(x,y,p_len) ) OUTPUT(0);
    j = m;
    while (j+diff < n) {
@@ -122,9 +90,60 @@ int search_large(unsigned char *x, int m, unsigned char *y, int n) {
       }
       else j+=mMinusq;
    }
-	END_SEARCHING
-   return count;
+   // END_SEARCHING
+   return index;
 }
 
+vector<int> search(char *x, int m, char *y, int n) {
+   vector<int> index;
+   unsigned int B[SIGMA], D, q;
+   int i, j, pos, mMinusq, mq, count, shift;
+   q = 4;
+   cerr <<"Teste"<<endl;
+   if(m<q) abort();
+   if(m>32) return search_large(x,m,y,n);
 
+	// BEGIN_PREPROCESSING
+
+   count = 0;
+   mMinusq = m - q +1;
+   mq = m - q;
+   for(i=0; i<SIGMA; i++) B[i]=0;
+   for (i = 1; i <= m; ++i)
+      B[x[m-i]] |= (1<<(i-1));
+
+      D = B[x[m-2]]; j=1; shift=0;
+   if(D & (1<<(m-1))) shift = m-j;
+      for(i=m-3; i>=0; i--) {
+      D = (D<<1) & B[x[i]];
+      j++;
+      if(D & (1<<(m-1))) shift = m-j;
+      }
+	// END_PREPROCESSING
+
+	// BEGIN_SEARCHING
+   if( !memcmp(x,y,m) ) OUTPUT(0);
+   j = m;
+   while (j < n) {
+      D = GRAM4(j);
+      if (D != 0) {
+         pos = j;
+         while (D=(D<<1) & B[y[j-q]]) --j;
+         j += mq;
+         if (j == pos) {
+            OUTPUT(j);
+            j+=shift;
+         }
+      }
+      else j+=mMinusq;
+   }
+   // END_SEARCHING
+   return index;
+}
+
+/*
+ * Simplified Backward Nondeterministic DAWG Matching using q-grams designed for large patterns
+ * The present implementation searches for prefixes of the pattern of length 32.
+ * When an occurrence is found the algorithm tests for the whole occurrence of the pattern
+ */
 
