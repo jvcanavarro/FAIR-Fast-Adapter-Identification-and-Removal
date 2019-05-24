@@ -8,24 +8,55 @@ columns = ['plen8', 'plen16', 'plen32', 'plen64']
 data = pd.read_csv('all8-64.csv', names=columns, sep='\t', lineterminator='\n')
 
 
-data['mean'] = data[['plen32', 'plen64']].mean(axis=1)
+# data['mean'] = data[['plen8', 'plen16']].mean(axis=1)
+data['mean'] = data.mean(axis=1)
 
 top5 = data.sort_values('mean').head(5)
+algorithms = open('algorithms.txt', 'r').read().splitlines()
+
+top5_algos = [algorithms[i] for i in top5.index]
 
 
-algo_names = open('algorithms.txt', 'r').read().splitlines()
-
-top5_algos = [algo_names[i] for i in set(top5.index)]
+top5.insert(loc=0, column='Algorithm', value=top5_algos)
 print(top5)
-print(top5_algos)
-
 
 plt.rc('axes', axisbelow=True)
 
-ax = top5.plot.bar(title='Best 5 by Mean', cmap='plasma')
-plt.xticks(np.arange(5), top5_algos)
-plt.figure()
-top5['mean'].plot.bar(title='Sorted Means', cmap='plasma', width=0.3)
-plt.xticks(np.arange(5), top5_algos)
-plt.grid(linestyle=':')
+top5.plot.bar(title='Best 5 by Mean', cmap='plasma')
+plt.xticks(np.arange(5), top5_algos, rotation=70)
+
+fig, axs = plt.subplots(2, 2)
+
+top5['plen8'].plot.bar(ax=axs[0,0], color='yellow')
+top5['plen32'].plot.bar(ax=axs[1,0], color='yellow')
+top5['plen16'].plot.bar(ax=axs[0,1], color='yellow')
+top5['plen64'].plot.bar(ax=axs[1,1], color='yellow')
+
+# plt.xticks(np.arange(5), top5_algos)
+axs[0,0].set_xticks(np.arange(5), top5_algos)
+
+# axs[1,1].set_xticks(np.arange(5), columns)
+
+
+
+for ax in axs.flat:
+	ax.set_xticks(np.arange(5), top5_algos)
+	# ax.set(xlabel='Algorithms', ylabel='Time(s)')
+	# ax.label_outer()
+# Hide x labels and tick labels for top plots and y ticks for right plots.
 plt.show()
+# axs[0, 0].plot(x, y)
+# axs[0, 0].set_title('Axis [0,0]')
+# axs[0, 1].plot(x, y, 'tab:orange')
+# axs[0, 1].set_title('Axis [0,1]')
+# axs[1, 0].plot(x, -y, 'tab:green')
+# axs[1, 0].set_title('Axis [1,0]')
+# axs[1, 1].plot(x, -y, 'tab:red')
+# axs[1, 1].set_title('Axis [1,1]')
+
+# for ax in axs.flat:
+#     ax.set(xlabel='x-label', ylabel='y-label')
+
+# # Hide x labels and tick labels for top plots and y ticks for right plots.
+# for ax in axs.flat:
+#     ax.label_outer()
