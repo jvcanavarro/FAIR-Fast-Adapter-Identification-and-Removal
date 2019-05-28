@@ -4,21 +4,27 @@ import matplotlib.pyplot as plt
 
 
 columns = ['plen8', 'plen16', 'plen32', 'plen64']
-
+algorithms = open('algorithms.txt', 'r').read().splitlines()
 data = pd.read_csv('all8-64.csv', names=columns, sep='\t', lineterminator='\n')
 
 
 # data['mean'] = data[['plen8', 'plen16']].mean(axis=1)
 data['mean'] = data.mean(axis=1)
-
 top5 = data.sort_values('mean').head(5)
+
 algorithms = open('algorithms.txt', 'r').read().splitlines()
 
 top5_algos = [algorithms[i] for i in top5.index]
-
-
-top5.insert(loc=0, column='Algorithm', value=top5_algos)
-print(top5)
+print(top5_algos)
+# top5.index.names = [1, 2, 3, 4, 5]
+x = top5.index.values
+x = top5_algos
+# print(type(top5.index))
+# top5.reindex(top5_algos, copy=False, axis=0)
+# top5.insert(loc=0, column='Algorithm', value=top5_algos)
+# for i in top5.index:
+# 	print(i)
+# print(top5)
 
 plt.rc('axes', axisbelow=True)
 
@@ -41,8 +47,8 @@ axs[0,0].set_xticks(np.arange(5), top5_algos)
 
 for ax in axs.flat:
 	ax.set_xticks(np.arange(5), top5_algos)
-	# ax.set(xlabel='Algorithms', ylabel='Time(s)')
-	# ax.label_outer()
+	ax.set(xlabel='Algorithms', ylabel='Time(s)')
+	ax.label_outer()
 # Hide x labels and tick labels for top plots and y ticks for right plots.
 plt.show()
 # axs[0, 0].plot(x, y)

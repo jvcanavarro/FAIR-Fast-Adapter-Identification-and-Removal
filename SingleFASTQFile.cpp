@@ -110,7 +110,6 @@ void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 		adapter = identifyAdapter();
 	}
 
-
 	char seq_c[newSequence.length() + 1];
 	char adapter_c[adapter.length() + 1];
 
@@ -124,7 +123,15 @@ void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 	{
 		cerr << *it << ' ';
 	}
+	while (!index.empty())
+	{	
+		string teste = newSequence.substr(index[0], adapter.length());
+		cerr << "String Teste: " << teste << endl;
+		index.pop_back();
+
+	}
 	cerr << endl;
+
 	// cerr << endl << "Adapter: " << adapter << endl;
 }
 

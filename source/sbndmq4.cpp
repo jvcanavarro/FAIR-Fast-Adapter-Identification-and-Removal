@@ -99,7 +99,6 @@ vector<int> search(char *x, int m, char *y, int n) {
    unsigned int B[SIGMA], D, q;
    int i, j, pos, mMinusq, mq, count, shift;
    q = 4;
-   cerr <<"Teste"<<endl;
    if(m<q) abort();
    if(m>32) return search_large(x,m,y,n);
 
@@ -133,6 +132,7 @@ vector<int> search(char *x, int m, char *y, int n) {
          if (j == pos) {
             OUTPUT(j);
             j+=shift;
+            index.push_back(j-m);
          }
       }
       else j+=mMinusq;
