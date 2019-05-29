@@ -2,7 +2,7 @@
 
 class SingleFASTQFile
 {
-	SingleFASTQ currentSequence;
+	SingleFASTQ sequence;
 	string file, adapter;
 	ifstream fin;
 	ofstream fout;
@@ -58,17 +58,17 @@ bool SingleFASTQFile::hasNext()
 		if (!getline(fin, lines[i]))
 			return false;
 
-	currentSequence.setIdentifier(lines[0]);
-	currentSequence.setSequence(lines[1]);
-	currentSequence.setPlaceHolder(lines[2]);
-	currentSequence.setQuality(lines[3]);
+	sequence.setIdentifier(lines[0]);
+	sequence.setSequence(lines[1]);
+	sequence.setPlaceHolder(lines[2]);
+	sequence.setQuality(lines[3]);
 
 	return true;
 }
 
 SingleFASTQ SingleFASTQFile::getNext()
 {
-	return currentSequence;
+	return sequence;
 }
 
 string SingleFASTQFile::identifyAdapter()
@@ -79,7 +79,7 @@ string SingleFASTQFile::identifyAdapter()
 
 void SingleFASTQFile::identifyQuality()
 {
-	cout << endl << "Phred Quality Offset of " << file << ":" << endl;
+	cerr << endl << "Phred Quality Offset of " << file << ":" << endl;
 	
 	string command = "sed -n '2p' " + file + " > seq_sample.fastq";
 
@@ -87,7 +87,8 @@ void SingleFASTQFile::identifyQuality()
 	system("python3 source/identify-phred.py seq_sample.fastq");
 	system("rm seq_sample.fastq");
 
-	cout << endl;
+	// TODO: Read File w/ Qual.
+	cerr << endl;
 }
 
 void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)
@@ -97,11 +98,9 @@ void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength
 
 void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 {
-	// TODO: Add this->adapter or remove it.
 	cerr << file << endl;
-	string newSequence = currentSequence.getSequence();
 
-	if (onlyRemove) // String OK
+	if (onlyRemove) // Adapter as Parameter
 	{
 		this->adapter = adapter;
 	}
@@ -110,42 +109,32 @@ void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 		adapter = identifyAdapter();
 	}
 
-	char seq_c[newSequence.length() + 1];
-	char adapter_c[adapter.length() + 1];
+	sequence.erase(adapter);
 
-	strcpy(seq_c, newSequence.c_str());
-	strcpy(adapter_c, adapter.c_str());
+	// int number_of_ocurrences = 0;
 
-	vector<int> index = search(adapter_c, adapter.length(), seq_c, newSequence.length());
+	// for (int i = newSequence.find(adapter, 0); i != string::npos; i = newSequence.find(adapter, i)) {
+	// 	cerr <<"i: " << i << endl << "Number Occ: " << number_of_ocurrences << endl;
+	// 	index.push_back(i);
+	// 	number_of_ocurrences++;
+	// 	i++;
 
-	cerr << "Adapters Indexes: ";
-	for (auto it = index.cbegin(); it != index.cend(); it++)
-	{
-		cerr << *it << ' ';
-	}
-	while (!index.empty())
-	{	
-		string teste = newSequence.substr(index[0], adapter.length());
-		cerr << "String Teste: " << teste << endl;
-		index.pop_back();
+	// }
 
-	}
-	cerr << endl;
-
-	// cerr << endl << "Adapter: " << adapter << endl;
 }
 
 void SingleFASTQFile::write()
 {
-	cerr << "Writing SingleFASTQ Sequence..." << endl;
+	cerr << "Writing SingleFASTQ Sequence" << endl;
 
-	// fout << currentSequence.getIdentifier() << "\n";
-	fout << currentSequence.getSequence() << "\n";
-	// fout << currentSequence.getPlaceHolder() << "\n";
-	// fout << currentSequence.getQuality() << "\n";
+	fout << sequence.getIdentifier() << "\n";
+	fout << sequence.getSequence() << "\n";
+	fout << sequence.getPlaceHolder() << "\n";
+	fout << sequence.getQuality() << "\n";
 }
 
 void SingleFASTQFile::closeOutput()
 {
+	fin.close();
 	fout.close();
 }

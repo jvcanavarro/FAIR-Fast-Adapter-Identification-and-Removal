@@ -17,6 +17,7 @@ public:
 	string getQuality();
 	vector<int> convertQ33ToInteger();
 	vector<int> convertQ64ToInteger();
+	void erase(string adapter);
 	void trim(string adapter, int minQuality, int minSequenceLength);
 };
 
@@ -62,7 +63,7 @@ vector<int> SingleFASTQ::convertQ33ToInteger()
 {
 	vector<int> intQuality;
 
-	// Base 33 (Ilumina, Ion Torrent, PacBio and Sanger)
+	// Base 33 : Sanger, Illumina 1.8+.
 	for (int i = 0; i < test.length(); i++)
 		intQuality.push_back(static_cast<int>(test[i]) - 33);
 
@@ -73,16 +74,52 @@ vector<int> SingleFASTQ::convertQ64ToInteger()
 
 	vector<int> intQuality;
 
-	// Base 64 (Old Illumina)
+	// Base 64 : Solexa, Illumina-1.3, Illumina-1.5.
 	for (int i = 0; i < test.length(); i++)
 		intQuality.push_back(static_cast<int>(test[i]) - 64);
 
 	return intQuality;
 }
 
+void SingleFASTQ::erase(string adapter)
+{
+	vector<int>index;
+
+	char seq_c[seq.length() + 1];
+	char adapter_c[adapter.length() + 1];
+
+	strcpy(seq_c, seq.c_str());
+	strcpy(adapter_c, adapter.c_str());
+
+	index = search(adapter_c, adapter.length(), seq_c, seq.length());
+
+	for(auto&& i: index)
+	{
+		seq.erase(i, adapter.length());
+		qual.erase(i, adapter.length());
+	}
+}
+
 void SingleFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
 {
-	;
+	// TODO: Identify Phred Offset to Int Quality
+
+	// Trim 'N' Bases on 5/3
+	cerr << "Removing 'N' Bases on 5'/3' & Trimming by Quality" << endl << endl;
+	for (int i = seq.length(); i = 0; i--)
+	{
+		if (seq.at(i) == 'N')
+		{
+			seq.erase(i);
+			qual.erase(i);
+		}
+
+		if (qual[i] < minQuality)
+		{
+			seq.erase(i);
+			qual.erase(i);
+		}
+	}
 }
 
 ostream &operator<<(ostream &os, const SingleFASTQ &single)

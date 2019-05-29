@@ -7,7 +7,6 @@ class PairedFASTQ
 public:
 	void setPair(SingleFASTQ forward, SingleFASTQ reverse);
 	pair<SingleFASTQ, SingleFASTQ> getPair();
-	void trim(string adapter1, string adapter2, int minQuality, int minSequenceLength);
 };
 
 void PairedFASTQ::setPair(SingleFASTQ forward, SingleFASTQ reverse)
@@ -18,9 +17,4 @@ void PairedFASTQ::setPair(SingleFASTQ forward, SingleFASTQ reverse)
 pair<SingleFASTQ, SingleFASTQ> PairedFASTQ::getPair()
 {
 	return fastqPair;
-}
-
-void PairedFASTQ::trim(string adapter1, string adapter2, int minQuality, int minSequenceLength)
-{
-	;
 }

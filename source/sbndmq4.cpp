@@ -38,7 +38,6 @@
 #include <dirent.h>
 #include <errno.h>
 #include <ctime>
-
 #define GRAM4(j) (B[y[j]]<<3)&(B[y[j-1]]<<2)&(B[y[j-2]]<<1)&B[y[j-3]]
 
 
@@ -130,9 +129,10 @@ vector<int> search(char *x, int m, char *y, int n) {
          while (D=(D<<1) & B[y[j-q]]) --j;
          j += mq;
          if (j == pos) {
-            OUTPUT(j);
             j+=shift;
-            index.push_back(j-m);
+            int z = (j - m) - m*count;
+            OUTPUT(j);
+            index.push_back(z);
          }
       }
       else j+=mMinusq;

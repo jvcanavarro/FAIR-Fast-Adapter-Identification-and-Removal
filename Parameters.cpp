@@ -173,6 +173,9 @@ bool Parameters::parseParameters()
 {
 	if (ready)
 	{
+		struct timespec start, finish;
+		double elapsed;
+
 		// Threads
 		if (threads != 1)
 			{
@@ -191,6 +194,8 @@ bool Parameters::parseParameters()
 				}
 				else
 				{
+					clock_gettime(CLOCK_MONOTONIC, &start);
+
 					while (s_fastq.hasNext())
 					{
 
@@ -203,6 +208,12 @@ bool Parameters::parseParameters()
 
 						s_fastq.write();
 					}
+					clock_gettime(CLOCK_MONOTONIC, &finish);
+
+					elapsed = (finish.tv_sec - start.tv_sec);
+					elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+					cerr << endl << "Elapsed Time: " << elapsed << endl;
+
 				}
 			}
 			s_fastq.closeOutput();
@@ -221,6 +232,8 @@ bool Parameters::parseParameters()
 				}
 				else
 				{
+					clock_gettime(CLOCK_MONOTONIC, &start);
+
 					while (p_fastq.hasNext())
 					{
 						p_fastq.removeAdapters(onlyRemove, forwardAdapter, reverseAdapter);
@@ -232,6 +245,11 @@ bool Parameters::parseParameters()
 
 						p_fastq.write();
 					}
+					clock_gettime(CLOCK_MONOTONIC, &finish);
+
+					elapsed = (finish.tv_sec - start.tv_sec);
+					elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+					cerr << endl << "Elapsed Time: " << elapsed << endl;
 				}
 			}
 			p_fastq.closeOutput();

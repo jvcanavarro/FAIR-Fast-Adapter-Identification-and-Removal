@@ -134,6 +134,13 @@ def main():
     if err_exit:
         sys.exit(1)
     else:
+        filename = 'qual.txt'
+        file = open(filename, 'w')
+        if 'Sanger' or 'Illumina-1.8' in valid:
+            file.write('33')
+        else:
+            file.write('64')
+
         print("{} | Lower Qual. :{} | Higher Qual. :{}".format(" - ".join(valid), gmin, gmax))
 
 
