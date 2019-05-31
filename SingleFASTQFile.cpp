@@ -104,7 +104,7 @@ void SingleFASTQFile::identifyQuality()
 
 void SingleFASTQFile::trim(int minQuality, int minSequenceLength)
 {
-	;
+	sequence.trim(quality, minQuality, minSequenceLength);
 }
 
 void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)

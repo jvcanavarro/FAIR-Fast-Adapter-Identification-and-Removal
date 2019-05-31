@@ -62,7 +62,6 @@ pair<string, string> PairedFASTQFile::identifyAdapters()
 
 void PairedFASTQFile::trim(int minQuality, int minSequenceLength)
 {
-	// TODO: add pair <adapter1, adapter2>;
 	forward.trim(0, 0);
 	reverse.trim(0, 0);
 }

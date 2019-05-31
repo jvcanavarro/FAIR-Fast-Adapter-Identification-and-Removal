@@ -2,6 +2,7 @@
 
 class SingleFASTQ
 {
+	vector<int> int_quality;
 	string id, seq, pholder, qual;
 	friend ostream &operator<<(ostream &os, const SingleFASTQ &single);
 
@@ -14,10 +15,9 @@ public:
 	string getPlaceHolder();
 	void setQuality(string qual);
 	string getQuality();
-	vector<int> convertQ33ToInteger();
-	vector<int> convertQ64ToInteger();
+	void convertQualToInteger(int qual_score);
 	void erase(string adapter);
-	void trim(string adapter, int minQuality, int minSequenceLength);
+	void trim(int qual_score, int minQuality, int minSequenceLength);
 };
 
 void SingleFASTQ::setIdentifier(string id)
@@ -56,26 +56,14 @@ string SingleFASTQ::getQuality()
 	return qual;
 }
 
-vector<int> SingleFASTQ::convertQ33ToInteger()
+void SingleFASTQ::convertQualToInteger(int qual_score)
 {
-	vector<int> intQuality;
-
+	int_quality.clear();
 	// Base 33 : Sanger, Illumina 1.8+.
-	for (int i = 0; i < qual.length(); i++)
-		intQuality.push_back(static_cast<int>(qual[i]) - 33);
-
-	return intQuality;
-}
-vector<int> SingleFASTQ::convertQ64ToInteger()
-{
-
-	vector<int> intQuality;
-
 	// Base 64 : Solexa, Illumina-1.3, Illumina-1.5.
 	for (int i = 0; i < qual.length(); i++)
-		intQuality.push_back(static_cast<int>(qual[i]) - 64);
+		int_quality.push_back(static_cast<int>(qual[i]) - qual_score);
 
-	return intQuality;
 }
 
 void SingleFASTQ::erase(string adapter)
@@ -97,24 +85,29 @@ void SingleFASTQ::erase(string adapter)
 	}
 }
 
-void SingleFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
+void SingleFASTQ::trim(int qual_score, int minQuality, int minSequenceLength)
 {
 
 	// Trim 'N' Bases on 5/3
+	convertQualToInteger(qual_score);
 	cerr << "Removing 'N' Bases on 5'/3' & Trimming by Quality" << endl
 		 << endl;
-	for (int i = seq.length(); i = 0; i--)
+	for (int i = seq.length() ; i > 0; i--)
 	{
-		if (seq.at(i) == 'N')
+		if (seq.at(i - 1) == 'N')
 		{
-			seq.erase(i);
-			qual.erase(i);
+			cerr << "N Trim" << endl;
+			cerr << seq.at(i - 1) << endl;
+			seq.erase(i - 1, 1);
+			qual.erase(i - 1, 1);
+			cerr << seq.at(i - 1) << endl;
 		}
 
-		if (qual[i] < minQuality)
+		if (int_quality[i] < minQuality)
 		{
-			seq.erase(i);
-			qual.erase(i);
+			cerr << "Quality Trim" << endl;
+			seq.erase(i, 1);
+			qual.erase(i, 1);
 		}
 	}
 }
