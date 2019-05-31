@@ -4,27 +4,35 @@ class SingleFASTQFile
 {
 	SingleFASTQ sequence;
 	string file, adapter;
-	ifstream fin;
 	ofstream fout;
+	ifstream fin;
+	int quality; // 33 or 64
 
 public:
-	bool openFASTQInput(string file);
+	bool openFASTQInput(string file, int quality);
 	bool openFASTQOutput(string file);
 	bool hasNext();
 	SingleFASTQ getNext();
 	string identifyAdapter();
 	void identifyQuality();
-	void trim(string adapter, int minQuality, int minSequenceLength);
+	void trim(int minQuality, int minSequenceLength);
 	void removeAdapter(bool onlyRemove, string adapter);
 	void write();
 	void closeOutput();
 };
 
-bool SingleFASTQFile::openFASTQInput(string file)
+bool SingleFASTQFile::openFASTQInput(string file, int quality)
 {
 	this->file = file;
 
-	identifyQuality();
+	if (quality == 0)
+	{
+		identifyQuality();
+	}
+	else
+	{
+		this->quality = quality;
+	}
 
 	fin.open(file);
 	if (fin.is_open())
@@ -38,8 +46,6 @@ bool SingleFASTQFile::openFASTQInput(string file)
 
 bool SingleFASTQFile::openFASTQOutput(string file)
 {
-	// this->file = file;
-
 	fout.open(file);
 	if (fout.is_open())
 	{
@@ -79,19 +85,24 @@ string SingleFASTQFile::identifyAdapter()
 
 void SingleFASTQFile::identifyQuality()
 {
-	cerr << endl << "Phred Quality Offset of " << file << ":" << endl;
-	
+	cerr << endl
+		 << "Phred Quality Offset of " << file << ":" << endl;
+
 	string command = "sed -n '2p' " + file + " > seq_sample.fastq";
 
 	system(command.c_str());
 	system("python3 source/identify-phred.py seq_sample.fastq");
-	system("rm seq_sample.fastq");
 
-	// TODO: Read File w/ Qual.
+	ifstream fef("qual.txt");
+	if (fef >> quality)
+	{
+		system("rm qual.txt && rm seq_sample.fastq");
+		fef.close();
+	}
 	cerr << endl;
 }
 
-void SingleFASTQFile::trim(string adapter, int minQuality, int minSequenceLength)
+void SingleFASTQFile::trim(int minQuality, int minSequenceLength)
 {
 	;
 }
@@ -120,7 +131,6 @@ void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 	// 	i++;
 
 	// }
-
 }
 
 void SingleFASTQFile::write()

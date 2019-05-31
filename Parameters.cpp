@@ -178,15 +178,15 @@ bool Parameters::parseParameters()
 
 		// Threads
 		if (threads != 1)
-			{
-				;	
-			}
+		{
+			;
+		}
 
 		if (single.length() != 0)
 		{
 			cerr << "SingleFASTQFIle: " << single << endl;
 			SingleFASTQFile s_fastq;
-			if (s_fastq.openFASTQInput(single) && s_fastq.openFASTQOutput(outputDir))
+			if (s_fastq.openFASTQInput(single, phredOffset) && s_fastq.openFASTQOutput(outputDir))
 			{
 				if (onlyIdentify)
 				{
@@ -203,7 +203,7 @@ bool Parameters::parseParameters()
 
 						if (trim)
 						{
-							s_fastq.trim(single, minQuality, 0);
+							s_fastq.trim(minQuality, 0);
 						}
 
 						s_fastq.write();
@@ -212,8 +212,8 @@ bool Parameters::parseParameters()
 
 					elapsed = (finish.tv_sec - start.tv_sec);
 					elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-					cerr << endl << "Elapsed Time: " << elapsed << endl;
-
+					cerr << endl
+						 << "Elapsed Time: " << elapsed << endl;
 				}
 			}
 			s_fastq.closeOutput();
@@ -224,7 +224,7 @@ bool Parameters::parseParameters()
 		{
 			cerr << "PairedFASTQFile: " << forward << "|" << reverse << endl;
 			PairedFASTQFile p_fastq;
-			if (p_fastq.openFASTQInputFile(forward, reverse) && p_fastq.openFASTQOutputFile(outputDir))
+			if (p_fastq.openFASTQInputFile(forward, reverse, phredOffset) && p_fastq.openFASTQOutputFile(outputDir))
 			{
 				if (onlyIdentify)
 				{
@@ -240,7 +240,7 @@ bool Parameters::parseParameters()
 
 						if (trim)
 						{
-							p_fastq.trim(forward, reverse, 0, 0);
+							p_fastq.trim(0, 0);
 						}
 
 						p_fastq.write();
@@ -249,7 +249,8 @@ bool Parameters::parseParameters()
 
 					elapsed = (finish.tv_sec - start.tv_sec);
 					elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-					cerr << endl << "Elapsed Time: " << elapsed << endl;
+					cerr << endl
+						 << "Elapsed Time: " << elapsed << endl;
 				}
 			}
 			p_fastq.closeOutput();

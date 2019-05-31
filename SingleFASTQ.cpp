@@ -1,6 +1,5 @@
 #include "source/sbndmq4.cpp"
 
-
 class SingleFASTQ
 {
 	string id, seq, pholder, qual;
@@ -20,8 +19,6 @@ public:
 	void erase(string adapter);
 	void trim(string adapter, int minQuality, int minSequenceLength);
 };
-
-string test = "#AAFFJJJJJJJFJJJJJJFJJJJJJFJJJJJJJJJJJJJJFJJJA";
 
 void SingleFASTQ::setIdentifier(string id)
 {
@@ -64,8 +61,8 @@ vector<int> SingleFASTQ::convertQ33ToInteger()
 	vector<int> intQuality;
 
 	// Base 33 : Sanger, Illumina 1.8+.
-	for (int i = 0; i < test.length(); i++)
-		intQuality.push_back(static_cast<int>(test[i]) - 33);
+	for (int i = 0; i < qual.length(); i++)
+		intQuality.push_back(static_cast<int>(qual[i]) - 33);
 
 	return intQuality;
 }
@@ -75,15 +72,15 @@ vector<int> SingleFASTQ::convertQ64ToInteger()
 	vector<int> intQuality;
 
 	// Base 64 : Solexa, Illumina-1.3, Illumina-1.5.
-	for (int i = 0; i < test.length(); i++)
-		intQuality.push_back(static_cast<int>(test[i]) - 64);
+	for (int i = 0; i < qual.length(); i++)
+		intQuality.push_back(static_cast<int>(qual[i]) - 64);
 
 	return intQuality;
 }
 
 void SingleFASTQ::erase(string adapter)
 {
-	vector<int>index;
+	vector<int> index;
 
 	char seq_c[seq.length() + 1];
 	char adapter_c[adapter.length() + 1];
@@ -93,7 +90,7 @@ void SingleFASTQ::erase(string adapter)
 
 	index = search(adapter_c, adapter.length(), seq_c, seq.length());
 
-	for(auto&& i: index)
+	for (auto &&i : index)
 	{
 		seq.erase(i, adapter.length());
 		qual.erase(i, adapter.length());
@@ -102,10 +99,10 @@ void SingleFASTQ::erase(string adapter)
 
 void SingleFASTQ::trim(string adapter, int minQuality, int minSequenceLength)
 {
-	// TODO: Identify Phred Offset to Int Quality
 
 	// Trim 'N' Bases on 5/3
-	cerr << "Removing 'N' Bases on 5'/3' & Trimming by Quality" << endl << endl;
+	cerr << "Removing 'N' Bases on 5'/3' & Trimming by Quality" << endl
+		 << endl;
 	for (int i = seq.length(); i = 0; i--)
 	{
 		if (seq.at(i) == 'N')

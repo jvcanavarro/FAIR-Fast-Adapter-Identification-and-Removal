@@ -141,7 +141,8 @@ def main():
         else:
             file.write('64')
 
-        print("{} | Lower Qual. :{} | Higher Qual. :{}".format(" - ".join(valid), gmin, gmax))
+        print("{} | Lower Qual. :{} | Higher Qual. :{}".format(
+            " - ".join(valid), gmin, gmax))
 
 
 if __name__ == "__main__":

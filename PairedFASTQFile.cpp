@@ -8,20 +8,20 @@ class PairedFASTQFile
 	pair<string, string> adapters;
 
 public:
-	bool openFASTQInputFile(string forward, string reverse);
+	bool openFASTQInputFile(string forward, string reverse, int quality);
 	bool openFASTQOutputFile(string file);
 	bool hasNext();
 	PairedFASTQ getNext();
 	pair<string, string> identifyAdapters();
-	void trim(string adapter1, string adapter2, int minQuality, int minSequenceLength);
+	void trim(int minQuality, int minSequenceLength);
 	void removeAdapters(bool onlyRemove, string adapter1, string adapter2);
 	void write();
 	void closeOutput();
 };
 
-bool PairedFASTQFile::openFASTQInputFile(string forward, string reverse)
+bool PairedFASTQFile::openFASTQInputFile(string forward, string reverse, int quality)
 {
-	if (this->forward.openFASTQInput(forward) && this->reverse.openFASTQInput(reverse))
+	if (this->forward.openFASTQInput(forward, quality) && this->reverse.openFASTQInput(reverse, quality))
 	{
 		return true;
 	}
@@ -60,11 +60,11 @@ pair<string, string> PairedFASTQFile::identifyAdapters()
 	return adapters;
 }
 
-void PairedFASTQFile::trim(string adapter1, string adapter2, int minQuality, int minSequenceLength)
+void PairedFASTQFile::trim(int minQuality, int minSequenceLength)
 {
 	// TODO: add pair <adapter1, adapter2>;
-	forward.trim(adapter1, 0, 0);
-	reverse.trim(adapter2, 0, 0);
+	forward.trim(0, 0);
+	reverse.trim(0, 0);
 }
 
 void PairedFASTQFile::removeAdapters(bool onlyRemove, string adapter1, string adapter2)
