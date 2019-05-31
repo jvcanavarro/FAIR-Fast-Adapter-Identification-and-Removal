@@ -88,19 +88,17 @@ void SingleFASTQ::erase(string adapter)
 void SingleFASTQ::trim(int qual_score, int minQuality, int minSequenceLength)
 {
 
-	// Trim 'N' Bases on 5/3
 	convertQualToInteger(qual_score);
-	cerr << "Removing 'N' Bases on 5'/3' & Trimming by Quality" << endl
-		 << endl;
+
 	for (int i = seq.length() ; i > 0; i--)
 	{
 		if (seq.at(i - 1) == 'N')
 		{
-			cerr << "N Trim" << endl;
-			cerr << seq.at(i - 1) << endl;
+			cerr << "N Trim" << endl << endl;
+			
 			seq.erase(i - 1, 1);
 			qual.erase(i - 1, 1);
-			cerr << seq.at(i - 1) << endl;
+			
 		}
 
 		if (int_quality[i] < minQuality)

@@ -104,6 +104,8 @@ void SingleFASTQFile::identifyQuality()
 
 void SingleFASTQFile::trim(int minQuality, int minSequenceLength)
 {
+	cerr << "Removing 'N' Bases on 5'/3' & Trimming by Quality" << endl
+		 << endl;
 	sequence.trim(quality, minQuality, minSequenceLength);
 }
 
