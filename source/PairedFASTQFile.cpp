@@ -62,8 +62,8 @@ pair<string, string> PairedFASTQFile::identifyAdapters()
 
 void PairedFASTQFile::trim(int minQuality, int minSequenceLength)
 {
-	forward.trim(0, 0);
-	reverse.trim(0, 0);
+	forward.trim(minQuality, 0);
+	reverse.trim(minQuality, 0);
 }
 
 void PairedFASTQFile::removeAdapters(bool onlyRemove, string adapter1, string adapter2)
@@ -74,8 +74,6 @@ void PairedFASTQFile::removeAdapters(bool onlyRemove, string adapter1, string ad
 
 void PairedFASTQFile::write()
 {
-	cerr << "Writing PairedFASTQ" << endl;
-
 	forward.write();
 	reverse.write();
 }

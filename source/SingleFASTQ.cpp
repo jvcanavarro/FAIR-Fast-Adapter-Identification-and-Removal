@@ -1,4 +1,4 @@
-#include "source/sbndmq4.cpp"
+#include "algos/sbndmq4.cpp"
 
 class SingleFASTQ
 {
@@ -95,7 +95,7 @@ void SingleFASTQ::trim(int qual_score, int minQuality, int minSequenceLength)
 	{
 		if (seq.at(i - 1) == 'N')
 		{
-			cerr << "N Trim" << endl << endl;
+			// cerr << "N Trim" << endl << endl;
 			
 			seq.erase(i - 1, 1);
 			qual.erase(i - 1, 1);
@@ -104,7 +104,7 @@ void SingleFASTQ::trim(int qual_score, int minQuality, int minSequenceLength)
 
 		if (int_quality[i] < minQuality)
 		{
-			cerr << "Quality Trim" << endl << endl;
+			// cerr << "Quality Trim" << endl << endl;
 
 			seq.erase(i, 1);
 			qual.erase(i, 1);

@@ -91,7 +91,7 @@ void SingleFASTQFile::identifyQuality()
 	string command = "sed -n '2p' " + file + " > seq_sample.fastq";
 
 	system(command.c_str());
-	system("python3 source/identify-phred.py seq_sample.fastq");
+	system("python3 source/bin/identify-phred.py seq_sample.fastq");
 
 	ifstream fef("qual.txt");
 	if (fef >> quality)
@@ -104,14 +104,11 @@ void SingleFASTQFile::identifyQuality()
 
 void SingleFASTQFile::trim(int minQuality, int minSequenceLength)
 {
-	cerr << "Removing 'N' Bases on 5'/3' & Trimming by Quality" << endl
-		 << endl;
 	sequence.trim(quality, minQuality, minSequenceLength);
 }
 
 void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 {
-	cerr << file << endl;
 
 	if (onlyRemove) // Adapter as Parameter
 	{
@@ -137,8 +134,6 @@ void SingleFASTQFile::removeAdapter(bool onlyRemove, string adapter)
 
 void SingleFASTQFile::write()
 {
-	cerr << "Writing SingleFASTQ Sequence" << endl;
-
 	fout << sequence.getIdentifier() << "\n";
 	fout << sequence.getSequence() << "\n";
 	fout << sequence.getPlaceHolder() << "\n";

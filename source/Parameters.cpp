@@ -168,7 +168,7 @@ bool Parameters::parseParameters()
 
 		if (single.length() != 0)
 		{
-			cerr << "SingleFASTQFIle: " << single << endl;
+			cerr << "Single File: " << single << endl;
 			SingleFASTQFile s_fastq;
 			if (s_fastq.openFASTQInput(single, phredOffset) && s_fastq.openFASTQOutput(outputDir))
 			{
@@ -206,7 +206,7 @@ bool Parameters::parseParameters()
 		}
 		else if (forward.length() != 0 && reverse.length() != 0)
 		{
-			cerr << "PairedFASTQFile: " << forward << "|" << reverse << endl;
+			cerr << "Paired Files: " << forward << " | " << reverse << endl;
 			PairedFASTQFile p_fastq;
 			if (p_fastq.openFASTQInputFile(forward, reverse, phredOffset) && p_fastq.openFASTQOutputFile(outputDir))
 			{
@@ -224,7 +224,7 @@ bool Parameters::parseParameters()
 
 						if (trim)
 						{
-							p_fastq.trim(0, 0);
+							p_fastq.trim(minQuality, 0);
 						}
 
 						p_fastq.write();
@@ -250,7 +250,42 @@ bool Parameters::parseParameters()
 }
 void Parameters::printHelp()
 {
-	cout << ifstream("Help.md").rdbuf() << endl;
+	cerr <<" FAIR - Fast Adapter Identification and Removal v1.0" << endl;
+	cerr << "" << endl;
+	cerr << "Usage: /home/joao/FAIR -o <output_dir> [options]" << endl;
+	cerr << "" << endl;
+	cerr << "Basic options:" << endl;
+	cerr << "-o/--output   <output_dir>   directory to store all the resulting files (required)" << endl;
+	cerr << "-h/--help                    prints this usage message" << endl;
+	cerr << "-v/--version                 prints version" << endl;
+	cerr << "" << endl;
+	cerr << "Input data:" << endl;
+	cerr << "-s/--single        <filename>    file with unpaired reads" << endl;
+	cerr << "-f/--forward       <filename>    file with forward paired-end reads" << endl;
+	cerr << "-r/--reverse       <filename>    file with reverse paired-end reads" << endl;
+	cerr << "-i/--interlaced    <filename>    file with interlaced forward and reverse paired-end reads" << endl;
+	cerr << "" << endl;
+	cerr << "Pipeline options:" << endl;
+	cerr << "--only-identify         runs only adapter identification (without removal)" << endl;
+	cerr << "--only-remove           runs only adapter removal (without identification)" << endl;
+	cerr << "                        need to set adapter(s) if this option is set" << endl;
+	cerr << "--trim                  trim ambiguous bases (N) at 5'/3' termini" << endl;
+	cerr << "--trim-quality          trim bases at 5'/3' termini with quality scores <= to" << endl;
+	cerr << "                        --min-quality value" << endl;
+	cerr << "--min-quality   <int>   minimal quality value to trim" << endl;
+	cerr << "" << endl;
+	cerr << "Advanced options:" << endl;
+	cerr << "--adapter     <adapter>         adapter sequence that will be removed (unpaired reads)" << endl;
+	cerr << "                                required with --only-remove" << endl;
+	cerr << "--forward-adapter   <adapter>   adapter sequence that will be removed" << endl;
+	cerr << "                                in the forward paired-end reads (required with --only-remove)" << endl;
+	cerr << "--reverse-adapter   <adapter>   adapter sequence that will be removed" << endl;
+	cerr << "                                in the reverse paired-end reads (required with --only-remove)" << endl;
+	cerr << "-t/--threads    <int>           number of threads" << endl;
+	cerr << "                                [default: 1]" << endl;
+	cerr << "--phred-offset    <33 or 64>    PHRED quality offset in the input reads (33 or 64)" << endl;
+	cerr << "                                [default: auto-detect]" << endl;
+	cerr << "                                " << endl;
 }
 void Parameters::printVersion()
 {
