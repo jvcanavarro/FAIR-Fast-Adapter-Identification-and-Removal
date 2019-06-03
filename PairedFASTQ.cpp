@@ -2,7 +2,7 @@
 
 class PairedFASTQ
 {
-	pair<SingleFASTQ, SingleFASTQ> fastqPair;
+	pair<SingleFASTQ, SingleFASTQ> pairedSequence;
 
 public:
 	void setPair(SingleFASTQ forward, SingleFASTQ reverse);
@@ -11,10 +11,10 @@ public:
 
 void PairedFASTQ::setPair(SingleFASTQ forward, SingleFASTQ reverse)
 {
-	fastqPair = make_pair(forward, reverse);
+	pairedSequence = make_pair(forward, reverse);
 }
 
 pair<SingleFASTQ, SingleFASTQ> PairedFASTQ::getPair()
 {
-	return fastqPair;
+	return pairedSequence;
 }

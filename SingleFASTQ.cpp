@@ -58,9 +58,10 @@ string SingleFASTQ::getQuality()
 
 void SingleFASTQ::convertQualToInteger(int qual_score)
 {
-	int_quality.clear();
 	// Base 33 : Sanger, Illumina 1.8+.
 	// Base 64 : Solexa, Illumina-1.3, Illumina-1.5.
+	int_quality.clear();
+
 	for (int i = 0; i < qual.length(); i++)
 		int_quality.push_back(static_cast<int>(qual[i]) - qual_score);
 
@@ -103,7 +104,8 @@ void SingleFASTQ::trim(int qual_score, int minQuality, int minSequenceLength)
 
 		if (int_quality[i] < minQuality)
 		{
-			cerr << "Quality Trim" << endl;
+			cerr << "Quality Trim" << endl << endl;
+
 			seq.erase(i, 1);
 			qual.erase(i, 1);
 		}

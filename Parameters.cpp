@@ -12,22 +12,6 @@ public:
 	bool parseParameters();
 	void printHelp();
 	void printVersion();
-	void printQuality(string filename);
-	string getOutputDir();
-	string getSingle();
-	string getForward();
-	string getReverse();
-	string getInterlaced();
-	bool identifyOnly();
-	bool removeOnly();
-	bool trimm();
-	bool trimmQuality();
-	int getMinQuality();
-	string getSingleAdapter();
-	string getForwardAdapter();
-	string getReverseAdapter();
-	int getThreads();
-	int getPhredOffset();
 };
 
 Parameters::Parameters(int argc, char *const argv[])
@@ -280,64 +264,4 @@ void Parameters::printVersion()
 		 << endl;
 	cerr << "Written by João V. Canavarro." << endl
 		 << endl;
-}
-string Parameters::getOutputDir()
-{
-	return outputDir;
-}
-string Parameters::getSingle()
-{
-	return single;
-}
-string Parameters::getForward()
-{
-	return forward;
-}
-string Parameters::getReverse()
-{
-	return reverse;
-}
-string Parameters::getInterlaced()
-{
-	return interlaced;
-}
-bool Parameters::identifyOnly()
-{
-	return onlyIdentify;
-}
-bool Parameters::removeOnly()
-{
-	return onlyRemove;
-}
-bool Parameters::trimm()
-{
-	return trim;
-}
-bool Parameters::trimmQuality()
-{
-	return trimQuality;
-}
-int Parameters::getMinQuality()
-{
-	return minQuality;
-}
-string Parameters::getSingleAdapter()
-{
-	return singleAdapter;
-}
-string Parameters::getForwardAdapter()
-{
-	return forwardAdapter;
-}
-string Parameters::getReverseAdapter()
-{
-	return reverseAdapter;
-}
-int Parameters::getThreads()
-{
-	return threads;
-}
-int Parameters::getPhredOffset()
-{
-	return phredOffset;
 }
