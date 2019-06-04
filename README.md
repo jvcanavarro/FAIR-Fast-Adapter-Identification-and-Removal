@@ -21,7 +21,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal">
-    <img src="logo.png" alt="Logo" width="80" height="80">
+    <img src="logo.png" alt="Logo" width="250" height="250">
   </a>
 
   <h3 align="center">Fast Adapter Identification & Removal</h3>
@@ -61,56 +61,45 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue with the tag.
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
 ### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+FAIR was built mainly with C++, but some funcionalities are based on python scripts, including the 180 Pattern-Matching Algorithms Analisys present on this repository.
+* [C++](http://www.cplusplus.org)
+* [Python](https://www.python.org)
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+FAIR works with single, both forward/reverse, and interlaced fastq files to identify, trim and remove adapters and low-quality / N bases from sequences. It's possible to choose the quantity of threads during processing, require a Phred-offset quality identification and/or adapter identification. At the end of the execution a new fastq file is created on the directory choosed by the user with the segments of adapters removed and a additional file with the deleted bases. FAIR does not works yet with tar.gz files.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+FAIR can be built with any C++ compiler. During the conception of the project we used gcc with any major problem. Additionally, Python is necessary for some extra funcionalities.
+* gcc
 ```sh
-npm install npm@latest -g
+sudo apt-get install gcc
+```
+* python
+```sh
+sudo apt-get install python
 ```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
 ```sh
-git clone https:://github.com/your_username_/Project-Name.git
+git clone https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal.git
 ```
-3. Install NPM packages
+2. Build with compiler
 ```sh
-npm install
+cd FAIR-Fast-Adapter-Identification-and-Removal
+g++ source/main.cpp -o FAIR
 ```
-4. Enter your API in `config.js`
-```JS
-const API_KEY = 'ENTER YOUR API';
-```
+
 
 
 
@@ -118,6 +107,43 @@ const API_KEY = 'ENTER YOUR API';
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+```FAIR - Fast Adapter Identification and Removal v1.0
+
+Usage: /home/fmiranda/bin/FAIR/fair [options] -o <output_dir>
+
+Basic options:
+-o/--output   <output_dir>   directory to store all the resulting files (required)
+-h/--help                    prints this usage message
+-v/--version                 prints version
+
+Input data:
+-s/--single        <filename>    file with unpaired reads
+-f/--forward       <filename>    file with forward paired-end reads
+-r/--reverse       <filename>    file with reverse paired-end reads
+-i/--interlaced    <filename>    file with interlaced forward and reverse paired-end reads
+
+Pipeline options:
+--only-identify         runs only adapter identification (without removal)
+--only-remove           runs only adapter removal (without identification)
+                        need to set adapter(s) if this option is set
+--trim                  trim ambiguous bases (N) at 5'/3' termini
+--trim-quality          trim bases at 5'/3' termini with quality scores <= to
+                        --min-quality value
+--min-quality   <int>   minimal quality value to trim
+
+Advanced options:
+--adapter     <adapter>         adapter sequence that will be removed (unpaired reads)
+                                required with --only-remove
+--forward-adapter   <adapter>   adapter sequence that will be removed
+                                in the forward paired-end reads (required with --only-remove)
+--reverse-adapter   <adapter>   adapter sequence that will be removed
+                                in the reverse paired-end reads (required with --only-remove)
+-t/--threads    <int>           number of threads
+                                [default: 16]
+--phred-offset    <33 or 64>    PHRED quality offset in the input reads (33 or 64)
+                                [default: auto-detect]
+```
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -146,13 +172,13 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+João V. Canavarro - [@jvcanab](https://twitter.com/jvcanab) - jvcanavarro@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal)
 
 
 
-<!-- ACKNOWLEDGEMENTS -->
+<!-- ACKNOWLEDGEMENTS
 ## Acknowledgements
 * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 * [Img Shields](https://shields.io)
@@ -165,7 +191,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 * [Sticky Kit](http://leafo.net/sticky-kit)
 * [JVectorMap](http://jvectormap.com)
 * [Font Awesome](https://fontawesome.com)
-
+-->
 
 
 
