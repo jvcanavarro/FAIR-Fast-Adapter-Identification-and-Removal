@@ -51,17 +51,19 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
+* [Examples](#examples)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+* [Acknowledgements and References](#acknowledgements-and-references)
 
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+<!-- [![Product Name Screen Shot][product-screenshot]](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal) -->
+The idea of this project is to create based on the 180 Pattern-Matching (PM) Algorithms Analisys a tool simple and fast to remove fragments of adapters located on fastq files. The first part of the development was making tests with patterns from length from 8 to 64 characters (adapters usually have 8-16 nitrogenous bases) utilizing the 180 PM algos. compiled on SMART (String Matching Algorithm Research Tool) repository. After thoose tests, we ended up with five algorithms that had close results. Analising the time of execution e pattern length we choosed the sbndmq4 as the final algorithm.
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal)
 
 
 ### Built With
@@ -87,6 +89,10 @@ sudo apt-get install gcc
 ```sh
 sudo apt-get install python
 ```
+If you want to execute algorithm evaluation located on `utils` some extra Python Frameworks are required, namely: pandas, matplotlib and numpy. Thankfully, you can install them all at once using pip.
+```sh
+pip install -r requirements.txt --user
+```
 
 ### Installation
 
@@ -110,7 +116,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 ```FAIR - Fast Adapter Identification and Removal v1.0
 
-Usage: /home/fmiranda/bin/FAIR/fair [options] -o <output_dir>
+Usage: /home/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal [options] -o <output_dir>
 
 Basic options:
 -o/--output   <output_dir>   directory to store all the resulting files (required)
@@ -140,14 +146,34 @@ Advanced options:
 --reverse-adapter   <adapter>   adapter sequence that will be removed
                                 in the reverse paired-end reads (required with --only-remove)
 -t/--threads    <int>           number of threads
-                                [default: 16]
+                                [default: 4]
 --phred-offset    <33 or 64>    PHRED quality offset in the input reads (33 or 64)
                                 [default: auto-detect]
 ```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://google.com)_
 
 
+
+## Examples
+You can test the program utilizing the samples `sample1.fastq` and `sample2.fastq` located at `data`. The new files are stored on `results`. Some common usages are listed bellow.
+
+* Remove Adapters from Single FASTQ File with Adapter and Quality Identification
+```sh
+./FAIR --output results/ --single sample1.fastq
+```
+* Remove Adapters from Forward and Reverse FASTQ Files with Adapter and Quality Identification
+```sh
+./FAIR --output results/ --forward sample1.fastq --reverse sample2.fastq
+```
+* Remove Adapters from Forward and Reverse FASTQ Files without Adapters Identification
+```sh
+./FAIR --output results/ --forward sample1.fastq --reverse sample2.fastq --only-remove --forward-adapter CCCCCCC --reverse-adapter CCCATCC
+```
+* Remove Adapters from Single FASTQ File with Trim, Trim-Quality, Min-Quality, Number of Threads and Phred-Offset
+```sh
+./FAIR --output results/ --single sample1.fastq --trim --trim-quality 90 --min-quality 90 --threads 8 --phread-offset 33
+```
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -178,20 +204,10 @@ Project Link: [https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-a
 
 
 
-<!-- ACKNOWLEDGEMENTS
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
--->
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements and References
+* [SMART (String Matching Algorithm Research Tool)](https://github.com/smart-tool/smart)
+* [Bit-Parallel Search Algorithms for Long Patterns](https://helda.helsinki.fi/bitstream/handle/10138/18570/Long.pdf?sequence=2)
 
 
 
@@ -202,5 +218,5 @@ Project Link: [https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-a
 [license-shield]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [license-url]: https://choosealicense.com/licenses/mit
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: https://raw.githubusercontent.com/othneildrew/Best-README-Template/master/screenshot.png
+[linkedin-url]: https://www.linkedin.com/in/jvcanavarro/
+[product-screenshot]:http://sites.psu.edu/biomonika/wp-content/uploads/sites/14384/2015/06/Screen-Shot-2015-06-26-at-4.04.13-PM.png
