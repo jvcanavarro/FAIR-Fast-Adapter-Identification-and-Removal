@@ -61,13 +61,13 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<!-- [![Product Name Screen Shot][product-screenshot]](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal) -->
-The idea of this project is to create based on the 180 Pattern-Matching (PM) Algorithms Analisys a tool simple and fast to remove fragments of adapters located on fastq files. The first part of the development was making tests with patterns from length from 8 to 64 characters (adapters usually have 8-16 nitrogenous bases) utilizing the 180 PM algos. compiled on SMART (String Matching Algorithm Research Tool) repository. After thoose tests, we ended up with five algorithms that had close results. Analising the time of execution e pattern length we choosed the sbndmq4 as the final algorithm.
+[![Product Name Screen Shot][product-screenshot]](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal)
+Based on 180 Pattern-Matching (PM) Algorithms Analisys the main idea of this project is to create a simple and fast tool to remove fragments of adapters located on FASTQ files. After testing all 180 algorithms utilizing the SMART Tool, we analysed the results and end up with 5 algorithms that had good performance with the approximated pattern length of a adapter (between 8 and 16 nitrogenous bases). QF43 and Sbndmq-4 had the best results, however Sbndmq-4 was slightly better with patterns of 8 nitrogenous bases, ending as our choice for this project. More informations about FAIR and 180 Pattern-Matching Algorithms Analysis can be found at: 
 
 
 
 ### Built With
-FAIR was built mainly with C++, but some funcionalities are based on python scripts, including the 180 Pattern-Matching Algorithms Analisys present on this repository.
+The project was built mainly with C++, but some funcionalities are based on python scripts, including the 180 Pattern-Matching Algorithms Analisys present on this repository.
 * [C++](http://www.cplusplus.org)
 * [Python](https://www.python.org)
 
@@ -80,7 +80,7 @@ FAIR works with single, both forward/reverse, and interlaced fastq files to iden
 
 ### Prerequisites
 
-FAIR can be built with any C++ compiler. During the conception of the project we used gcc with any major problem. Additionally, Python is necessary for some extra funcionalities.
+This repository can be built with any C++ compiler. During the conception of the project we used gcc with any major problem. Additionally, Python is necessary for some extra funcionalities.
 * gcc
 ```sh
 sudo apt-get install gcc
@@ -112,7 +112,7 @@ g++ source/main.cpp -o FAIR
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Bellow are listed all FAIR avaiable parameters.
 
 ```FAIR - Fast Adapter Identification and Removal v1.0
 
@@ -151,7 +151,7 @@ Advanced options:
                                 [default: auto-detect]
 ```
 
-_For more examples, please refer to the [Documentation](https://google.com)_
+_For more examples, please refer to the [Documentation](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal)_
 
 
 
@@ -219,4 +219,4 @@ Project Link: [https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-a
 [license-url]: https://choosealicense.com/licenses/mit
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/jvcanavarro/
-[product-screenshot]:http://sites.psu.edu/biomonika/wp-content/uploads/sites/14384/2015/06/Screen-Shot-2015-06-26-at-4.04.13-PM.png
+[product-screenshot]:https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal/blob/master/utils/best5.png
