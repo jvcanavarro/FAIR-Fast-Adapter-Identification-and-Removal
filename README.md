@@ -27,7 +27,6 @@
   <h3 align="center">Fast Adapter Identification & Removal</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
     <br />
     <a href="https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal"><strong>Explore the docs »</strong></a>
     <br />
