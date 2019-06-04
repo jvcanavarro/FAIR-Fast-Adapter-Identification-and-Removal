@@ -61,7 +61,8 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-[![Product Name Screen Shot][product-screenshot]](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal/blob/master/utils/best5.png)
+
 Based on 180 Pattern-Matching (PM) Algorithms Analisys the main idea of this project is to create a simple and fast tool to remove fragments of adapters located on FASTQ files. After testing all 180 algorithms utilizing the SMART Tool, we analysed the results and end up with 5 algorithms that had good performance with the approximated pattern length of a adapter (between 8 and 16 nitrogenous bases). QF43 and Sbndmq-4 had the best results, however Sbndmq-4 was slightly better with patterns of 8 nitrogenous bases, ending as our choice for this project. More informations about FAIR and 180 Pattern-Matching Algorithms Analysis can be found at: 
 
 
@@ -206,8 +207,10 @@ Project Link: [https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-a
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements and References
+* [R. S. Boyer and J. S. Moore. A fast string searching algorithm. Commun. ACM,20(10):762–772, 1977.](https://www.cs.utexas.edu/users/moore/publications/fstrpos.pdf)
+* [B. Durian, H. Peltola, L. Salmela, and J. Tarhio. Bit-parallel search algorithms forlong patterns. In P. Festa, editor, Symposium on Experimental Algorithms, LNCS6049, 129–140, Springer-Verlag, Berlin, 2010.](https://helda.helsinki.fi/bitstream/handle/10138/18570/Long.pdf?sequence=2)
+* [G. Navarro, M. Raffinot, “A Bit-Parallel Approach to Suffix Automata: Fast Extended String Matching”, in Proc. of the 9th Annual Symposium on Combinatorial Pattern Matching, No. 1448.](https://users.dcc.uchile.cl/~gnavarro/ps/cpm98.pdf)
 * [SMART (String Matching Algorithm Research Tool)](https://github.com/smart-tool/smart)
-* [Bit-Parallel Search Algorithms for Long Patterns](https://helda.helsinki.fi/bitstream/handle/10138/18570/Long.pdf?sequence=2)
 
 
 
