@@ -198,6 +198,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements and References
 * [R. S. Boyer and J. S. Moore. A fast string searching algorithm. Commun. ACM,20(10):762–772, 1977.](https://www.cs.utexas.edu/users/moore/publications/fstrpos.pdf)
+* [Koloud Al-Khamaiseh  and  ShadiALShagarin, “A Survey of  String  Matching  Algorithms”  in  Int.  Journal  of Engineering  Research  and Applications,  IJERA,  ISSN: 2248-9622,  Vol.  4,  Issue  7  (Version  2),  July  2014, pp.144-156](https://core.ac.uk/download/pdf/26834073.pdf)
 * [B. Durian, H. Peltola, L. Salmela, and J. Tarhio. Bit-parallel search algorithms forlong patterns. In P. Festa, editor, Symposium on Experimental Algorithms, LNCS6049, 129–140, Springer-Verlag, Berlin, 2010.](https://helda.helsinki.fi/bitstream/handle/10138/18570/Long.pdf?sequence=2)
 * [G. Navarro, M. Raffinot, “A Bit-Parallel Approach to Suffix Automata: Fast Extended String Matching”, in Proc. of the 9th Annual Symposium on Combinatorial Pattern Matching, No. 1448.](https://users.dcc.uchile.cl/~gnavarro/ps/cpm98.pdf)
 * [SMART (String Matching Algorithm Research Tool)](https://github.com/smart-tool/smart)
