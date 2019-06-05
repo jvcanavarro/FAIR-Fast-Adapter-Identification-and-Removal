@@ -6,7 +6,7 @@ int main(int argc, char *const argv[])
 
 	if (parameters.parseParameters())
 	{
-		;
+		cerr << "End of Execution" << endl;
 	}
 	return 0;
 }

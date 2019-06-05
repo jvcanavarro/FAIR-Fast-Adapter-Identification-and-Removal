@@ -16,7 +16,7 @@ public:
 
 Parameters::Parameters(int argc, char *const argv[])
 {
-	this->version = "1.0";
+	version = "1.0";
 	bool help = false, version = false;
 	onlyIdentify = false;
 	onlyRemove = false;
@@ -292,7 +292,7 @@ void Parameters::printVersion()
 	cerr << endl
 		 << "FAIR - Fast Adapter Identification & Removal v1.0" << endl
 		 << endl;
-	cerr << "Copyright (C) 2019 Federal University of Para." << endl;
+	cerr << "Copyright (C) 2019 Federal University of Pará." << endl;
 	cerr << "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>." << endl;
 	cerr << "This is free software: you are free to change and redistribute it." << endl;
 	cerr << "There is NO WARRANTY, to the extent permitted by law." << endl
