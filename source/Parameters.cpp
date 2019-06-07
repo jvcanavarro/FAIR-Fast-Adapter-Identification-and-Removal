@@ -243,8 +243,41 @@ bool Parameters::parseParameters()
 		}
 		else if (interlaced.length() != 0)
 		{
-			//?
-			return true;
+			cerr << "Interlaced File: " << interlaced << endl;
+				SingleFASTQFile s_fastq;
+				if (s_fastq.openFASTQInput(interlaced, phredOffset) && s_fastq.openFASTQOutput(outputDir))
+				{
+					if (onlyIdentify)
+					{
+						cerr << "Adapter (Interlaced File)" << s_fastq.identifyAdapter() << endl;
+					}
+					else
+					{
+						clock_gettime(CLOCK_MONOTONIC, &start);
+
+						while (s_fastq.hasNext())
+						{
+
+							s_fastq.removeAdapter(onlyRemove, singleAdapter);
+
+							if (trim)
+							{
+								s_fastq.trim(minQuality, 0);
+							}
+
+							s_fastq.write();
+						}
+						clock_gettime(CLOCK_MONOTONIC, &finish);
+
+						elapsed = (finish.tv_sec - start.tv_sec);
+						elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+						cerr << endl
+							 << "Elapsed Time: " << elapsed << endl;
+					}
+				}
+				s_fastq.closeOutput();
+
+			return true;	
 		}
 	}
 }
