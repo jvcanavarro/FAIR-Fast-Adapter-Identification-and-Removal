@@ -49,7 +49,7 @@ vector<int> search_large(char *x, int m, char *y, int n)
    q = 4;
 
    if (m < q)
-      abort();
+	  abort();
    p_len = m;
    m = 32;
    int diff = p_len - m;
@@ -59,48 +59,48 @@ vector<int> search_large(char *x, int m, char *y, int n)
    mMinusq = m - q + 1;
    mq = m - q;
    for (i = 0; i < SIGMA; i++)
-      B[i] = 0;
+	  B[i] = 0;
    for (i = 1; i <= m; ++i)
-      B[x[m - i]] |= (1 << (i - 1));
+	  B[x[m - i]] |= (1 << (i - 1));
 
    D = B[x[m - 2]];
    j = 1;
    shift = 0;
    if (D & (1 << (m - 1)))
-      shift = m - j;
+	  shift = m - j;
    for (i = m - 3; i >= 0; i--)
    {
-      D = (D << 1) & B[x[i]];
-      j++;
-      if (D & (1 << (m - 1)))
-         shift = m - j;
+	  D = (D << 1) & B[x[i]];
+	  j++;
+	  if (D & (1 << (m - 1)))
+		 shift = m - j;
    }
    // END_PREPROCESSING
 
    // BEGIN_SEARCHING
    if (!memcmp(x, y, p_len))
-      OUTPUT(0);
+	  OUTPUT(0);
    j = m;
    while (j + diff < n)
    {
-      D = GRAM4(j);
-      if (D != 0)
-      {
-         pos = j;
-         while (D = (D << 1) & B[y[j - q]])
-            --j;
-         j += mq;
-         if (j == pos)
-         {
-            for (i = m + 1; i < p_len && x[i] == y[j - m + 1 + i]; i++)
-               ;
-            if (i == p_len)
-               OUTPUT(j - m + 1);
-            j += shift;
-         }
-      }
-      else
-         j += mMinusq;
+	  D = GRAM4(j);
+	  if (D != 0)
+	  {
+		 pos = j;
+		 while (D = (D << 1) & B[y[j - q]])
+			--j;
+		 j += mq;
+		 if (j == pos)
+		 {
+			for (i = m + 1; i < p_len && x[i] == y[j - m + 1 + i]; i++)
+			   ;
+			if (i == p_len)
+			   OUTPUT(j - m + 1);
+			j += shift;
+		 }
+	  }
+	  else
+		 j += mMinusq;
    }
    // END_SEARCHING
    return index;
@@ -113,9 +113,9 @@ vector<int> search(char *x, int m, char *y, int n)
    int i, j, pos, mMinusq, mq, count, shift;
    q = 4;
    if (m < q)
-      abort();
+	  abort();
    if (m > 32)
-      return search_large(x, m, y, n);
+	  return search_large(x, m, y, n);
 
    // BEGIN_PREPROCESSING
 
@@ -123,47 +123,55 @@ vector<int> search(char *x, int m, char *y, int n)
    mMinusq = m - q + 1;
    mq = m - q;
    for (i = 0; i < SIGMA; i++)
-      B[i] = 0;
+	  B[i] = 0;
    for (i = 1; i <= m; ++i)
-      B[x[m - i]] |= (1 << (i - 1));
+	  B[x[m - i]] |= (1 << (i - 1));
 
    D = B[x[m - 2]];
    j = 1;
    shift = 0;
    if (D & (1 << (m - 1)))
-      shift = m - j;
+	  shift = m - j;
    for (i = m - 3; i >= 0; i--)
    {
-      D = (D << 1) & B[x[i]];
-      j++;
-      if (D & (1 << (m - 1)))
-         shift = m - j;
+	  D = (D << 1) & B[x[i]];
+	  j++;
+	  if (D & (1 << (m - 1)))
+		 shift = m - j;
    }
    // END_PREPROCESSING
 
    // BEGIN_SEARCHING
    if (!memcmp(x, y, m))
-      OUTPUT(0);
+	  OUTPUT(0);
    j = m;
    while (j < n)
    {
-      D = GRAM4(j);
-      if (D != 0)
-      {
-         pos = j;
-         while (D = (D << 1) & B[y[j - q]])
-            --j;
-         j += mq;
-         if (j == pos)
-         {
-            j += shift;
-            int z = (j - m) - m * count;
-            OUTPUT(j);
-            index.push_back(z);
-         }
-      }
-      else
-         j += mMinusq;
+	  D = GRAM4(j);
+	  if (D != 0)
+	  {
+		 pos = j;
+		 while (D = (D << 1) & B[y[j - q]])
+			--j;
+		 j += mq;
+		 if (j == pos)
+		 {
+			j += shift;
+			int z = (j - m) - m * count;
+			OUTPUT(j);
+			// if (z < 0)
+			// {
+			// 	cerr << "seq: " << y << endl;
+			// 	cerr << "Z:" << z << endl;
+			// 	cerr << "j: " << j << endl;
+			// 	cerr << "m: " << m << endl;
+			// 	cerr << "count: " << count << endl;
+			// }
+			index.push_back(z);
+		 }
+	  }
+	  else
+		 j += mMinusq;
    }
    // END_SEARCHING
    return index;

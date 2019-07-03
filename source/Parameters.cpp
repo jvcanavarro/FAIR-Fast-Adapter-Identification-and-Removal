@@ -280,6 +280,7 @@ bool Parameters::parseParameters()
 			return true;	
 		}
 	}
+	return false;
 }
 void Parameters::printHelp()
 {

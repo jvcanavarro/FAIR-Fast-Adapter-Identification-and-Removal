@@ -81,8 +81,11 @@ void SingleFASTQ::erase(string adapter)
 
 	for (auto &&i : index)
 	{
+		if (i >= 0)
+		{
 		seq.erase(i, adapter.length());
 		qual.erase(i, adapter.length());
+		}
 	}
 }
 
