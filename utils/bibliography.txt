@@ -1,0 +1,8 @@
+https://eldorado.tu-dortmund.de/bitstream/2003/31824/1/Dissertation.pdf
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4751634/pdf/13104_2016_Article_1900.pdf
+Trimmomatic: a flexible trimmer for Illumina sequence data
+https://www.sciencedirect.com/science/article/pii/S0888754313001481
+https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-15-182
+https://aaltodoc.aalto.fi/bitstream/handle/123456789/9853/publication5.pdf?sequence=7&isAllowed=y
+http://www.dmi.unict.it/~faro/smart/algorithms.php
+https://www.semanticscholar.org/paper/Bit-Parallel-Search-Algorithms-for-Long-Patterns-Durian-Peltola/c69eed22ae4b39485dcaff550601558ac3f72575

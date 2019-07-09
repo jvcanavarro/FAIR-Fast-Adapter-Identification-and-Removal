@@ -142,6 +142,7 @@ void SingleFASTQFile::write()
 
 void SingleFASTQFile::closeOutput()
 {
+	cerr << "Number of Occurrences: " << sequence.getOccurrences() << endl;
 	fin.close();
 	fout.close();
 }

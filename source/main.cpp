@@ -8,5 +8,9 @@ int main(int argc, char *const argv[])
 	{
 		cerr << "End of Execution" << endl;
 	}
+    else
+    {
+        cerr << "Wrong Parameters" << endl;
+    }
 	return 0;
 }

@@ -1,7 +1,8 @@
-#include "algos/sbndmq4.cpp"
+#include "algos/qf43.cpp"
 
 class SingleFASTQ
 {
+    int occurrences;
 	vector<int> int_quality;
 	string id, seq, pholder, qual;
 	friend ostream &operator<<(ostream &os, const SingleFASTQ &single);
@@ -16,6 +17,7 @@ public:
 	void setQuality(string qual);
 	string getQuality();
 	void convertQualToInteger(int qual_score);
+	int getOccurrences();
 	void erase(string adapter);
 	void trim(int qual_score, int minQuality, int minSequenceLength);
 };
@@ -67,6 +69,11 @@ void SingleFASTQ::convertQualToInteger(int qual_score)
 
 }
 
+int SingleFASTQ::getOccurrences()
+{
+	return occurrences;
+}
+
 void SingleFASTQ::erase(string adapter)
 {
 	vector<int> index;
@@ -81,10 +88,12 @@ void SingleFASTQ::erase(string adapter)
 
 	for (auto &&i : index)
 	{
-		if (i >= 0)
+        if (i >= 0)
 		{
-		seq.erase(i, adapter.length());
-		qual.erase(i, adapter.length());
+		    occurrences ++;
+    		seq.erase(i, adapter.length());
+	    	qual.erase(i, adapter.length());
+            // cerr << "Occurrences: " << occurrences << endl;
 		}
 	}
 }

@@ -159,14 +159,6 @@ vector<int> search(char *x, int m, char *y, int n)
 			j += shift;
 			int z = (j - m) - m * count;
 			OUTPUT(j);
-			// if (z < 0)
-			// {
-			// 	cerr << "seq: " << y << endl;
-			// 	cerr << "Z:" << z << endl;
-			// 	cerr << "j: " << j << endl;
-			// 	cerr << "m: " << m << endl;
-			// 	cerr << "count: " << count << endl;
-			// }
 			index.push_back(z);
 		 }
 	  }
