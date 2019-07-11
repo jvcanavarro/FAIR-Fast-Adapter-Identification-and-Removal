@@ -15,7 +15,7 @@ ifstream::pos_type filesize(const char* filename)
 }
 
 
-string exec(const char* cmd) {
+int exec(const char* cmd) {
     array<char, 128> buffer;
     string result;
     unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
@@ -25,17 +25,17 @@ string exec(const char* cmd) {
     while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
         result += buffer.data();
     }
-    return result;
+    return atoi(result.c_str());
 }
 
 int main (int argc, char *const argv[])
 {
     string filepath = argv[1];
     string command = "wc -l " + filepath;
-    string result = exec(command.c_str());
-    cerr << result << endl;
+    // string result = exec(command.c_str());
+    // int number_of_lines = atoi(result.c_str());
+    int number_of_lines = exec(command.c_str());
+    cerr << number_of_lines << endl;
     
-    cerr << filesize(argv[1]) << endl;
-     
     return 0;
 }
