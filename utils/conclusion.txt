@@ -1,0 +1,5 @@
+ - Conclusion and Future Works
+
+ We presented FAIR - Fast Adapter Identification & Removal, a tool that aims to improve quality of NGS output by trimming adapters fragments and low quality nitrogenous bases utilizing a adaptation of BNDM and Shift-Or algorithms (Navarro) with bit paralelism, SBNDMq4. We also made a comparison between 170 exactly pattern matching algorithms provided by SMART tool in the context of adapter identification on genome reads.
+
+ Compared to  others pre-processing tools, FAIR required less processing time but lacked in improvement of overall sequence reliability. In fact, using a exactly pattern matching algorithm allows fragments of adapters to went unnoticed in the process. Thereat, adapting SBNDMq4 to approximate pattern matching allows a more effective adapter contamination

@@ -187,7 +187,14 @@ bool Parameters::parseParameters()
 
 						if (trim)
 						{
-							s_fastq.trim(minQuality, 0);
+							if (trimQuality)
+							{
+								s_fastq.trim(minQuality, 3);
+							}
+							else
+							{
+								s_fastq.trim(-1, 1);
+							}
 						}
 
 						s_fastq.write();
@@ -224,7 +231,14 @@ bool Parameters::parseParameters()
 
 						if (trim)
 						{
-							p_fastq.trim(minQuality, 0);
+							if (trimQuality)
+							{
+								p_fastq.trim(minQuality, 3);
+							}
+							else
+							{
+								p_fastq.trim(-1, 1);
+							}
 						}
 
 						p_fastq.write();
