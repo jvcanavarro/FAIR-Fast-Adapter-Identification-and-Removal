@@ -8,13 +8,6 @@
 
 using namespace std;
 
-ifstream::pos_type filesize(const char* filename)
-{
-    ifstream in(filename, ifstream::ate | ifstream::binary);
-    return in.tellg();
-}
-
-
 int exec(const char* cmd) {
     array<char, 128> buffer;
     string result;
@@ -32,10 +25,29 @@ int main (int argc, char *const argv[])
 {
     string filepath = argv[1];
     string command = "wc -l " + filepath;
-    // string result = exec(command.c_str());
-    // int number_of_lines = atoi(result.c_str());
+
+    ifstream fin;
+    fin.open(filepath);
+
+    if (fin.is_open())
+    {
+        cout << "File open." << endl;
+    }
+
     int number_of_lines = exec(command.c_str());
-    cerr << number_of_lines << endl;
+    cout << "Number of lines:" << number_of_lines << endl;
+
+    int threads = 2;
+    int lines_by_thread = number_of_lines / threads;
     
+    fin.seekg();
+    string lines[lines_by_thread];
+	for (int i = 0; i < lines_by_thread; i++)
+		if (!getline(fin, lines[i]))
+            cout << "EOF" << endl;
+        else
+            cout << lines[i] << endl;
+
+
     return 0;
 }

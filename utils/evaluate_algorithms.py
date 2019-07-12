@@ -28,7 +28,7 @@ print(top5)
 
 plt.rc('axes', axisbelow=True)
 
-top5.plot.bar(title='Best 5 by Mean', cmap='plasma')
+top5.iloc[:, :-1].plot.bar(cmap='plasma')
 plt.xticks(np.arange(5), top5_algos, rotation=0, fontsize=14)
 plt.savefig('best5.png')
 fig, axs = plt.subplots(2, 2)
