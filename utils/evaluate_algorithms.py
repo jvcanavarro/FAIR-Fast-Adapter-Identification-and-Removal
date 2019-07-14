@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-columns = ['len8', 'len16', 'len32', 'len64']
+columns = ['length = 8', 'length = 16', 'length = 32', 'length = 64']
 algorithms = open('algorithms.txt', 'r').read().splitlines()
 data = pd.read_csv('all8-64.csv', names=columns, sep='\t', lineterminator='\n')
 
@@ -29,27 +29,31 @@ print(top5)
 plt.rc('axes', axisbelow=True)
 
 top5.iloc[:, :-1].plot.bar(cmap='plasma')
+plt.legend(loc=2, prop={'size': 14})
 plt.xticks(np.arange(5), top5_algos, rotation=0, fontsize=14)
-plt.savefig('best5.png')
-fig, axs = plt.subplots(2, 2)
+plt.yticks(fontsize=16)
+plt.xlabel('Algorithms', fontsize=16)
+plt.ylabel('Time (s)',rotation=0, fontsize=16)
+# plt.savefig('best5.png')
+# fig, axs = plt.subplots(2, 2)
 
-top5['len8'].plot.bar(ax=axs[0,0], color='yellow')
-top5['len32'].plot.bar(ax=axs[1,0], color='yellow')
-top5['len16'].plot.bar(ax=axs[0,1], color='yellow')
-top5['len64'].plot.bar(ax=axs[1,1], color='yellow')
+# top5['len8'].plot.bar(ax=axs[0,0], color='yellow')
+# top5['len32'].plot.bar(ax=axs[1,0], color='yellow')
+# top5['len16'].plot.bar(ax=axs[0,1], color='yellow')
+# top5['len64'].plot.bar(ax=axs[1,1], color='yellow')
 
-# plt.xticks(np.arange(5), top5_algos)
-axs[0,0].set_xticks(np.arange(5), top5_algos)
+# # plt.xticks(np.arange(5), top5_algos)
+# axs[0,0].set_xticks(np.arange(5), top5_algos)
 
-# axs[1,1].set_xticks(np.arange(5), columns)
+# # axs[1,1].set_xticks(np.arange(5), columns)
 
 
 
-for ax in axs.flat:
-	ax.set_xticks(np.arange(5), top5_algos)
-	ax.set(xlabel='Algorithms', ylabel='Time(s)')
-	ax.label_outer()
-# Hide x labels and tick labels for top plots and y ticks for right plots.
+# for ax in axs.flat:
+# 	ax.set_xticks(np.arange(5), top5_algos)
+# 	ax.set(xlabel='Algorithms', ylabel='Time(s)')
+# 	ax.label_outer()
+# # Hide x labels and tick labels for top plots and y ticks for right plots.
 plt.show()
 # axs[0, 0].plot(x, y)
 # axs[0, 0].set_title('Axis [0,0]')
