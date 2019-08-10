@@ -20,8 +20,8 @@ plt.show()
 qf43_trim = [33.0342, 34.2925, 42.9897, 33.6567]
 bndm_trim = [13.3473, 12.99992, 13.932, 13.854]
 
-plt.plot(y, qf43_trim, label="qf43-trim", linewidth=4)
-plt.plot(y, bndm_trim, label="bndm-trim", linewidth=4)
+plt.plot(y, qf43_trim, label="qf43 w/ quality trim.", linewidth=4)
+plt.plot(y, bndm_trim, label="bndm w/ quality trim.", linewidth=4)
 plt.legend(loc=2, prop={'size': 15})
 plt.grid(True, linestyle=':')
 plt.xticks(y, ('8', '16', '32', '64'), fontsize=16)
