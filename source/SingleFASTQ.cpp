@@ -2,7 +2,7 @@
 
 class SingleFASTQ
 {
-    int occurrences;
+    int occurrences = 0;
 	vector<int> int_quality;
 	string id, seq, pholder, qual;
 	friend ostream &operator<<(ostream &os, const SingleFASTQ &single);
@@ -93,7 +93,7 @@ void SingleFASTQ::erase(string adapter)
 		    occurrences ++;
     		seq.erase(i, adapter.length());
 	    	qual.erase(i, adapter.length());
-            // cerr << "Occurrences: " << occurrences << endl;
+            cerr << "Occurrences: " << occurrences << endl;
 		}
 	}
 }

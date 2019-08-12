@@ -29,3 +29,31 @@ plt.yticks(fontsize=16)
 plt.xlabel('Pattern Length', fontsize=17)
 plt.ylabel('Time (s)', rotation=0, fontsize=15)
 plt.show()
+
+# Tools
+
+# Single End w/ Trim
+all_tools_single = [8.11, 10.0, 54.0, 7.8]
+#Paired End w/ Trim
+all_tools_paired = [16.03, 22.0, 108.0, 16.3]
+
+y = np.arange(len(all_tools_single))
+plt.bar(y, all_tools_single, linewidth=2, color='grey')
+for index,data in enumerate(all_tools_single):
+    plt.text(x=index-.075 , y =data-4 , s=f"{data}" , fontdict=dict(fontsize=16), color='white')
+# plt.legend(loc=2, prop={'size': 15})
+plt.xticks(y, ('FAIR', 'Trimmomatic', 'Alien Trimmer', 'Adapter Removal'), fontsize=14)
+plt.yticks(fontsize=14)
+plt.xlabel('Tools', fontsize=15)
+plt.ylabel('Time (s)', rotation=0, fontsize=14)
+plt.show()
+
+plt.bar(y, all_tools_paired, linewidth=2, color='grey')
+for index,data in enumerate(all_tools_paired):
+    plt.text(x=index-.075 , y =data-4 , s=f"{data}" , fontdict=dict(fontsize=16), color='white')
+# plt.legend(loc=2, prop={'size': 15})
+plt.xticks(y, ('FAIR', 'Trimmomatic', 'Alien Trimmer', 'Adapter Removal'), fontsize=14)
+plt.yticks(fontsize=14)
+plt.xlabel('Tools', fontsize=15)
+plt.ylabel('Time (s)', rotation=0, fontsize=14)
+plt.show()
