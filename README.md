@@ -175,19 +175,6 @@ You can test the program utilizing the samples `sample1.fastq` and `sample2.fast
 ./FAIR --output results/ --single sample1.fastq --trim --trim-quality 90 --min-quality 90 --threads 8 --phread-offset 33
 ```
 
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
 <!-- LICENSE -->
 ## License
 
@@ -207,7 +194,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-João V. Canavarro - [@jvcanab](https://twitter.com/jvcanab) - jvcanavarro@gmail.com
+João V. Canavarro - jvcanavarro@gmail.com
 
 Project Link: [https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal)
 
