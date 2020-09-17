@@ -24,14 +24,14 @@
 
   <p align="center">
     <br />
-    <a href="https://github.com/SRodriguess/FAIR"><strong>Explore the docs »</strong></a>
+    <a href="#"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/SRodriguess/FAIR">View Demo</a>
+    <a href="#">View Demo</a>
     ·
-    <a href="https://github.com/SRodriguess/FAIR/issues">Report Bug</a>
+    <a href="#">Report Bug</a>
     ·
-    <a href="https://github.com/SRodriguess/FAIR/issues">Request Feature</a>
+    <a href="#">Request Feature</a>
   </p>
 </p>
 
@@ -217,12 +217,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * [bio-playground by Brent Perdensen](https://github.com/brentp/bio-playground)
 * [Andrews, S. (2010). FastQC: a quality control tool for high throughput sequence data.](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
-<!-- CONTACT -->
-## Contact
-
-Sebastião R. C. Neto - s.rodriguescn@gmail.com
-
-Project Link: [https://github.com/SRodriguess/FAIR](https://github.com/SRodriguess/FAIR)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [build-shield]: https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square
