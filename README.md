@@ -5,10 +5,6 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-
-
-
-
 <!-- PROJECT SHIELDS -->
 [![Build Status][build-shield]]()
 [![Contributors][contributors-shield]]()
@@ -20,22 +16,22 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal">
-    <img src="logo.png" alt="Logo" width="250" height="250">
+  <a href="">
+    <img src="app/static/images/icons/logo.png" alt="Logo" width="150">
   </a>
 
   <h3 align="center">Fast Adapter Identification & Removal</h3>
 
   <p align="center">
     <br />
-    <a href="https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal"><strong>Explore the docs »</strong></a>
+    <a href="#"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal">View Demo</a>
+    <a href="#">View Demo</a>
     ·
-    <a href="https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal/issues">Report Bug</a>
+    <a href="#">Report Bug</a>
     ·
-    <a href="https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal/issues">Request Feature</a>
+    <a href="#">Request Feature</a>
   </p>
 </p>
 
@@ -60,27 +56,24 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-[![Product Name Screen Shot][product-screenshot]](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal/blob/master/utils/best5.png)
 
-Based on 180 Pattern-Matching (PM) Algorithms Analisys the main idea of the project is to create a simple and fast tool to remove fragments of adapters located on FASTQ files. After testing all 180 algorithms utilizing the SMART Tool, we analysed the results and end up with 5 algorithms that had good performance with the approximated pattern length of a adapter (between 8 and 16 nitrogenous bases). QF43 and Sbndmq-4 had the best results, however Sbndmq-4 was slightly better with patterns of 8 nitrogenous bases, ending as our choice for this project. More informations about FAIR and 180 Pattern-Matching Algorithms Analysis can be found at: 
-
-
+FAIR is an adapter cutting tool that uses the algorithms of Wu & Manber (1992) and Myers (1999) that take advantage of efficient chain matching techniques, providing a tool that runs in O (n+m) time for removal of adapters.
 
 ### Built With
-The project was built mainly with C++, but some funcionalities are based on python scripts, including the 180 Pattern-Matching Algorithms Analisys present on this repository.
+The project was built mainly with C++, but some funcionalities are based on python scripts. JS, CSS and HTML are used for web interface, for parameter selecion.
 * [C++](http://www.cplusplus.org)
 * [Python](https://www.python.org)
-
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-FAIR works with single, both forward/reverse, and interlaced fastq files to identify, trim and remove adapters and low-quality / N bases from sequences. It's possible to choose the quantity of threads during processing, require a Phred-offset quality identification and/or adapter identification. At the end of the execution a new fastq file is created on the directory choosed by the user with the segments of adapters removed and a additional file with the deleted bases. FAIR does not works yet with tar.gz files.
+FAIR works with single fastq files, forward / reverse and interlaced, to identify, trim and remove low quality N / adapters and bases from the strings. In addition to the command interface (CLI), FAIR can be used through a graphical web interface, developed in Flask Python for parameter selection.
+At the end of the execution, when selecting the option to remove the adapters a new fastq file is created in the directory chosen by the user with the adapter segments removed. FAIR does not yet work with tar.gz files.
 
 ### Prerequisites
 
-This repository can be built with any C++ compiler. During the conception of the project we used gcc with any major problem. Additionally, Python is necessary for some extra funcionalities.
+This repository can be built with any C++ compiler. During the conception of the project we used gcc with any major problem. Additionally, Python is necessary for some extra functionalities.
 * gcc
 ```sh
 sudo apt-get install gcc
@@ -89,91 +82,126 @@ sudo apt-get install gcc
 ```sh
 sudo apt-get install python
 ```
-If you want to execute algorithm evaluation located on `utils` some extra Python Frameworks are required, namely: pandas, matplotlib and numpy. Thankfully, you can install them all at once using pip.
+
+If graphic web interface is required (Parameter [--web-interface])
+* Python Flask
 ```sh
-pip install -r requirements.txt --user
+sudo apt install python3-flask
+```
+* Python FlaskRestful
+```sh
+pip3 install flask-restful
 ```
 
-### Installation
+### Binary Compile(if you have made changes to the source code)
 
 1. Clone the repo
 ```sh
-git clone https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal.git
+git clone https://github.com/SRodriguess/FAIR.git
 ```
-2. Build with compiler
+2. Make changes in source code (files in the 'source' folder)
+
+3. Build with compiler
 ```sh
-cd FAIR-Fast-Adapter-Identification-and-Removal
+cd FAIR
 g++ source/main.cpp -o FAIR
 ```
-
-
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Bellow are listed all FAIR avaiable parameters.
+### CLI (Command Line Interface)
+
+Bellow are listed all FAIR available parameters.
 
 ```FAIR - Fast Adapter Identification and Removal v1.0
 
-Usage: /home/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal [options] -o <output_dir>
+ Usage: /home/joao/FAIR -o <output_dir> [options]
 
-Basic options:
--o/--output   <output_dir>   directory to store all the resulting files (required)
--h/--help                    prints this usage message
--v/--version                 prints version
+|> Basic options:
+|-o/--output   <output_dir>   directory to store all the resulting files (required)
+|-h/--help                    prints this usage message
+|-v/--version                 prints version
+|--web-interface              enable web interface in your browser for parameters selection 
+|                            after activation, access url http://0.0.0.0:8080
 
-Input data:
--s/--single        <filename>    file with unpaired reads
--f/--forward       <filename>    file with forward paired-end reads
--r/--reverse       <filename>    file with reverse paired-end reads
--i/--interlaced    <filename>    file with interlaced forward and reverse paired-end reads
+|> Input data:
+|-s/--single        <filename>    file with unpaired reads
+|-f/--forward       <filename>    file with forward paired-end reads
+|-r/--reverse       <filename>    file with reverse paired-end reads
+|-i/--interlaced    <filename>    file with interlaced forward and reverse paired-end reads
 
-Pipeline options:
---only-identify         runs only adapter identification (without removal)
---only-remove           runs only adapter removal (without identification)
-                        need to set adapter(s) if this option is set
---trim                  trim ambiguous bases (N) at 5'/3' termini
---trim-quality          trim bases at 5'/3' termini with quality scores <= to
-                        --min-quality value
---min-quality   <int>   minimal quality value to trim
+|> Pipeline options:
+|--only-identify         runs only adapter identification (without removal)
+|--only-remove           runs only adapter removal (without identification)
+|                        need to set adapter(s) if this option is set
+|--trim                  trim ambiguous bases (N) at 5'/3' termini
+|--trim-quality  <int>   trim bases at 5'/3' termini and with
+|                       quality scores <= [--trim-quality] value
 
-Advanced options:
---adapter     <adapter>         adapter sequence that will be removed (unpaired reads)
-                                required with --only-remove
---forward-adapter   <adapter>   adapter sequence that will be removed
-                                in the forward paired-end reads (required with --only-remove)
---reverse-adapter   <adapter>   adapter sequence that will be removed
-                                in the reverse paired-end reads (required with --only-remove)
--t/--threads    <int>           number of threads
-                                [default: 4]
---phred-offset    <33 or 64>    PHRED quality offset in the input reads (33 or 64)
-                                [default: auto-detect]
+|>Advanced options:
+|--adapter     <adapter>          adapter sequence that will be removed (unpaired reads)
+|                                required with --only-remove
+|--forward-adapter   <adapter>    adapter sequence that will be removed
+|                                in the forward paired-end reads (required with --only-remove)
+|--reverse-adapter   <adapter>    adapter sequence that will be removed
+|                                in the reverse paired-end reads (required with --only-remove)
+|-mm/--mismatch      <int>        mismatch rate global (5'/3')
+|                                [default: 2] 2 bases
+|-mmr/--mismatch-right <0 to 0.6> mismatch rate in region 3'
+|                                [default: 0.5] 50% incompatibilities
+|--phred-offset    <33 or 64>     PHRED quality offset in the input reads (33 or 64)
+|                                [default: auto-detect]
 ```
 
-_For more examples, please refer to the [Documentation](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal)_
+### Web Interface
 
+Do you use to select parameters.
 
+1. Running Server
+```sh
+cd FAIR
+./FAIR --web-interface
+```
+2. Access URL in your browser http://0.0.0.0:8080/
 
-## Examples
+_For more examples, please refer to the [Documentation](https://github.com/SRodriguess/FAIR)_
+
+## Examples (CLI)
 You can test the program utilizing the samples `sample1.fastq` and `sample2.fastq` located at `data`. The new files are stored on `results`. Some common usages are listed bellow.
 
-* Remove Adapters from Single FASTQ File with Adapter and Quality Identification
+* Remove Adapters from Single FASTQ File with Adapter
 ```sh
-./FAIR --output results/ --single sample1.fastq
+./FAIR --only-remove --single sample1.fastq --adapter CCTCCTCCTCCT --output results/
 ```
-* Remove Adapters from Forward and Reverse FASTQ Files with Adapter and Quality Identification
+
+* Remove Adapters from Forward and Reverse FASTQ Files
 ```sh
-./FAIR --output results/ --forward sample1.fastq --reverse sample2.fastq
+./FAIR --only-remove --forward sample1.fastq --forward-adapter CCCCCCC --reverse sample2.fastq --reverse-adapter CCCATCC --output results/
 ```
-* Remove Adapters from Forward and Reverse FASTQ Files without Adapters Identification
+
+* Identify Adapters from Forward and Reverse FASTQ Files
 ```sh
-./FAIR --output results/ --forward sample1.fastq --reverse sample2.fastq --only-remove --forward-adapter CCCCCCC --reverse-adapter CCCATCC
+./FAIR --only-identify --forward sample1.fastq --reverse sample2.fastq --output results/
 ```
-* Remove Adapters from Single FASTQ File with Trim, Trim-Quality, Min-Quality, Number of Threads and Phred-Offset
+
+* Remove Adapters from Single FASTQ File with Mismatch Global 5'/3' (3 nucleotides), Trim(N), Trim-Quality, Number of Phred-Offset, Mismatch in region 3' (30%)
 ```sh
-./FAIR --output results/ --single sample1.fastq --trim --trim-quality 90 --min-quality 90 --threads 8 --phread-offset 33
+./FAIR --only-remove --single sample1.fastq --adapter AGAGAATAGATAGAT --mismatch 3 --trim --trim-quality 90 --phread-offset 33 --mismatch-right 0.3 --output results/
 ```
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
 
 <!-- LICENSE -->
 ## License
@@ -181,24 +209,13 @@ You can test the program utilizing the samples `sample1.fastq` and `sample2.fast
 Distributed under the MIT License. See `LICENSE` for more information.
 
 
-
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements and References
-* [R. S. Boyer and J. S. Moore. A fast string searching algorithm. Commun. ACM,20(10):762–772, 1977.](https://www.cs.utexas.edu/users/moore/publications/fstrpos.pdf)
-* [Koloud Al-Khamaiseh  and  ShadiALShagarin, “A Survey of  String  Matching  Algorithms”  in  Int.  Journal  of Engineering  Research  and Applications,  IJERA,  ISSN: 2248-9622,  Vol.  4,  Issue  7  (Version  2),  July  2014, pp.144-156](https://core.ac.uk/download/pdf/26834073.pdf)
-* [B. Durian, H. Peltola, L. Salmela, and J. Tarhio. Bit-parallel search algorithms forlong patterns. In P. Festa, editor, Symposium on Experimental Algorithms, LNCS6049, 129–140, Springer-Verlag, Berlin, 2010.](https://helda.helsinki.fi/bitstream/handle/10138/18570/Long.pdf?sequence=2)
-* [G. Navarro, M. Raffinot, “A Bit-Parallel Approach to Suffix Automata: Fast Extended String Matching”, in Proc. of the 9th Annual Symposium on Combinatorial Pattern Matching, No. 1448.](https://users.dcc.uchile.cl/~gnavarro/ps/cpm98.pdf)
-* [SMART (String Matching Algorithm Research Tool)](https://github.com/smart-tool/smart)
+* [Hyyro, H., Fredriksson, K., \& Navarro, G. (2005). Increased bit-parallelism for approximate and multiple string matching. Journal of Experimental Algorithmics (JEA), 10, 2-6.](https://dl.acm.org/doi/pdf/10.1145/1064546.1180617)
+* [Myers, G. (1999). A fast bit-vector algorithm for approximate string matching based on dynamic programming. Journal of the ACM (JACM), 46(3), 395-415.](https://dl.acm.org/doi/10.1145/316542.316550)
+* [Wu, S., \& Manber, U. (1992). Fast text searching: allowing errors. Communications of the ACM, 35(10), 83-91.](https://dl.acm.org/doi/10.1145/135239.135244)
 * [bio-playground by Brent Perdensen](https://github.com/brentp/bio-playground)
-
-<!-- CONTACT -->
-## Contact
-
-João V. Canavarro - jvcanavarro@gmail.com
-
-Project Link: [https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal](https://github.com/jvcanavarro/FAIR-Fast-Adapter-Identification-and-Removal)
-
-
+* [Andrews, S. (2010). FastQC: a quality control tool for high throughput sequence data.](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
